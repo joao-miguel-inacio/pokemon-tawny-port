@@ -68,7 +68,9 @@ router.post("/signup", isLoggedOut, (req, res) => {
       .then((user) => {
         // Bind the user to the session object
         req.session.user = user;
-        res.redirect("/");
+        req.app.locals.inSession = true;
+        req.app.locals.anonymous = false;
+        res.redirect("/app/home");
       })
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
@@ -129,7 +131,10 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         }
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-        return res.redirect("/");
+        req.app.locals.inSession = true;
+        req.app.locals.anonymous = false;
+        
+        return res.redirect("/app/home");
       });
     })
 
@@ -148,6 +153,8 @@ router.get("/logout", isLoggedIn, (req, res) => {
         .status(500)
         .render("auth/logout", { errorMessage: err.message });
     }
+    req.app.locals.inSession = false;
+    req.app.locals.anonymous = true;
     res.redirect("/");
   });
 });

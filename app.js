@@ -23,6 +23,7 @@ const capitalized = require("./utils/capitalized");
 const projectName = "pokemon-white";
 
 app.locals.appTitle = `${capitalized(projectName)}`;
+app.locals.anonymous = true;
 
 // 👇 Start handling routes here
 const index = require("./routes/index.routes");

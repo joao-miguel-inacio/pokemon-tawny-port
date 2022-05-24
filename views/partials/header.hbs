@@ -4,7 +4,15 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
     <a class="nav-link active" aria-current="page" href="/app/home">Home</a>
+    {{#if anonymous}}
     <a class="nav-link" href="/auth/login">Log in</a>
     <a class="nav-link" href="/auth/signup">Sign up</a>
+    {{/if}}
+    {{#if inSession}}   
+    <a class="nav-link" href="/auth/logout">Log out</a>
+    <a class="nav-link" href="/app/trainer-list">Trainers list</a>
+    <a class="nav-link" href="/app/own-pokemon-list">Pokeballs Belt</a>
+    {{/if}}
     <a class="nav-link" href="/app/original-trainer-profile">Original Trainer</a>
+    
 </nav>

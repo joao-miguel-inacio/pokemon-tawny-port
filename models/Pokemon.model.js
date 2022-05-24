@@ -3,6 +3,8 @@ const { Schema, model } = require("mongoose");
 const pokemonSchema = new Schema(
   {
     name: String,
+    type: String,
+    image: String,
     baseExperience: Number,
     //type: String
     //signatureMove: String,
