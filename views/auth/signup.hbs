@@ -1,0 +1,25 @@
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg" alt="pokemon-logo">
+<h1>White</h1>
+
+<form action="/auth/signup" method="POST">
+   <label> Username
+      <input type="text" name="username">
+   </label>
+   <label> Password
+      <input type="password" name="password">
+   </label>
+
+   <button type="submit">Submit</button>
+</form>
+
+{{#if errorMessage}}
+   {{errorMessage}}
+{{/if}}
+
+<form method="get" action="/auth/login">
+    <button type="submit" class="btn btn-primary">Log in</button>
+</form>
+
+<form method="get" action="/app/home">
+    <button type="submit" class="btn btn-success">Visit</button>
+</form>
