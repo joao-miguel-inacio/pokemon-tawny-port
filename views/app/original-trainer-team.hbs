@@ -1,0 +1,25 @@
+{{>header}}
+
+<h4>original trainer team</h4>
+
+<div class="card-grid">
+    {{#each pokemons}}
+        <div class="flip-card">
+            <div class="pokemon-card flip-card-inner">
+                <div class="flip-card-front">
+                    <div class="pokemon-card-image-container">
+                        <img src="{{this.image_url}}" class="pokemon-card-image" alt="{{this.name}} image">
+                    </div>
+                    <h3 class="pokemon-card-text">{{this.name}}</h3>
+                    <p class="pokemon-card-text">{{this.tagline}}</font></p>
+                </div>
+                <div class="flip-card-back">
+                    <p class="pokemon-card-text">{{this.description}}</p>
+                    <a class="card-more-button" href="/{{this.id}}">More on {{this.name}}</a>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+{{>footer}}

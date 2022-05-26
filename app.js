@@ -1,41 +1,40 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
-require("dotenv/config");
+import "dotenv/config";
 
-// ℹ️ Connects to the database
-require("./db");
+import "./db/index.js";
 
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
-const express = require("express");
+import express from "express";
+const app = express()
 
-// Handles the handlebars
-// https://www.npmjs.com/package/hbs
-const hbs = require("hbs");
+import hbs from "hbs";
+import path from 'path';
+import {fileURLToPath} from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 hbs.registerPartials(__dirname + '/views/partials');
 
-const app = express();
+//require("./config")(app);
+import aFunction from "./config/index.js";
+aFunction(app);
 
-// ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
-require("./config")(app);
+import capitalized from "./utils/capitalized.js";
 
-const capitalized = require("./utils/capitalized");
 const projectName = "pokemon-white";
+
+
 
 app.locals.appTitle = `${capitalized(projectName)}`;
 app.locals.anonymous = true;
 
-// 👇 Start handling routes here
-const index = require("./routes/index.routes");
+import index from "./routes/index.routes.js";
 app.use("/", index);
 
-const authRoutes = require("./routes/auth.routes");
+import authRoutes from "./routes/auth.routes.js";
 app.use("/auth", authRoutes);
 
-const appRoutes = require("./routes/app.routes");
+import appRoutes from "./routes/app.routes.js";
 app.use("/app", appRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
-require("./error-handling")(app);
+import aSecondFunction from "./error-handling";
 
-module.exports = app;
+export default app;

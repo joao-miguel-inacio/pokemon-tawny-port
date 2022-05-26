@@ -1,10 +1,12 @@
-const router = require("express").Router();
-const mongoose = require("mongoose");
+import express from "express";
+const router = express.Router();
 
-const isLoggedIn = require("../middleware/isLoggedIn.js");
+import mongoose from "mongoose";
 
-const User = require ("../models/User.model.js");
-const Pokemon = require("../models/Pokemon.model.js");
+import isLoggedIn from "../middleware/isLoggedIn.js";
+
+import User from "../models/User.model.js";
+import Pokemon from "../models/Pokemon.model.js";
 
 router.get('/home', async (req, res, next) => {
     try {
@@ -21,5 +23,21 @@ router.get('/home', async (req, res, next) => {
       next(err);
     }
   });
+
+  router.get('/original-trainer-team', async (req, res, next) => {
+    try {
+      res.render('app/original-trainer-team');
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/original-trainer-pokedex', async (req, res, next) => {
+    try {
+      res.render('app/original-trainer-pokedex');
+    } catch (err) {
+      next(err);
+    }
+  });
   
-module.exports = router;
+export default router;
