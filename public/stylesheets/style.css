@@ -1,9 +1,100 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.title {
-  display: flex;
-  
+.nav{
+  margin: 2vw !important;
+  width: 75vw !important;
+}
+
+@media screen and (min-width: 500px) {
+  .profile-buttons-container {
+    display: flex;
+    gap: 5px;
+  }
+  .profile-image-and-user-details-container{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .profile-user-details-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.profile-card {
+  width: 75vw;
+  background-color: #efefef;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.profile-image{
+  transition: all 0.5s
+}
+
+.profile-card:hover .profile-image {
+  transform: scale(1.5)
+}
+
+.profile-name {
+  font-size: 22px;
+  font-weight: bold
+}
+
+.profile-idd {
+  font-size: 14px;
+  font-weight: 600
+}
+
+.profile-number {
+  font-size: 22px;
+  font-weight: bold
+}
+
+.profile-pokemon {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444444
+}
+
+.profile-text {
+  text-align: center;
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500
+}
+
+.profile-icon {
+  height: 35px;
+}
+
+.gap {
+  gap: 10px
+}
+
+.footer-link {
+  color: #545454;
+  text-decoration: none;
+}
+
+footer { 
+  margin: 2vw;
+  color: #545454;
+}
+
+.home-image {
+  width: 50vh;
+}
+
+.nav-link {
+  color: #545454 !important;
+}
+
+.active {
+  background-color: #545454 !important;
+  color: white !important;
 }

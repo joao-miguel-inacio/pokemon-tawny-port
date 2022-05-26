@@ -1,18 +1,17 @@
-<nav class="nav flex-column nav-pills">
+<nav class="nav flex-column mx-auto d-block nav-pills">
     <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form>
-    <a class="nav-link active" aria-current="page" href="/app/home">Home</a>
+    <a id="/app/home" class="nav-link" href="/app/home">Home</a>
     {{#if anonymous}}
-    <a class="nav-link" href="/auth/login">Log in</a>
-    <a class="nav-link" href="/auth/signup">Sign up</a>
+    <a class="nav-link" id="/auth/login" href="/auth/login">Log in</a>
+    <a class="nav-link" id="/auth/signup" href="/auth/signup">Sign up</a>
     {{/if}}
     {{#if inSession}}   
-    <a class="nav-link" href="/auth/logout">Log out</a>
-    <a class="nav-link" href="/app/trainer-list">Trainers list</a>
-    <a class="nav-link" href="/app/own-pokemon-list">Pokeballs Belt</a>
+    <a class="nav-link" id="/auth/logout" href="/auth/logout">Log out</a>
+    <a class="nav-link" id="/app/trainer-list" href="/app/trainer-list">Trainers list</a>
+    <a class="nav-link" id="/app/own-pokemon-list" href="/app/own-pokemon-list">Pokeballs Belt</a>
     {{/if}}
-    <a class="nav-link" href="/app/original-trainer-profile">Original Trainer</a>
-    
+    <a class="nav-link" id="/app/original-trainer-profile" href="/app/original-trainer-profile">Original Trainer</a>
 </nav>

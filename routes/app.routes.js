@@ -13,5 +13,13 @@ router.get('/home', async (req, res, next) => {
       next(err);
     }
   });
+
+  router.get('/original-trainer-profile', async (req, res, next) => {
+    try {
+      res.render('app/original-trainer-profile');
+    } catch (err) {
+      next(err);
+    }
+  });
   
 module.exports = router;
