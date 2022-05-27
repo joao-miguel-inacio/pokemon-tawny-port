@@ -1,4 +1,5 @@
 {{>header}}
+
 <div class="card-grid">
     {{#each myPokemon}}
         <div class="flip-card">
@@ -8,8 +9,8 @@
                         <img src="{{this.sprites.front_default}}" class="pokemon-card-image" alt="{{this.name}} image">
                     </div>
                     <h3 class="pokemon-card-text">{{this.name}}</h3>
-                    <p class="pokemon-card-text">Exp: {{this.base_experience}}</font></p>
-                    <p><a  class="card-more-button" href="/{{this.id}}">More on {{this.name}}</a></p>
+                    <p class="pokemon-card-text">Exp: {{this.base_experience}}</p>
+                    <p><a  class="card-more-button" href="/app/pokemon-details/{{this.id}}">More on {{this.name}}</a></p>
                 </div>
                 <div class="flip-card-back">
                     <div class="pokemon-card-image-container">
@@ -17,7 +18,7 @@
                     </div>
                     <p>Type:</p>
                     {{#each this.types}}
-                        <p>{{this}}</p>
+                        <a>{{this}}</a>
                     {{/each}}
                     <p class="pokemon-card-text">Height: {{this.height}}; Weight: {{this.weight}}</p>
                 </div>

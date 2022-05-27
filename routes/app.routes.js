@@ -43,5 +43,31 @@ router.get('/home', async (req, res, next) => {
       next(err);
     }
   });
+
+  //ADD MIDDLEWARE!! ISLOGGEDIN
+  router.get('/pokemon-details/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const pokemon = await MyPokedex.getPokemonByName(id);
+      const pokemonSpecie = await MyPokedex.getPokemonSpeciesByName(id);
+
+      async function findEvoChainId (pokemonSpecie) {
+        if (pokemonSpecie.evolution_chain.url.charAt(43) !== "/") {
+          const chainId = pokemonSpecie.evolution_chain.url.charAt(42)+pokemonSpecie.evolution_chain.url.charAt(43);
+          const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+        } else {
+          const chainId = pokemonSpecie.evolution_chain.url.charAt(42);
+          const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+        }
+      } 
+      const pokemonEvolutionChain = await findEvoChainId (pokemonSpecie);
+      console.log(pokemonEvolutionChain)
+      console.log("hey")
+
+      res.render('app/pokemon-details', {pokemon, pokemonSpecie, pokemonEvolutionChain} );
+    } catch (err) {
+      next(err);
+    }
+  });
   
 export default router;
