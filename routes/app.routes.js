@@ -29,8 +29,8 @@ router.get('/home', async (req, res, next) => {
 
   router.get('/original-trainer-team', async (req, res, next) => {
     try {
-      const myPokemon = await MyPokedex.getPokemonByName(['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']);
-      res.render('app/original-trainer-team', {myPokemon});
+      const pokemon = await MyPokedex.getPokemonByName(['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']);
+      res.render('app/original-trainer-team', {pokemon});
     } catch (err) {
       next(err);
     }
@@ -38,7 +38,9 @@ router.get('/home', async (req, res, next) => {
 
   router.get('/original-trainer-pokedex', async (req, res, next) => {
     try {
-      res.render('app/original-trainer-pokedex');
+      const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+      const pokemon = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
+      res.render('app/original-trainer-pokedex', {pokemon});
     } catch (err) {
       next(err);
     }
@@ -49,22 +51,43 @@ router.get('/home', async (req, res, next) => {
     try {
       const { id } = req.params;
       const pokemon = await MyPokedex.getPokemonByName(id);
-      const pokemonSpecie = await MyPokedex.getPokemonSpeciesByName(id);
-
-      async function findEvoChainId (pokemonSpecie) {
-        if (pokemonSpecie.evolution_chain.url.charAt(43) !== "/") {
-          const chainId = pokemonSpecie.evolution_chain.url.charAt(42)+pokemonSpecie.evolution_chain.url.charAt(43);
+      const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
+      async function findEvoChainId (pokemonSpecies) {
+        if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
+          const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
           const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+          return pokemonEvolutionChain;
         } else {
-          const chainId = pokemonSpecie.evolution_chain.url.charAt(42);
+          const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
           const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+          return pokemonEvolutionChain;
         }
       } 
-      const pokemonEvolutionChain = await findEvoChainId (pokemonSpecie);
-      console.log(pokemonEvolutionChain)
-      console.log("hey")
+      const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
+      if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
+        res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
+      } else if (String(pokemonEvolutionChain.chain.evolves_to[0].evolves_to) === "" ) {
+        res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
+      } else if (pokemonEvolutionChain.chain.evolves_to && pokemonEvolutionChain.chain.evolves_to[0].evolves_to[0].species.name === pokemon.name) {
+        res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
+      } else {
+        res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
+      }
+    } catch (err) {
+      next(err);
+    }
+  });
 
-      res.render('app/pokemon-details', {pokemon, pokemonSpecie, pokemonEvolutionChain} );
+  router.get('/pokemon-by-egg-group-list/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
+      const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+      const pokemonNamesInEggGroup = eggGroupPokemon.pokemon_species.map(pokemon => pokemon.name);   
+      const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
+      const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
+      const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);
+      res.render('app/pokemon-by-egg-group-list', {pokemon} );
     } catch (err) {
       next(err);
     }

@@ -14,27 +14,25 @@
 <p>Height: {{this.pokemon.height}} cm</p>
 <p>Weight: {{this.pokemon.weight}} g</p>
 
-<p>Growth Rate: {{this.pokemonSpecie.growth_rate.name}}</p>
-<p>Habitat: {{this.pokemonSpecie.habitat.name}}</p>
+<p>Growth Rate: {{this.pokemonSpecies.growth_rate.name}}</p>
+<p>Habitat: {{this.pokemonSpecies.habitat.name}}</p>
 
 <h4>Evolution Chain</h4>
-{{#if this.pokemonSpecie.evolves_from_species}}
-<p>Evolves from: {{this.pokemonSpecie.evolves_from_species.name}}</p>
-<a href="{{this.pokemonSpecie.evolves_from_species.name}}">Click here for more info on {{this.pokemonSpecie.evolves_from_species.name}}</a>
+{{#if this.pokemonSpecies.evolves_from_species}}
+<p>Evolves from: {{this.pokemonSpecies.evolves_from_species.name}}</p>
+<a href="{{this.pokemonSpecies.evolves_from_species.name}}">More on {{this.pokemonSpecies.evolves_from_species.name}}</a>
 {{/if}}
-
-{{log this.pokemonEvolutionChain}}
 
 {{#if this.pokemonEvolutionChain}}
 <p>Evolves to: {{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</p>
-<a href="this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name">Click here for more info on {{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</a>
+<a href="{{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}">More on {{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</a>
 {{/if}}
 
 <h4>Breeding</h4>
 <p>Egg Groups:</p>
-{{#each this.pokemonSpecie.egg_groups}}
+{{#each this.pokemonSpecies.egg_groups}}
 <p>{{this.name}}</p>
-<a href="">Other pokemons who belong to {{this.name}} egg group</a>
+<a href="/app/pokemon-by-egg-group-list/{{this.name}}">Other pokemons who belong to {{this.name}} egg group</a>
 {{/each}}
 
 {{>footer}}

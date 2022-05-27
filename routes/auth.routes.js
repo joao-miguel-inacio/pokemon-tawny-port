@@ -62,6 +62,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
       })
       .then((user) => {
         req.session.user = user;
+        req.app.locals.user = req.session.user;
         req.app.locals.inSession = true;
         req.app.locals.anonymous = false;
         res.redirect("/app/home");
@@ -119,6 +120,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           });
         }
         req.session.user = user;
+        req.app.locals.user = req.session.user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
         req.app.locals.inSession = true;
         req.app.locals.anonymous = false;
