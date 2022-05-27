@@ -20,8 +20,6 @@ import capitalized from "./utils/capitalized.js";
 
 const projectName = "pokemon-white";
 
-
-
 app.locals.appTitle = `${capitalized(projectName)}`;
 app.locals.anonymous = true;
 

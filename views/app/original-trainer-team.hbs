@@ -1,21 +1,25 @@
 {{>header}}
-
-<h4>original trainer team</h4>
-
 <div class="card-grid">
-    {{#each pokemons}}
+    {{#each myPokemon}}
         <div class="flip-card">
             <div class="pokemon-card flip-card-inner">
                 <div class="flip-card-front">
                     <div class="pokemon-card-image-container">
-                        <img src="{{this.image_url}}" class="pokemon-card-image" alt="{{this.name}} image">
+                        <img src="{{this.sprites.front_default}}" class="pokemon-card-image" alt="{{this.name}} image">
                     </div>
                     <h3 class="pokemon-card-text">{{this.name}}</h3>
-                    <p class="pokemon-card-text">{{this.tagline}}</font></p>
+                    <p class="pokemon-card-text">Exp: {{this.base_experience}}</font></p>
+                    <p><a  class="card-more-button" href="/{{this.id}}">More on {{this.name}}</a></p>
                 </div>
                 <div class="flip-card-back">
-                    <p class="pokemon-card-text">{{this.description}}</p>
-                    <a class="card-more-button" href="/{{this.id}}">More on {{this.name}}</a>
+                    <div class="pokemon-card-image-container">
+                        <img src="{{this.sprites.back_default}}" class="pokemon-card-image" alt="{{this.name}} image">
+                    </div>
+                    <p>Type:</p>
+                    {{#each this.types}}
+                        <p>{{this}}</p>
+                    {{/each}}
+                    <p class="pokemon-card-text">Height: {{this.height}}; Weight: {{this.weight}}</p>
                 </div>
             </div>
         </div>

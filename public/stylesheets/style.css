@@ -109,9 +109,8 @@ footer {
 
 .card-grid {
   position: relative;
-  top: 60px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
   margin: 30px;
@@ -121,29 +120,28 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #2081c3;
+  background-color: rgb(110, 13, 13);
   color: #f7f9f9;
   position: relative;
   width: 100%;
   height: 100%;
   transition: transform 1s;
   transform-style: preserve-3d;
-  box-shadow: 0px 0px 10px #0a2c42;
+  box-shadow: 0px 0px 10px rgb(32, 3, 3);
 }
 
 .pokemon-card-image-container {
-  height: 150px;
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .pokemon-card-image {
-  width: 30px;
+  height: 100%;
 }
 
 .pokemon-card-text{
-  padding: 15px;
   text-align: center;
 }
 
@@ -152,7 +150,7 @@ footer {
   backface-visibility: hidden;
 }
 
-.flip-card:hover .flip-card-inner {
+.flip-card:active .flip-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -167,4 +165,26 @@ footer {
 }
 .card-more-button {
   color: #f7f9f9;
+}
+
+@media screen and (min-width: 481px) {
+  .card-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    margin: 30px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .card-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    margin: 30px;
+  }
 }
