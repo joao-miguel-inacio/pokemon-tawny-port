@@ -13,18 +13,20 @@
 <p>Base Exp: {{this.pokemon.base_experience}}</p>
 <p>Height: {{this.pokemon.height}} cm</p>
 <p>Weight: {{this.pokemon.weight}} g</p>
-
+<p>Types: 
+    {{#each this.pokemon.types}}
+        <a>{{this.type.name}}</a>
+    {{/each}}
 <p>Growth Rate: {{this.pokemonSpecies.growth_rate.name}}</p>
 <p>Habitat: {{this.pokemonSpecies.habitat.name}}</p>
 
-<h4>Evolution Chain</h4>
-{{#if this.pokemonSpecies.evolves_from_species}}
-<p>Evolves from: {{this.pokemonSpecies.evolves_from_species.name}}</p>
-<a href="{{this.pokemonSpecies.evolves_from_species.name}}">More on {{this.pokemonSpecies.evolves_from_species.name}}</a>
-{{/if}}
-
 {{#if this.pokemonEvolutionChain}}
-<p>Evolves to: {{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</p>
+<h4>Evolution Chain</h4>
+<p>{{this.pokemonEvolutionChain.chain.species.name}}</p>
+<a href="{{this.pokemonEvolutionChain.chain.species.name}}">More on {{this.pokemonEvolutionChain.chain.species.name}}</a>
+<p>{{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}</p>
+<a href="{{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}">More on {{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}</a>
+<p>{{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</p>
 <a href="{{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}">More on {{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</a>
 {{/if}}
 

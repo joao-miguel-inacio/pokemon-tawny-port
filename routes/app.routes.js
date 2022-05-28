@@ -46,7 +46,6 @@ router.get('/home', async (req, res, next) => {
     }
   });
 
-  //ADD MIDDLEWARE!! ISLOGGEDIN
   router.get('/pokemon-details/:id', async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -65,10 +64,6 @@ router.get('/home', async (req, res, next) => {
       } 
       const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
       if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
-        res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
-      } else if (String(pokemonEvolutionChain.chain.evolves_to[0].evolves_to) === "" ) {
-        res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
-      } else if (pokemonEvolutionChain.chain.evolves_to && pokemonEvolutionChain.chain.evolves_to[0].evolves_to[0].species.name === pokemon.name) {
         res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
       } else {
         res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );

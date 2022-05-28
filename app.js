@@ -18,7 +18,7 @@ aFunction(app);
 
 import capitalized from "./utils/capitalized.js";
 
-const projectName = "pokemon-white";
+const projectName = "pokemon-tawny-port";
 
 app.locals.appTitle = `${capitalized(projectName)}`;
 app.locals.anonymous = true;

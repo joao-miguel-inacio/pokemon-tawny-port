@@ -24,9 +24,9 @@
                     <div class="pokemon-card-image-container">
                         <img src="{{this.sprites.versions.generation-v.black-white.animated.back_default}}" class="pokemon-card-image" alt="{{this.name}} image">
                     </div>
-                    <p>Type:</p>
+                    <a>Types:</a>
                     {{#each this.types}}
-                        <a>{{this}}</a>
+                        <a>{{this.type.name}}</a>
                     {{/each}}
                     <p class="pokemon-card-text">Height: {{this.height}}; Weight: {{this.weight}}</p>
                 </div>
