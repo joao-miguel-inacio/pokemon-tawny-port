@@ -1,8 +1,10 @@
 <nav class="nav flex-column mx-auto d-block nav-pills">
-    <form class="d-flex" role="search">
-        <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+    <form class="d-flex" role="search"  action="/app/pokemon-search" method="get">
+        <label for="pokemon-input"></label>
+            <input id="pokemon-input" type="text" name="id" class="form-control me-3" placeholder="Search">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form>
+
     <a id="/app/home" class="nav-link" href="/app/home">Home</a>
     {{#if anonymous}}
     <a class="nav-link" id="/auth/login" href="/auth/login">Log in</a>
@@ -14,4 +16,5 @@
     <a class="nav-link" id="/app/own-pokemon-list" href="/app/own-pokemon-list">Pokeballs Belt</a>
     {{/if}}
     <a class="nav-link" id="/app/original-trainer-profile" href="/app/original-trainer-profile">Original Trainer</a>
+    <a class="nav-link" id="/app/pokedex" href="/app/pokedex">Pokedex</a>
 </nav>

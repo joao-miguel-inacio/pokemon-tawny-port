@@ -36,17 +36,6 @@ router.get('/home', async (req, res, next) => {
     }
   });
 
-  router.get('/original-trainer-pokedex', async (req, res, next) => {
-    try {
-      const gen1Pokemon = await MyPokedex.getGenerationByName(1);
-      const pokemonShuffled = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
-      const pokemon = (pokemonShuffled.sort((a,b) => a.id - b.id));
-      res.render('app/original-trainer-pokedex', {pokemon});
-    } catch (err) {
-      next(err);
-    }
-  });
-
   router.get('/pokemon-details/:id', async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -98,6 +87,17 @@ router.get('/home', async (req, res, next) => {
       } catch (err) {
         res.render('app/search-unsuccessful');
       }
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/pokedex', async (req, res, next) => {
+    try {
+      const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+      const pokemonShuffled = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
+      const pokemon = (pokemonShuffled.sort((a,b) => a.id - b.id));
+      res.render('app/pokedex', {pokemon});
     } catch (err) {
       next(err);
     }
