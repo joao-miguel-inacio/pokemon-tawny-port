@@ -39,7 +39,8 @@ router.get('/home', async (req, res, next) => {
   router.get('/original-trainer-pokedex', async (req, res, next) => {
     try {
       const gen1Pokemon = await MyPokedex.getGenerationByName(1);
-      const pokemon = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
+      const pokemonShuffled = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
+      const pokemon = (pokemonShuffled.sort((a,b) => a.id - b.id));
       res.render('app/original-trainer-pokedex', {pokemon});
     } catch (err) {
       next(err);
@@ -82,7 +83,7 @@ router.get('/home', async (req, res, next) => {
       const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
       const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
       const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);
-      res.render('app/pokemon-by-egg-group-list', {pokemon} );
+      res.render('app/pokemon-by-egg-group-list', {pokemon, id} );
     } catch (err) {
       next(err);
     }

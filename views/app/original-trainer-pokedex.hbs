@@ -1,5 +1,37 @@
 {{>header}}
 
 <h1>original trainer pokedex</h1>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col">
+            <img class="pokedex-pokeball-image" src="https://res.cloudinary.com/dvru7nv6q/image/upload/v1653720586/pokemon-white/pokeball-transparent-png-2_skcq48.png" alt="Image">
+        </div>
+        <div class="col">
+            <a>Number</a>
+        </div>
+        <div class="col">
+            <a>Name</a>
+        </div>
+        <div class="col">
+            <a>Link</a>
+        </div>
+    </div>
+    {{#each pokemon}}
+    <div class="row align-items-start">
+        <div class="col">
+            <img src="{{this.sprites.front_default}}" alt="https://res.cloudinary.com/dvru7nv6q/image/upload/v1653720586/pokemon-white/pokeball-transparent-png-2_skcq48.png">
+        </div>
+        <div class="col">
+            <a>{{this.id}}</a>
+        </div>
+        <div class="col">
+            <a>{{this.name}}</a>
+        </div>
+        <div class="col">
+            <a href="/app/pokemon-details/{{this.id}}">More</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
 
 {{>footer}}

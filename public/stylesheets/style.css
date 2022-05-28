@@ -192,3 +192,17 @@ footer {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/*egg group list*/
+
+.egg-group-list-id{
+  text-align: center;
+}
+
+/*pokedex*/
+
+.pokedex-pokeball-image{
+  height: 96px;
+  margin: 0;
+}
+
