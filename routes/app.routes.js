@@ -38,25 +38,29 @@ router.get('/home', async (req, res, next) => {
 
   router.get('/pokemon-details/:id', async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const pokemon = await MyPokedex.getPokemonByName(id);
-      const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
-      async function findEvoChainId (pokemonSpecies) {
-        if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
-          const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
-          const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-          return pokemonEvolutionChain;
+      try {
+        const { id } = req.params;
+        const pokemon = await MyPokedex.getPokemonByName(id);
+        const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
+        async function findEvoChainId (pokemonSpecies) {
+          if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
+            const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
+            const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+            return pokemonEvolutionChain;
+          } else {
+            const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
+            const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+            return pokemonEvolutionChain;
+          }
+        } 
+        const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
+        if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
+          res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
         } else {
-          const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
-          const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-          return pokemonEvolutionChain;
+          res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
         }
-      } 
-      const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
-      if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
-        res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
-      } else {
-        res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
+      } catch (err) {
+        res.render('app/search-unsuccessful');
       }
     } catch (err) {
       next(err);
@@ -80,12 +84,14 @@ router.get('/home', async (req, res, next) => {
 
   router.get('/pokemon-search', async (req, res, next) => {
     try {
-      try {
-        const searchedPokemon = req.query.id;
-        const pokemon = await MyPokedex.getPokemonByName(searchedPokemon);
-        res.render('app/pokemon-details', {pokemon});
-      } catch (err) {
-        res.render('app/search-unsuccessful');
+      const searchedPokemon = req.query.id;
+      const filteredSearchedPokemon = searchedPokemon.toLowerCase().replace(/\s/g, '');
+      if (filteredSearchedPokemon === "nidoran"){
+        res.redirect(`/app/pokemon-details/nidoran-m`);
+      } else if (filteredSearchedPokemon === "mime" || filteredSearchedPokemon === "mrmime" || filteredSearchedPokemon === "mr") {
+        res.redirect(`/app/pokemon-details/mr-mime`);
+      } else {
+        res.redirect(`/app/pokemon-details/${filteredSearchedPokemon}`);
       }
     } catch (err) {
       next(err);

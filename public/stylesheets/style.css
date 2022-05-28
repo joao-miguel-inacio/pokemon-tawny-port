@@ -2,6 +2,14 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.home-image {
+  width: 50vh;
+}
+
+.hidden {
+  display: none;
+}
+
 /*header*/
 
 .nav{
@@ -30,8 +38,9 @@ footer {
   color: #545454;
 }
 
-.home-image {
-  width: 50vh;
+.psyduck-image {
+  position: absolute;
+  height: 90px;
 }
 
 /*trainer profile*/
@@ -206,3 +215,10 @@ footer {
   margin: 0;
 }
 
+/*unsuccessful search*/
+
+.center-text {
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+}
