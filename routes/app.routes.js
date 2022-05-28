@@ -88,5 +88,19 @@ router.get('/home', async (req, res, next) => {
       next(err);
     }
   });
+
+  router.get('/pokemon-search', async (req, res, next) => {
+    try {
+      try {
+        const searchedPokemon = req.query.id;
+        const pokemon = await MyPokedex.getPokemonByName(searchedPokemon);
+        res.render('app/pokemon-details', {pokemon});
+      } catch (err) {
+        res.render('app/search-unsuccessful');
+      }
+    } catch (err) {
+      next(err);
+    }
+  });
   
 export default router;
