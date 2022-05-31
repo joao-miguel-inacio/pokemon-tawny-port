@@ -4,10 +4,25 @@ const {Schema, model} = mongoose;
 const pokemonSchema = new Schema(
   {
     name: String,
-    type: String,
-    image: String,
-    baseExperience: Number,
-    //type: String
+    id: Number,
+    base_Experience: Number,
+    types: [String],
+    height: Number,
+    weight: Number,
+    habitat: String,
+    growth_rate: String,
+    sprites: {
+      front_default : String,
+      back_default: String,
+      front_shiny: String,
+      back_shiny: String,
+      front_animated: String,
+      back_animated: String
+    },
+    evolution_chain: [String],
+    egg_groups: [String],
+    trainer: { type: Schema.Types.ObjectId, ref: "User" },
+    nickname: String
     //signatureMove: String,
     //signatureMoveType: String
   },
