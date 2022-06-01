@@ -10,6 +10,7 @@ const userSchema = new Schema(
       unique: true
     },
     password: String,
+    pokemon: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }]
     //level: Number
   },
   {

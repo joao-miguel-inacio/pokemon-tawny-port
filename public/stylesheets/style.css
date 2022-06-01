@@ -222,3 +222,58 @@ footer {
   padding-left: 5%;
   padding-right: 5%;
 }
+
+/*battle*/
+/*
+.battleground{
+  border: 2px solid rgb(110, 13, 13);
+  position: relative;
+  height: 204px;
+}
+
+.battle-pokemon {
+  position: absolute;
+  right: 0;
+  height: 100px;
+	animation: slide-left 5s;
+}
+
+.battle-trainer {
+  position: relative;
+  margin-top: 100px;
+  height: 100px;
+	animation: slide-right 5s;
+}
+
+.battle-pokeball{
+  position: absolute;
+  height: 40px;
+  animation: catch 10s;
+}
+
+@keyframes slide-left {
+  0% {
+    right: 100vw;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    left: 100vw;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+@keyframes catch {
+  0% {
+    transform: translate(85vw, 85vh) rotate(0deg);
+  }
+  100% {
+    transform: translate(85vw, 85vh) rotate(7200deg);
+  }
+}*/

@@ -125,5 +125,24 @@ router.get('/home', async (req, res, next) => {
       next(err);
     }
   });
+
+  router.get('/catch-pokemon/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const pokemonInArray = await Pokemon.find( {id : id} );
+      const pokemon = pokemonInArray[0];
+      const pokemonObjId = pokemonInArray[0]._id;
+      const userId = req.session.user._id;
+      const user = await User.findById(userId);
+      const userObjId=user._id;
+      await Pokemon.findByIdAndUpdate(pokemonObjId, { $addToSet: { trainer: userObjId } });
+      await User.findByIdAndUpdate(userObjId, { $addToSet: { pokemon: pokemonObjId } });
+      res.render('app/catch-pokemon', {pokemon});
+    } catch (err) {
+      next(err);
+    }
+  });
   
+
+
 export default router;

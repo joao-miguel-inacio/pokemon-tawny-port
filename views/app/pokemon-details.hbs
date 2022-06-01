@@ -2,13 +2,19 @@
 
 {{#if pokemon}}
 
+{{#if inSession}}   
+    <form action="/app/catch-pokemon/{{this.pokemon.id}}" method="get">
+        <button class="btn btn-danger">Catch!</button>
+    </form>
+{{/if}}
+
 <h1>{{this.pokemon.name}}</h1>
 
-    <img src="{{this.pokemon.sprites.front_default}}" alt="{{this.name}} image">
-    <img src="{{this.pokemon.sprites.back_default}}" alt="{{this.name}} image">
+    <img src="{{this.pokemon.sprites.front_default}}" alt="{{this.pokemon.name}} image">
+    <img src="{{this.pokemon.sprites.back_default}}" alt="{{this.pokemon.name}} image">
 
-    <img src="{{this.pokemon.sprites.front_shiny}}" alt="{{this.name}} image">
-    <img src="{{this.pokemon.sprites.back_shiny}}" alt="{{this.name}} image">
+    <img src="{{this.pokemon.sprites.front_shiny}}" alt="{{this.pokemon.name}} image">
+    <img src="{{this.pokemon.sprites.back_shiny}}" alt="{{this.pokemon.name}} image">
 
     <h4>Pokedex Data</h4>
     <p>National no.: {{this.pokemon.id}}</p>
@@ -39,6 +45,7 @@
 {{/if}}
 
 {{#if pokemonNotGen1}}
+
     <h1>{{this.pokemonNotGen1.name}}</h1>
 
     <img src="{{this.pokemonNotGen1.sprites.front_default}}" alt="{{this.pokemonNotGen1.name}} image">
