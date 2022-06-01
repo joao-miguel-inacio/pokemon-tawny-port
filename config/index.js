@@ -4,10 +4,7 @@ import express from "express";
 // ℹ️ Responsible for the messages you see in the terminal as requests are coming in
 // https://www.npmjs.com/package/morgan
 import logger from "morgan";
-// import path from 'path';
-import {fileURLToPath} from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
 // ℹ️ Needed when we deal with cookies (we will when dealing with authentication)
 // https://www.npmjs.com/package/cookie-parser
 import cookieParser from "cookie-parser";
@@ -19,6 +16,9 @@ import favicon from "serve-favicon";
 // ℹ️ global package used to `normalize` paths amongst different operating systems
 // https://www.npmjs.com/package/path
 import path from "path";
+import {fileURLToPath} from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ℹ️ Session middleware for authentication
 // https://www.npmjs.com/package/express-session
