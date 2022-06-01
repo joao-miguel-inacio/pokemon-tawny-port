@@ -8,59 +8,7 @@
     <span class="large-screens-original-trainer-team-text">This is my team {{user.username}}. How would your team fare against mine?</span>
 {{/if}}
 
-<div class="card-grid">
-    {{#each pokemon}}
-        <div class="flip-card">
-            <div class="pokemon-card flip-card-inner">
-                <div class="flip-card-front">
-                    <div class="pokemon-card-image-container">
-                        <img src="{{this.sprites.front_animated}}" class="pokemon-card-image" alt="{{this.name}} image">
-                    </div>
-                    <h3 class="pokemon-card-text">{{this.name}}</h3>
-                    <p class="pokemon-card-text">Exp: {{this.base_experience}}</p>
-                    <p><a  class="card-more-button" href="/app/pokemon-details/{{this.id}}">More on {{this.name}}</a></p>
-                </div>
-                <div class="flip-card-back">
-                    <div class="pokemon-card-image-container">
-                        <img src="{{this.sprites.back_animated}}" class="pokemon-card-image" alt="{{this.name}} image">
-                    </div>
-                    <a>Types:</a>
-                    {{#each this.types}}
-                        <a>{{this}}</a>
-                    {{/each}}
-                    <p class="pokemon-card-text">Height: {{this.height}}; Weight: {{this.weight}}</p>
-                </div>
-            </div>
-        </div>
-    {{/each}}
-</div>
+
+{{>card-grid}}
 
 {{>footer}}
-
-<!--If handling data obtained through the API and not MongoDB:
-<div class="card-grid">
-    {{#each pokemon}}
-        <div class="flip-card">
-            <div class="pokemon-card flip-card-inner">
-                <div class="flip-card-front">
-                    <div class="pokemon-card-image-container">
-                        <img src="{{this.sprites.versions.generation-v.black-white.animated.front_default}}" class="pokemon-card-image" alt="{{this.name}} image">
-                    </div>
-                    <h3 class="pokemon-card-text">{{this.name}}</h3>
-                    <p class="pokemon-card-text">Exp: {{this.base_experience}}</p>
-                    <p><a  class="card-more-button" href="/app/pokemon-details/{{this.id}}">More on {{this.name}}</a></p>
-                </div>
-                <div class="flip-card-back">
-                    <div class="pokemon-card-image-container">
-                        <img src="{{this.sprites.versions.generation-v.black-white.animated.back_default}}" class="pokemon-card-image" alt="{{this.name}} image">
-                    </div>
-                    <a>Types:</a>
-                    {{#each this.types}}
-                        <a>{{this.type.name}}</a>
-                    {{/each}}
-                    <p class="pokemon-card-text">Height: {{this.height}}; Weight: {{this.weight}}</p>
-                </div>
-            </div>
-        </div>
-    {{/each}}
-</div>--->

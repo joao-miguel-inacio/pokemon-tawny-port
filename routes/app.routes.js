@@ -80,12 +80,15 @@ router.get('/home', async (req, res, next) => {
     //can be based on the database
     try {
       const { id } = req.params;
-      const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
-      const gen1Pokemon = await MyPokedex.getGenerationByName(1);
-      const pokemonNamesInEggGroup = eggGroupPokemon.pokemon_species.map(pokemon => pokemon.name);   
-      const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
-      const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
-      const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);
+      const pokemon = await Pokemon.find( {egg_groups : id} );
+
+      // const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
+      // const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+      // const pokemonNamesInEggGroup = eggGroupPokemon.pokemon_species.map(pokemon => pokemon.name);   
+      // const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
+      // const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
+      // const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);
+
       res.render('app/pokemon-by-egg-group-list', {pokemon, id} );
     } catch (err) {
       next(err);
