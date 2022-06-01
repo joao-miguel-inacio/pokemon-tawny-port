@@ -52,9 +52,10 @@ const createPokemons = async () => {
         const second = res[i]?.chain?.evolves_to[0]?.species.name;
         const third = res[i]?.chain?.evolves_to[0]?.evolves_to[0]?.species.name;
         evolutionChainsArray.push([first, second, third]);
+        
         //evolutionChainsArray is now [[baby, teen, adult],[baby, teen, adult],[baby, teen, adult],[baby, teen, undefined],[baby, undefined, undefined] x78]
       }
-
+      
       for (let i = 0; i <= 150; i++) {
 
         const relevantEvolutionChain = evolutionChainsArray.find((element) => {
@@ -75,11 +76,10 @@ const createPokemons = async () => {
         eggGroupsRawData.forEach((element) => eggGroups.push(element.name));
         //this will iterate over the raw data on eggGroups for the specific pokemon we are iterating over and push just the eggGroups' names into our newly created array
 
-
         const pokemon = {
           name: data1Array[i].name,
           id: data1Array[i].id,
-          base_Experience: data1Array[i].base_experience,
+          base_experience: data1Array[i].base_experience,
           types: types,
           weight: data1Array[i].weight,
           height: data1Array[i].height,
