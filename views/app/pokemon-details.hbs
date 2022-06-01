@@ -1,40 +1,80 @@
 {{>header}}
 
+{{#if pokemon}}
+
 <h1>{{this.pokemon.name}}</h1>
 
-<img src="{{this.pokemon.sprites.front_default}}" alt="{{this.pokemon.name}} image">
-<img src="{{this.pokemon.sprites.back_default}}" alt="{{this.pokemon.name}} image">
+    <img src="{{this.pokemon.sprites.front_default}}" alt="{{this.name}} image">
+    <img src="{{this.pokemon.sprites.back_default}}" alt="{{this.name}} image">
 
-<img src="{{this.pokemon.sprites.front_shiny}}" alt="{{this.pokemon.name}} image">
-<img src="{{this.pokemon.sprites.back_shiny}}" alt="{{this.pokemon.name}} image">
+    <img src="{{this.pokemon.sprites.front_shiny}}" alt="{{this.name}} image">
+    <img src="{{this.pokemon.sprites.back_shiny}}" alt="{{this.name}} image">
 
-<h4>Pokedex Data</h4>
-<p>National no.: {{this.pokemon.id}}</p>
-<p>Base Exp: {{this.pokemon.base_experience}}</p>
-<p>Height: {{this.pokemon.height}} cm</p>
-<p>Weight: {{this.pokemon.weight}} g</p>
-<p>Types: 
-    {{#each this.pokemon.types}}
-        <a>{{this.type.name}}</a>
+    <h4>Pokedex Data</h4>
+    <p>National no.: {{this.pokemon.id}}</p>
+    <p>Base Exp: {{this.pokemon.base_experience}}</p>
+    <p>Height: {{this.pokemon.height}} cm</p>
+    <p>Weight: {{this.pokemon.weight}} g</p>
+    <p>Types: 
+        {{#each this.pokemon.types}}
+            <a>{{this}}</a>
+        {{/each}}
+    <p>Growth Rate: {{this.pokemon.growth_rate}}</p>
+    <p>Habitat: {{this.pokemon.habitat}}</p>
+
+    <h4>Evolution Chain</h4>
+    {{#each this.pokemon.evolution_chain}}
+        {{#if this}}
+            <p>{{this}}</p>
+            <a href="{{this}}">More on {{this}}</a>
+        {{/if}}
     {{/each}}
-<p>Growth Rate: {{this.pokemonSpecies.growth_rate.name}}</p>
-<p>Habitat: {{this.pokemonSpecies.habitat.name}}</p>
 
-{{#if this.pokemonEvolutionChain}}
-<h4>Evolution Chain</h4>
-<p>{{this.pokemonEvolutionChain.chain.species.name}}</p>
-<a href="{{this.pokemonEvolutionChain.chain.species.name}}">More on {{this.pokemonEvolutionChain.chain.species.name}}</a>
-<p>{{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}</p>
-<a href="{{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}">More on {{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}</a>
-<p>{{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</p>
-<a href="{{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}">More on {{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</a>
+    <h4>Breeding</h4>
+    <p>Egg Groups:</p>
+    {{#each this.pokemon.egg_groups}}
+    <p>{{this}}</p>
+    <a href="/app/pokemon-by-egg-group-list/{{this}}">Other pokemons who belong to {{this}} egg group</a>
+    {{/each}}
 {{/if}}
 
-<h4>Breeding</h4>
-<p>Egg Groups:</p>
-{{#each this.pokemonSpecies.egg_groups}}
-<p>{{this.name}}</p>
-<a href="/app/pokemon-by-egg-group-list/{{this.name}}">Other pokemons who belong to {{this.name}} egg group</a>
-{{/each}}
+{{#if pokemonNotGen1}}
+    <h1>{{this.pokemonNotGen1.name}}</h1>
+
+    <img src="{{this.pokemonNotGen1.sprites.front_default}}" alt="{{this.pokemonNotGen1.name}} image">
+    <img src="{{this.pokemonNotGen1.sprites.back_default}}" alt="{{this.pokemonNotGen1.name}} image">
+
+    <img src="{{this.pokemonNotGen1.sprites.front_shiny}}" alt="{{this.pokemonNotGen1.name}} image">
+    <img src="{{this.pokemonNotGen1.sprites.back_shiny}}" alt="{{this.pokemonNotGen1.name}} image">
+
+    <h4>Pokedex Data</h4>
+    <p>National no.: {{this.pokemonNotGen1.id}}</p>
+    <p>Base Exp: {{this.pokemonNotGen1.base_experience}}</p>
+    <p>Height: {{this.pokemonNotGen1.height}} cm</p>
+    <p>Weight: {{this.pokemonNotGen1.weight}} g</p>
+    <p>Types: 
+        {{#each this.pokemonNotGen1.types}}
+            <a>{{this.type.name}}</a>
+        {{/each}}
+    <p>Growth Rate: {{this.pokemonSpecies.growth_rate.name}}</p>
+    <p>Habitat: {{this.pokemonSpecies.habitat.name}}</p>
+
+    {{#if this.pokemonEvolutionChain}}
+    <h4>Evolution Chain</h4>
+    <p>{{this.pokemonEvolutionChain.chain.species.name}}</p>
+    <a href="{{this.pokemonEvolutionChain.chain.species.name}}">More on {{this.pokemonEvolutionChain.chain.species.name}}</a>
+    <p>{{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}</p>
+    <a href="{{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}">More on {{this.pokemonEvolutionChain.chain.evolves_to.[0].species.name}}</a>
+    <p>{{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</p>
+    <a href="{{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}">More on {{this.pokemonEvolutionChain.chain.evolves_to.[0].evolves_to.[0].species.name}}</a>
+    {{/if}}
+
+    <h4>Breeding</h4>
+    <p>Egg Groups:</p>
+    {{#each this.pokemonSpecies.egg_groups}}
+    <p>{{this.name}}</p>
+    <a href="/app/pokemon-by-egg-group-list/{{this.name}}">Other pokemons who belong to {{this.name}} egg group</a>
+    {{/each}}
+{{/if}}
 
 {{>footer}}

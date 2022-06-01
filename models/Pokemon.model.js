@@ -5,7 +5,7 @@ const pokemonSchema = new Schema(
   {
     name: String,
     id: Number,
-    base_Experience: Number,
+    base_experience: Number,
     types: [String],
     height: Number,
     weight: Number,

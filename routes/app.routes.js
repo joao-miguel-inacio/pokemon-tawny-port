@@ -41,24 +41,32 @@ router.get('/home', async (req, res, next) => {
     try {
       try {
         const { id } = req.params;
-        const pokemon = await MyPokedex.getPokemonByName(id);
-        const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
-        async function findEvoChainId (pokemonSpecies) {
-          if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
-            const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
-            const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-            return pokemonEvolutionChain;
-          } else {
-            const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
-            const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-            return pokemonEvolutionChain;
-          }
-        } 
-        const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
-        if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
-          res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
+        if (id <= 151){
+          const pokemonInArray = await Pokemon.find( {id : id} );
+          const pokemon = pokemonInArray[0];
+          console.log(pokemon.evolution_chain)
+          res.render('app/pokemon-details', {pokemon});
         } else {
-          res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
+          //because only 1st generation pokemons are seeded in the database
+          const pokemonNotGen1 = await MyPokedex.getPokemonByName(id);
+          const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
+          async function findEvoChainId (pokemonSpecies) {
+            if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
+              const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
+              const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+              return pokemonEvolutionChain;
+            } else {
+              const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
+              const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+              return pokemonEvolutionChain;
+            }
+          } 
+          const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
+          if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
+            res.render('app/pokemon-details', {pokemonNotGen1, pokemonSpecies} );
+          } else {
+            res.render('app/pokemon-details', {pokemonNotGen1, pokemonSpecies, pokemonEvolutionChain} );
+          }
         }
       } catch (err) {
         res.render('app/search-unsuccessful');
