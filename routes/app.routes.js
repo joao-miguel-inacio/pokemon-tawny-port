@@ -30,7 +30,9 @@ router.get('/home', async (req, res, next) => {
   router.get('/original-trainer-team', async (req, res, next) => {
     try {
       const pokemon = await Pokemon.find( {name: ['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']});
+      
       //const pokemon2 = await MyPokedex.getPokemonByName(['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']);
+      
       res.render('app/original-trainer-team', {pokemon});
     } catch (err) {
       next(err);
@@ -77,7 +79,6 @@ router.get('/home', async (req, res, next) => {
   });
 
   router.get('/pokemon-by-egg-group-list/:id', async (req, res, next) => {
-    //can be based on the database
     try {
       const { id } = req.params;
       const pokemon = await Pokemon.find( {egg_groups : id} );
@@ -113,8 +114,11 @@ router.get('/home', async (req, res, next) => {
 
   router.get('/pokedex', async (req, res, next) => {
     try {
-      const gen1Pokemon = await MyPokedex.getGenerationByName(1);
-      const pokemonShuffled = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
+      const pokemonShuffled = await Pokemon.find();
+
+      // const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+      // const pokemonShuffled = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
+
       const pokemon = (pokemonShuffled.sort((a,b) => a.id - b.id));
       res.render('app/pokedex', {pokemon});
     } catch (err) {
