@@ -128,20 +128,16 @@ footer {
     flex-direction: column;
     gap: 5px;
   }
-
-  .large-screens-original-trainer-team-text {
-    display: block !important;
-    text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
-    font-size: small;
-  }
 }
 
 /*6 pokemon team*/
 
-.large-screens-original-trainer-team-text {
-  display: none;
+.original-trainer-team-text {
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: small;
+  margin: 0;
 }
 
 .card-grid {
@@ -180,11 +176,17 @@ footer {
   height: 100%;
 }
 
-.pokemon-card-text{
-  text-align: center;
+.pokemon-card-types-container{
+  margin: 10px;
 }
 
 .flip-card-front, .flip-card-back {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
 }
@@ -203,7 +205,8 @@ footer {
   text-align: center;
 }
 .card-more-button {
-  color: #f7f9f9;
+  text-decoration: none;
+  color: white;
 }
 
 @media screen and (min-width: 481px) {
@@ -231,7 +234,8 @@ footer {
   margin: 0;
 }
 
-.pokedex-pokedex-link {
+.pokedex-pokedex-link,
+.trainer-list-link {
   text-decoration: none;
   color: transparent;
   background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-white/66a6a4d3-pokedex_kanto_jvz4bm.png);
@@ -239,7 +243,8 @@ footer {
   background-size: contain;
 }
 
-.pokedex-pokedex-link:hover {
+.pokedex-pokedex-link:hover,
+.trainer-list-link:hover {
   color: transparent;
 }
 
@@ -264,6 +269,75 @@ footer {
   text-align: center;
   padding-left: 5%;
   padding-right: 5%;
+}
+
+/*pokemon details*/
+
+.pokemon-details-name{
+  text-align: center;
+  background-color: #efefef;
+}
+
+.pokemon-details-image-container{
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.pokemon-details-image-container > div > p{
+  margin: 0;
+}
+
+.pokemon-details {
+  text-align: center;
+}
+
+.pokemon-details > h4 {
+  background-color: #efefef;
+}
+
+.pokemon-details-card{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1em;
+  margin: 1em;
+}
+
+
+.pokemon-details-types{
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.pokemon-details-types:hover{
+  color: white;
+}
+
+
+.bold{
+  font-weight: bold;
+}
+
+
+@media screen and (min-width: 481px) {
+  .pokemon-details-card{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .evolution-chain-container,
+  .egg-groups-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .pokemon-details-card{
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /*battle*/

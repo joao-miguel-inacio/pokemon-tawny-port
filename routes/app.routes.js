@@ -24,7 +24,7 @@ const MyPokedex = new Pokedex();
   router.get('/original-trainer-team', async (req, res, next) => {
     try {
       const pokemon = await Pokemon.find( {name: ['Blastoise', 'Dragonite', 'Gengar','Chansey', 'Ninetales', 'Mew']});
-      
+      console.log(pokemon)
       //const pokemon2 = await MyPokedex.getPokemonByName(['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']);
       
       res.render('app/original-trainer-team', {pokemon});
@@ -38,7 +38,8 @@ const MyPokedex = new Pokedex();
         const { id } = req.params;
           const pokemonInArray = await Pokemon.find( {id : id} );
           const pokemon = pokemonInArray[0];
-          res.render('app/pokemon-details', {pokemon});
+          const evolutionChainPokemons = await Pokemon.find( {name : pokemon.evolution_chain} );
+          res.render('app/pokemon-details', {pokemon, evolutionChainPokemons});
 
           // const pokemon = await MyPokedex.getPokemonByName(id);
           // const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
@@ -141,7 +142,7 @@ const MyPokedex = new Pokedex();
     try {
       const userId = req.session.user._id;
       const user = await User.findById(userId).populate("pokemon");
-      const pokemon=user.pokemon;
+      const pokemon = user.pokemon;
       if (pokemon.length <1){
         const noPokemon = "No Pokemons caught yet";
         res.render('app/own-pokemon-list', {noPokemon});
@@ -180,6 +181,37 @@ const MyPokedex = new Pokedex();
         { name, username, image, description }, 
         { new: true });
       res.redirect('own-profile');
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/trainer-list', async (req, res, next) => {
+    try {
+      const trainers = await User.find();
+      res.render('app/trainer-list', {trainers});
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/trainer-profile/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const trainerInArray = await User.find( {_id : id });
+      const trainer = trainerInArray[0];
+      res.render('app/trainer-profile', {trainer});
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/trainer-team/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const trainerInArray = await User.find( {_id : id }).populate("pokemon");
+      const pokemon = trainerInArray[0].pokemon;
+      res.render('app/trainer-team', {pokemon});
     } catch (err) {
       next(err);
     }

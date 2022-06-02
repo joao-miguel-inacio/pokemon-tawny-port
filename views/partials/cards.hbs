@@ -6,24 +6,28 @@
                     <div class="pokemon-card-image-container">
                         <img src="{{this.sprites.front_animated}}" class="pokemon-card-image" alt="{{this.name}} image">
                     </div>
-                    <h3 class="pokemon-card-text">{{this.name}}</h3>
-                    <p class="pokemon-card-text">Exp: {{this.base_experience}}</p>
-                    <p><a  class="card-more-button" href="/app/pokemon-details/{{this.id}}">More on {{this.name}}</a></p>
+                    <h3><a  class="card-more-button" href="/app/pokemon-details/{{this.id}}">{{this.name}} #{{this.id}}</a></h3>
+                    <a>Exp: {{this.base_experience}};</a>
+                    <div class="pokemon-card-types-container">
+                    {{#each this.types}}
+                        <a class="pokemon-details-types">{{this}}</a>
+                    {{/each}}
+                    </div>
                 </div>
                 <div class="flip-card-back">
                     <div class="pokemon-card-image-container">
                         <img src="{{this.sprites.back_animated}}" class="pokemon-card-image" alt="{{this.name}} image">
                     </div>
-                    <a>Types:</a>
-                    {{#each this.types}}
-                        <a>{{this}}</a>
-                    {{/each}}
-                    <p class="pokemon-card-text">Height: {{this.height}}; Weight: {{this.weight}}</p>
+                    <p>Height: {{this.height}}; Weight: {{this.weight}};</p>
+                    <p>Growth Rate: {{this.growth_rate}};</p>
+                    <p>Habitat: {{this.habitat}};</p>
                 </div>
             </div>
         </div>
     {{/each}}
 </div>
+
+<script src="\js\details.js"></script>
 
 <!--If handling data obtained through the API and not MongoDB:
 <div class="card-grid">
@@ -34,8 +38,8 @@
                     <div class="pokemon-card-image-container">
                         <img src="{{this.sprites.versions.generation-v.black-white.animated.front_default}}" class="pokemon-card-image" alt="{{this.name}} image">
                     </div>
-                    <h3 class="pokemon-card-text">{{this.name}}</h3>
-                    <p class="pokemon-card-text">Exp: {{this.base_experience}}</p>
+                    <h3>{{this.name}}</h3>
+                    <p>Exp: {{this.base_experience}}</p>
                     <p><a  class="card-more-button" href="/app/pokemon-details/{{this.id}}">More on {{this.name}}</a></p>
                 </div>
                 <div class="flip-card-back">
@@ -46,7 +50,7 @@
                     {{#each this.types}}
                         <a>{{this.type.name}}</a>
                     {{/each}}
-                    <p class="pokemon-card-text">Height: {{this.height}}; Weight: {{this.weight}}</p>
+                    <p>Height: {{this.height}}; Weight: {{this.weight}}</p>
                 </div>
             </div>
         </div>
