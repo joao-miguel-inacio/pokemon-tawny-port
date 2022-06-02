@@ -1,12 +1,12 @@
 {{>header}}
 
 <div class="container">
-    <div class="row align-items-center">
+    <div class="pokedex-head row">
         <div class="col">
             <img class="pokedex-pokeball-image" src="https://res.cloudinary.com/dvru7nv6q/image/upload/v1654107302/pokemon-white/pokeball-png-45332_rarrzq.png" alt="Image">
         </div>
         <div class="col">
-            <a>Number</a>
+            <a>Id</a>
         </div>
         <div class="col">
             <a>Name</a>
@@ -16,7 +16,7 @@
         </div>
     </div>
     {{#each pokemon}}
-    <div class="row align-items-start">
+    <div class="row pokedex-body">
         <div class="col">
             <img src="{{this.sprites.front_default}}" alt="https://res.cloudinary.com/dvru7nv6q/image/upload/v1653720586/pokemon-white/pokeball-transparent-png-2_skcq48.png">
         </div>
@@ -27,7 +27,7 @@
             <a>{{this.name}}</a>
         </div>
         <div class="col">
-            <a href="/app/pokemon-details/{{this.id}}">More</a>
+            <a class="pokedex-pokedex-link" href="/app/pokemon-details/{{this.id}}">Details</a>
         </div>
     </div>
     {{/each}}

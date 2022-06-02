@@ -131,7 +131,7 @@ const MyPokedex = new Pokedex();
       const userObjId=user._id;
       await Pokemon.findByIdAndUpdate(pokemonObjId, { $addToSet: { trainer: userObjId } });
       await User.findByIdAndUpdate(userObjId, { $addToSet: { pokemon: pokemonObjId } });
-      res.render('app/catch-pokemon', {pokemon});
+      res.redirect('/app/own-pokemon-list');
     } catch (err) {
       next(err);
     }

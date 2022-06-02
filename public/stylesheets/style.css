@@ -231,6 +231,33 @@ footer {
   margin: 0;
 }
 
+.pokedex-pokedex-link {
+  text-decoration: none;
+  color: transparent;
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-white/66a6a4d3-pokedex_kanto_jvz4bm.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.pokedex-pokedex-link:hover {
+  color: transparent;
+}
+
+.pokedex-head {
+  background-color: #efefef;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.pokedex-body {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border: dashed #efefef;
+  border-top: none;
+}
+
 /*unsuccessful search*/
 
 .center-text {
