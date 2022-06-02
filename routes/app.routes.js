@@ -93,7 +93,7 @@ router.get("/pokemon-search", async (req, res, next) => {
   try {
     const searchedPokemon = req.query.id;
     if (+searchedPokemon > 151) {
-      res.render("app/search-unsuccessful");
+      res.render("app/pokemon-search-unsuccessful");
     } else if (+searchedPokemon <= 151) {
       res.redirect(`/app/pokemon-details/${searchedPokemon}`);
     } else if (isNaN(+searchedPokemon)) {
@@ -105,7 +105,7 @@ router.get("/pokemon-search", async (req, res, next) => {
         const searchedPokemonId = pokemon[0].id;
         res.redirect(`/app/pokemon-details/${searchedPokemonId}`);
       } catch {
-        res.render("app/search-unsuccessful");
+        res.render("app/pokemon-search-unsuccessful");
       }
     }
   } catch (err) {

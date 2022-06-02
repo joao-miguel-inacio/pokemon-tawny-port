@@ -263,8 +263,7 @@ footer {
   margin: 0;
 }
 
-.pokedex-pokedex-link,
-.trainer-list-link {
+.pokedex-pokedex-link {
   text-decoration: none;
   color: transparent;
   background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-white/66a6a4d3-pokedex_kanto_jvz4bm.png);
@@ -272,8 +271,7 @@ footer {
   background-size: contain;
 }
 
-.pokedex-pokedex-link:hover,
-.trainer-list-link:hover {
+.pokedex-pokedex-link:hover{
   color: transparent;
 }
 
@@ -372,6 +370,18 @@ footer {
 /*trainer list*/
 .trainer-list-image {
   height: 50px;
+}
+
+.trainer-list-link {
+  text-decoration: none;
+  color: transparent;
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-white/66a6a4d3-pokedex_kanto_jvz4bm.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.trainer-list-link:hover {
+  color: transparent;
 }
 
 /*battle*/
