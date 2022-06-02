@@ -3,23 +3,33 @@
 
 <form action="/auth/signup" method="POST">
 
-   <label> Name
-      <input required type="text" name="name">
-   </label>
-   <label> Username
-      <input required type="text" name="username">
-   </label>
-   <label> Image
-      <input required type="text" name="image">
-   </label>
-   <label> About you:
-      <input required type="text" name="description">
-   </label>
-   <label> Password
-      <input required type="password" name="password">
-   </label>
+   <div class="mb-3">
+      <label> Name
+         <input required type="text" name="name">
+      </label>
+   </div>
+   <div class="mb-3">
+      <label> Username
+         <input required type="text" name="username">
+      </label>
+   </div>
+   <div class="mb-3">
+      <label> Image
+         <input required type="text" name="image" id="profile-creation-image" value="{{this.pokemonImg}}">
+      </label>
+   </div>
+   <div class="mb-3">
+      <label> About you:
+         <input required type="text" name="description" id="profile-creation-description" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit elementum tortor eget tincidunt. Suspendisse vel efficitur tortor, non finibus massa. Maecenas semper eros arcu, et mollis nibh pretium ac. Quisque volutpat ipsum non volutpat egestas. Pellentesque ornare sollicitudin massa vitae laoreet. Cras in auctor eros. Aenean a risus in.">
+      </label>
+   </div>
+   <div class="mb-3">
+      <label> Password
+         <input required type="password" name="password">
+      </label>
+   </div>
 
-   <button type="submit">Submit</button>
+   <button type="submit" name="submit_btn">Submit</button>
 </form>
 
 {{#if errorMessage}}
@@ -30,7 +40,7 @@
     <button type="submit" class="btn btn-primary">Log in</button>
 </form>
 
-<form method="get" action="/app/home">
+<form method="get" action="/">
     <button type="submit" class="btn btn-success">Visit</button>
 </form>
 

@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 
 import Pokemon from "../models/Pokemon.model.js";
 
+import capitalized from "../utils/capitalized.js";
+
 import Pokedex from "pokedex-promise-v2";
 const MyPokedex = new Pokedex();
 let pokemonsArray = [];
@@ -51,40 +53,53 @@ const createPokemons = async () => {
         const first = res[i]?.chain?.species?.name;
         const second = res[i]?.chain?.evolves_to[0]?.species.name;
         const third = res[i]?.chain?.evolves_to[0]?.evolves_to[0]?.species.name;
-        evolutionChainsArray.push([first, second, third]);
+        if (second === undefined){
+          const capitalizedFirst = capitalized(first);
+          evolutionChainsArray.push([capitalizedFirst, second, third]);
+        } else if (third === undefined) {
+          const capitalizedFirst = capitalized(first);
+          const capitalizedSecond = capitalized(second);
+          evolutionChainsArray.push([capitalizedFirst, capitalizedSecond, third]);
+        } else {
+          const capitalizedFirst = capitalized(first);
+          const capitalizedSecond = capitalized(second);
+          const capitalizedThird = capitalized(third);
+          evolutionChainsArray.push([capitalizedFirst, capitalizedSecond, capitalizedThird]);
+        }
         
         //evolutionChainsArray is now [[baby, teen, adult],[baby, teen, adult],[baby, teen, adult],[baby, teen, undefined],[baby, undefined, undefined] x78]
       }
-      
+      console.log(evolutionChainsArray)
       for (let i = 0; i <= 150; i++) {
 
         const relevantEvolutionChain = evolutionChainsArray.find((element) => {
-          return element.includes(data1Array[i].name);
+          const relevantName = capitalized(data1Array[i].name)
+          return element.includes(relevantName);
           //for each of the 151 pokemons, this will find the element (array), in the evolutionChainsArray, that contains the name of the pokemon we are iteration over.
           //this will be returned as true and become the relevantEvolutionChain to be sent to our DB on the current iteration
-        });
+        });       
 
         const types = [];
         const typesRawData = data1Array[i].types;
         //extracts array relative to the types from the data1Array
-        typesRawData.forEach((element) => types.push(element.type.name));
+        typesRawData.forEach((element) => types.push(capitalized(element.type.name)));
         //this will iterate over the raw data on types for the specific pokemon we are iterating over and push just the type.name into our newly created array
 
         const eggGroups = [];
         const eggGroupsRawData = data2Array[i].egg_groups;
         //extracts array relative to the egg groups from the data2Array
-        eggGroupsRawData.forEach((element) => eggGroups.push(element.name));
+        eggGroupsRawData.forEach((element) => eggGroups.push(capitalized(element.name)));
         //this will iterate over the raw data on eggGroups for the specific pokemon we are iterating over and push just the eggGroups' names into our newly created array
 
         const pokemon = {
-          name: data1Array[i].name,
+          name: capitalized(data1Array[i].name),
           id: data1Array[i].id,
           base_experience: data1Array[i].base_experience,
           types: types,
           weight: data1Array[i].weight,
           height: data1Array[i].height,
-          habitat: data2Array[i].habitat.name,
-          growth_rate: data2Array[i].growth_rate.name,
+          habitat: capitalized(data2Array[i].habitat.name),
+          growth_rate: capitalized(data2Array[i].growth_rate.name),
           evolution_chain: relevantEvolutionChain,
           sprites: {
             front_default: data1Array[i].sprites.front_default,

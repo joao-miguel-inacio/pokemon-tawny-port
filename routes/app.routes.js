@@ -3,21 +3,15 @@ const router = express.Router();
 
 import mongoose from "mongoose";
 
+import isLoggedOut from "../middleware/isLoggedOut.js";
 import isLoggedIn from "../middleware/isLoggedIn.js";
 
 import User from "../models/User.model.js";
 import Pokemon from "../models/Pokemon.model.js";
 
 import Pokedex from 'pokedex-promise-v2';
+import capitalized from "../utils/capitalized.js";
 const MyPokedex = new Pokedex();
-
-router.get('/home', async (req, res, next) => {
-    try {
-      res.render('app/home');
-    } catch (err) {
-      next(err);
-    }
-  });
 
   router.get('/original-trainer-profile', async (req, res, next) => {
     try {
@@ -29,7 +23,7 @@ router.get('/home', async (req, res, next) => {
 
   router.get('/original-trainer-team', async (req, res, next) => {
     try {
-      const pokemon = await Pokemon.find( {name: ['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']});
+      const pokemon = await Pokemon.find( {name: ['Blastoise', 'Dragonite', 'Gengar','Chansey', 'Ninetales', 'Mew']});
       
       //const pokemon2 = await MyPokedex.getPokemonByName(['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']);
       
@@ -46,7 +40,6 @@ router.get('/home', async (req, res, next) => {
         if (id <= 151){
           const pokemonInArray = await Pokemon.find( {id : id} );
           const pokemon = pokemonInArray[0];
-          console.log(pokemon.evolution_chain)
           res.render('app/pokemon-details', {pokemon});
         } else {
           //because only 1st generation pokemons are seeded in the database
@@ -99,11 +92,11 @@ router.get('/home', async (req, res, next) => {
   router.get('/pokemon-search', async (req, res, next) => {
     try {
       const searchedPokemon = req.query.id;
-      const filteredSearchedPokemon = searchedPokemon.toLowerCase().replace(/\s/g, '');
-      if (filteredSearchedPokemon === "nidoran"){
-        res.redirect(`/app/pokemon-details/nidoran-m`);
-      } else if (filteredSearchedPokemon === "mime" || filteredSearchedPokemon === "mrmime" || filteredSearchedPokemon === "mr") {
-        res.redirect(`/app/pokemon-details/mr-mime`);
+      const filteredSearchedPokemon = capitalized(searchedPokemon.toLowerCase().replace(/\s/g, ''));
+      if (filteredSearchedPokemon === "Nidoran"){
+        res.redirect(`/app/pokemon-details/Nidoran-m`);
+      } else if (filteredSearchedPokemon === "Mime" || filteredSearchedPokemon === "Mrmime" || filteredSearchedPokemon === "Mr") {
+        res.redirect(`/app/pokemon-details/Mr-mime`);
       } else {
         res.redirect(`/app/pokemon-details/${filteredSearchedPokemon}`);
       }
@@ -148,7 +141,12 @@ router.get('/home', async (req, res, next) => {
       const userId = req.session.user._id;
       const user = await User.findById(userId).populate("pokemon");
       const pokemon=user.pokemon;
-      res.render('app/own-pokemon-list', {pokemon});
+      if (pokemon.length <1){
+        const noPokemon = "No Pokemons caught yet";
+        res.render('app/own-pokemon-list', {noPokemon});
+      } else {
+        res.render('app/own-pokemon-list', {pokemon});
+      }
     } catch (err) {
       next(err);
     }

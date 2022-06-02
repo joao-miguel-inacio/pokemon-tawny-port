@@ -20,7 +20,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 255
+      maxlength: 500
     },
     password: {
       type: String,

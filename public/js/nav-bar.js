@@ -1,6 +1,9 @@
 function respNavBar () {
     let currentpage = window.location.pathname;
-    if (currentpage.includes("/app/pokemon-search")){
+    console.log(currentpage)
+    if (currentpage === "/app/own-profile" || currentpage === "/app/own-pokemon-list" || currentpage === "/app/edit-profile") {
+    document.getElementById("/app/own-profile").classList.add("active");
+    } else if (currentpage.includes("/app/pokemon-search")){
         document.getElementById("psyduck-image").classList.remove("hidden");
     } else if (currentpage.includes("/app/original")){
         document.getElementById("/app/original-trainer-profile").classList.add("active");

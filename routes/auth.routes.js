@@ -5,15 +5,19 @@ import bcrypt from "bcrypt";
 
 import mongoose from "mongoose";
 
-const saltRounds = 10;
-
 import User from "../models/User.model.js";
+import Pokemon from "../models/Pokemon.model.js";
 
 import isLoggedOut from "../middleware/isLoggedOut.js";
 import isLoggedIn from "../middleware/isLoggedIn.js";
 
-router.get("/signup", isLoggedOut, (req, res) => {
-  res.render("auth/signup");
+const saltRounds = 10;
+
+router.get("/signup", isLoggedOut, async (req, res) => {
+  const pokemonID = Math.floor(Math.random() * 151);
+  const pokemon = await Pokemon.find( {id:pokemonID});
+  const pokemonImg = pokemon[0].sprites.front_animated;
+  res.render("auth/signup", {pokemonImg});
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {
@@ -21,7 +25,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
 
   if (!name) {
     return res.status(400).render("auth/signup", {
-      errorMessage: "Please provide your username.",
+      errorMessage: "Please provide your name.",
     });
   }
 
@@ -86,7 +90,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         req.app.locals.user = req.session.user;
         req.app.locals.inSession = true;
         req.app.locals.anonymous = false;
-        res.redirect("/app/home");
+        res.redirect("/");
       })
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
@@ -146,7 +150,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         req.app.locals.inSession = true;
         req.app.locals.anonymous = false;
         
-        return res.redirect("/app/home");
+        return res.redirect("/");
       });
     })
 

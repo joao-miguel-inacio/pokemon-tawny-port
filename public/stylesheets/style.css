@@ -10,6 +10,22 @@ body {
   display: none;
 }
 
+.random-image-generator-button{
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654107302/pokemon-white/pokeball-png-45332_rarrzq.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 25px;
+  border: 0.5px solid black;
+}
+
+.random-text-generator-button{
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654169206/pokemon-white/letter_L_PNG92_crc1ze.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 25px;
+  border: 0.5px solid black;
+}
+
 /*header*/
 
 .nav{
