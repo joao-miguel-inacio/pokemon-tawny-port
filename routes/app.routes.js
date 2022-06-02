@@ -35,37 +35,32 @@ const MyPokedex = new Pokedex();
 
   router.get('/pokemon-details/:id', async (req, res, next) => {
     try {
-      try {
         const { id } = req.params;
-        if (id <= 151){
           const pokemonInArray = await Pokemon.find( {id : id} );
           const pokemon = pokemonInArray[0];
           res.render('app/pokemon-details', {pokemon});
-        } else {
-          //because only 1st generation pokemons are seeded in the database
-          const pokemonNotGen1 = await MyPokedex.getPokemonByName(id);
-          const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
-          async function findEvoChainId (pokemonSpecies) {
-            if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
-              const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
-              const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-              return pokemonEvolutionChain;
-            } else {
-              const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
-              const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-              return pokemonEvolutionChain;
-            }
-          } 
-          const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
-          if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
-            res.render('app/pokemon-details', {pokemonNotGen1, pokemonSpecies} );
-          } else {
-            res.render('app/pokemon-details', {pokemonNotGen1, pokemonSpecies, pokemonEvolutionChain} );
-          }
-        }
-      } catch (err) {
-        res.render('app/search-unsuccessful');
-      }
+
+          // const pokemon = await MyPokedex.getPokemonByName(id);
+          // const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
+          // async function findEvoChainId (pokemonSpecies) {
+          //   if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
+          //     const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
+          //     const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+          //     return pokemonEvolutionChain;
+          //   } else {
+          //     const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
+          //     const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+          //     return pokemonEvolutionChain;
+          //   }
+          // } 
+          // const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
+          // if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
+          //   res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
+          // } else {
+          //   res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
+          // }
+        //}
+
     } catch (err) {
       next(err);
     }
@@ -92,13 +87,19 @@ const MyPokedex = new Pokedex();
   router.get('/pokemon-search', async (req, res, next) => {
     try {
       const searchedPokemon = req.query.id;
-      const filteredSearchedPokemon = capitalized(searchedPokemon.toLowerCase().replace(/\s/g, ''));
-      if (filteredSearchedPokemon === "Nidoran"){
-        res.redirect(`/app/pokemon-details/Nidoran-m`);
-      } else if (filteredSearchedPokemon === "Mime" || filteredSearchedPokemon === "Mrmime" || filteredSearchedPokemon === "Mr") {
-        res.redirect(`/app/pokemon-details/Mr-mime`);
-      } else {
-        res.redirect(`/app/pokemon-details/${filteredSearchedPokemon}`);
+      if (+searchedPokemon>151){
+        res.render('app/search-unsuccessful');
+      } else if (+searchedPokemon<=151){
+        res.redirect(`/app/pokemon-details/${searchedPokemon}`);
+      } else if (isNaN(+searchedPokemon)){
+        const filteredSearchedPokemon = capitalized(searchedPokemon.toLowerCase().replace(/\s/g, ''));
+        try {
+          const pokemon = await Pokemon.find( {name: filteredSearchedPokemon});
+          const searchedPokemonId = pokemon[0].id;
+          res.redirect(`/app/pokemon-details/${searchedPokemonId}`);
+        } catch {
+          res.render('app/search-unsuccessful');
+        }
       }
     } catch (err) {
       next(err);

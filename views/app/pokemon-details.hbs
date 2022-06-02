@@ -32,7 +32,7 @@
     {{#each this.pokemon.evolution_chain}}
         {{#if this}}
             <p>{{this}}</p>
-            <a href="{{this}}">More on {{this}}</a>
+            <a href="/app/pokemon-search?id={{this}}">More on {{this}}</a>
         {{/if}}
     {{/each}}
 
@@ -44,23 +44,25 @@
     {{/each}}
 {{/if}}
 
-{{#if pokemonNotGen1}}
+{{>footer}}
 
-    <h1>{{this.pokemonNotGen1.name}}</h1>
+<!--
 
-    <img src="{{this.pokemonNotGen1.sprites.front_default}}" alt="{{this.pokemonNotGen1.name}} image">
-    <img src="{{this.pokemonNotGen1.sprites.back_default}}" alt="{{this.pokemonNotGen1.name}} image">
+    <h1>{{this.pokemon.name}}</h1>
 
-    <img src="{{this.pokemonNotGen1.sprites.front_shiny}}" alt="{{this.pokemonNotGen1.name}} image">
-    <img src="{{this.pokemonNotGen1.sprites.back_shiny}}" alt="{{this.pokemonNotGen1.name}} image">
+    <img src="{{this.pokemon.sprites.front_default}}" alt="{{this.pokemon.name}} image">
+    <img src="{{this.pokemon.sprites.back_default}}" alt="{{this.pokemon.name}} image">
+
+    <img src="{{this.pokemon.sprites.front_shiny}}" alt="{{this.pokemon.name}} image">
+    <img src="{{this.pokemon.sprites.back_shiny}}" alt="{{this.pokemon.name}} image">
 
     <h4>Pokedex Data</h4>
-    <p>National no.: {{this.pokemonNotGen1.id}}</p>
-    <p>Base Exp: {{this.pokemonNotGen1.base_experience}}</p>
-    <p>Height: {{this.pokemonNotGen1.height}} cm</p>
-    <p>Weight: {{this.pokemonNotGen1.weight}} g</p>
+    <p>National no.: {{this.pokemon.id}}</p>
+    <p>Base Exp: {{this.pokemon.base_experience}}</p>
+    <p>Height: {{this.pokemon.height}} cm</p>
+    <p>Weight: {{this.pokemon.weight}} g</p>
     <p>Types: 
-        {{#each this.pokemonNotGen1.types}}
+        {{#each this.pokemon.types}}
             <a>{{this.type.name}}</a>
         {{/each}}
     <p>Growth Rate: {{this.pokemonSpecies.growth_rate.name}}</p>
@@ -82,6 +84,5 @@
     <p>{{this.name}}</p>
     <a href="/app/pokemon-by-egg-group-list/{{this.name}}">Other pokemons who belong to {{this.name}} egg group</a>
     {{/each}}
-{{/if}}
-
-{{>footer}}
+    
+-->
