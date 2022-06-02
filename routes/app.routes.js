@@ -142,22 +142,22 @@ router.get("/catch-pokemon/:id", async (req, res, next) => {
     await User.findByIdAndUpdate(userObjId, {
       $addToSet: { pokemon: pokemonObjId },
     });
-    res.redirect("/app/own-pokemon-list");
+    res.redirect("/app/own-pokemon-team");
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/own-pokemon-list", async (req, res, next) => {
+router.get("/own-pokemon-team", async (req, res, next) => {
   try {
     const userId = req.session.user._id;
     const user = await User.findById(userId).populate("pokemon");
     const pokemon = user.pokemon;
     if (pokemon.length < 1) {
       const noPokemon = "No Pokemons caught yet";
-      res.render("app/own-pokemon-list", { noPokemon });
+      res.render("app/own-pokemon-team", { noPokemon });
     } else {
-      res.render("app/own-pokemon-list", { pokemon });
+      res.render("app/own-pokemon-team", { pokemon });
     }
   } catch (err) {
     next(err);
@@ -201,9 +201,20 @@ router.post("/edit-profile", async (req, res, next) => {
 router.get("/trainer-list", async (req, res, next) => {
   try {
     const trainers = await User.find();
+    //console.log(trainers)
     const user = req.session.user;
-    const userIndex = trainers.indexOf(user);
+    //console.log(user)
+
+    const userIndex = trainers.findIndex(object => {
+      return object.name === user.name;
+    });
+
+    //const userIndex = trainers.indexOf(user);
+    //ALWAYS RETURNING -1
+
+    //console.log(userIndex)
     trainers.splice(userIndex, 1);
+    //console.log(trainers)
     res.render("app/trainer-list", { trainers });
   } catch (err) {
     next(err);
@@ -226,7 +237,13 @@ router.get("/trainer-team/:id", async (req, res, next) => {
     const { id } = req.params;
     const trainerInArray = await User.find({ _id: id }).populate("pokemon");
     const pokemon = trainerInArray[0].pokemon;
-    res.render("app/trainer-team", { pokemon });
+    const trainer = trainerInArray[0]
+    if (pokemon.length < 1) {
+      const noPokemon = "No Pokemons caught yet";
+      res.render("app/trainer-team", { noPokemon, trainer });
+    } else {
+      res.render("app/trainer-team", { pokemon, trainer});
+    }
   } catch (err) {
     next(err);
   }

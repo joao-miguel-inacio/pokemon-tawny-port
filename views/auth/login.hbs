@@ -1,25 +1,40 @@
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg" alt="pokemon-logo">
-<h1>Tawny Port</h1>
+<div class="auth-container">
 
-<form action="/auth/login" method="POST">
-   <label> Username
-      <input type="text" name="username">
-   </label>
-   <label> Password
-      <input type="password" name="password">
-   </label>
+  <img  
+      class="auth-image"
+      src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+      alt="pokemon-logo"
+  />
 
-   <button type="submit">Submit</button>
-</form>
+  <h1>Tawny Port</h1>
 
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}
+  <form action="/auth/login" method="POST">
 
-<form method="get" action="/auth/signup">
-    <button type="submit" class="btn btn-primary">Sign up</button>
-</form>
+    <div class="row mb-1">
+      <label class="form-label">Username
+         <input class="form-control" type="text" name="username" />
+      </label>
+    </div>
+    <div class="row mb-1">
+      <label class="form-label">Password
+         <input class="form-control" type="password" name="password" />
+      </label>
+    </div>
+    
+    <button class="btn btn-danger auth-submit-button" type="submit">Submit</button>
+  
+  </form>
 
-<form method="get" action="/">
-    <button type="submit" class="btn btn-success">Visit</button>
-</form>
+  {{#if errorMessage}}
+    {{errorMessage}}
+  {{/if}}
+
+  <form method="get" action="/auth/signup">
+    <button type="submit" class="btn btn-primary auth-login-button">Sign up</button>
+  </form>
+
+  <form method="get" action="/">
+    <button type="submit" class="btn btn-success auth-visit-button">Visit</button>
+  </form>
+
+</div>
