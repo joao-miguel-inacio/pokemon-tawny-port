@@ -4,7 +4,7 @@ function respNavBar() {
   if (
     currentpage === "/app/own-profile" ||
     currentpage === "/app/own-pokemon-team" ||
-    currentpage === "/app/edit-profile"
+    currentpage === "/app/own-profile-edit"
   ) {
     document.getElementById("/app/own-profile").classList.add("active");
   } else if (currentpage.includes("/app/trainer")) {

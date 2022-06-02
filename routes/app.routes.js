@@ -175,15 +175,15 @@ router.get("/own-profile", async (req, res, next) => {
   }
 });
 
-router.get("/edit-profile", async (req, res, next) => {
+router.get("/own-profile-edit", async (req, res, next) => {
   try {
-    res.render("app/edit-profile");
+    res.render("app/own-profile-edit");
   } catch (err) {
     next(err);
   }
 });
 
-router.post("/edit-profile", async (req, res, next) => {
+router.post("/own-profile-edit", async (req, res, next) => {
   try {
     const userObjId = req.session.user._id;
     const { name, username, image, description, password } = req.body;
