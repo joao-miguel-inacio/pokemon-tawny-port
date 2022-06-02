@@ -17,11 +17,29 @@ router.get("/signup", isLoggedOut, (req, res) => {
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, password } = req.body;
+  const { name, username, image, description, password } = req.body;
+
+  if (!name) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please provide your username.",
+    });
+  }
 
   if (!username) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your username.",
+    });
+  }
+
+  if (!image) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please provide the link to an image.",
+    });
+  }
+
+  if (!description) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "What kind of trainer are you?",
     });
   }
 
@@ -56,7 +74,10 @@ router.post("/signup", isLoggedOut, (req, res) => {
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
         return User.create({
+          name,
           username,
+          image,
+          description,
           password: hashedPassword,
         });
       })

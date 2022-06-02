@@ -6,14 +6,15 @@
     </form>
 
     <a id="/app/home" class="nav-link" href="/app/home">Home</a>
+    <a class="nav-link" id="/auth/logout" href="/auth/logout">Log out</a>
     {{#if anonymous}}
     <a class="nav-link" id="/auth/login" href="/auth/login">Log in</a>
     <a class="nav-link" id="/auth/signup" href="/auth/signup">Sign up</a>
     {{/if}}
     {{#if inSession}}   
-    <a class="nav-link" id="/auth/logout" href="/auth/logout">Log out</a>
     <a class="nav-link" id="/app/trainer-list" href="/app/trainer-list">Trainers list</a>
-    <a class="nav-link" id="/app/own-pokemon-list" href="/app/own-pokemon-list">Pokeballs Belt</a>
+    <a class="nav-link" id="/app/trainer-list" href="/app/own-profile">Profile</a>
+    <a class="nav-link" id="/app/own-pokemon-list" href="/app/own-pokemon-list">Own Team</a>
     {{/if}}
     <a class="nav-link" id="/app/original-trainer-profile" href="/app/original-trainer-profile">Original Trainer</a>
     <a class="nav-link" id="/app/pokedex" href="/app/pokedex">Pokedex</a>

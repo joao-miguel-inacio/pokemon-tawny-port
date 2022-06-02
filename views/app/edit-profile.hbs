@@ -1,0 +1,17 @@
+<form action="/app/edit-profile" method="POST">
+
+   <label> Name
+      <input required type="text" name="name" value="{{user.name}}">
+   </label>
+   <label> Username
+      <input required type="text" name="username" value="{{user.username}}">
+   </label>
+   <label> Image
+      <input required type="text" name="image" value="{{user.image}}">
+   </label>
+   <label> About you:
+      <input required type="text" name="description" value="{{user.description}}">
+   </label>
+
+   <button type="submit">Submit</button>
+</form>

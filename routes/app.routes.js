@@ -143,6 +143,47 @@ router.get('/home', async (req, res, next) => {
     }
   });
   
+  router.get('/own-pokemon-list', async (req, res, next) => {
+    try {
+      const userId = req.session.user._id;
+      const user = await User.findById(userId).populate("pokemon");
+      const pokemon=user.pokemon;
+      res.render('app/own-pokemon-list', {pokemon});
+    } catch (err) {
+      next(err);
+    }
+  });
 
+  router.get('/own-profile', async (req, res, next) => {
+    try {
+      const userObjId = req.session.user._id;
+      const user = await User.findById(userObjId).populate("pokemon");
+      const teamLength = user.pokemon.length;
+      res.render('app/own-profile', {user, teamLength});
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/edit-profile', async (req, res, next) => {
+    try {
+      res.render('app/edit-profile');
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.post('/edit-profile', async (req, res, next) => {
+    try {
+      const userObjId = req.session.user._id;
+      const { name, username, image, description, password } = req.body;
+      await User.findByIdAndUpdate(userObjId,  
+        { name, username, image, description }, 
+        { new: true });
+      res.redirect('own-profile');
+    } catch (err) {
+      next(err);
+    }
+  });
 
 export default router;

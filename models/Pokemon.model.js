@@ -21,10 +21,7 @@ const pokemonSchema = new Schema(
     },
     evolution_chain: [String],
     egg_groups: [String],
-    trainer: { type: Schema.Types.ObjectId, ref: "User" },
-    nickname: String
-    //signatureMove: String,
-    //signatureMoveType: String
+    trainer: { type: Schema.Types.ObjectId, ref: "User" }
   },
   {
     timestamps: true,

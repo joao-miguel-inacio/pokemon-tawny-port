@@ -3,15 +3,30 @@ const {Schema, model} = mongoose;
 
 const userSchema = new Schema(
   {
-    name: String,
-    imageUrl: String,
+    name: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    },
     username: {
       type: String,
-      unique: true
+      unique: true,
+      required: true
     },
-    password: String,
+    description: {
+      type: String,
+      required: true,
+      minlength: 1,
+      maxlength: 255
+    },
+    password: {
+      type: String,
+      required: true
+    },
     pokemon: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }]
-    //level: Number
   },
   {
     timestamps: true,
