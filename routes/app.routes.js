@@ -189,6 +189,9 @@ const MyPokedex = new Pokedex();
   router.get('/trainer-list', async (req, res, next) => {
     try {
       const trainers = await User.find();
+      const user = req.session.user;
+      const userIndex = trainers.indexOf(user);
+      trainers.splice(userIndex, 1);
       res.render('app/trainer-list', {trainers});
     } catch (err) {
       next(err);
