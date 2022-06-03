@@ -28,7 +28,6 @@ const evolutionChainArrayCreator = () => {
     data3Array.push(MyPokedex.getEvolutionChainById(i));
   }
   //data3Array is now array with all information received using getEvolutionChainById
-
   return data3Array;
 };
 
@@ -69,15 +68,28 @@ const createPokemons = async () => {
         
         //evolutionChainsArray is now [[baby, teen, adult],[baby, teen, adult],[baby, teen, adult],[baby, teen, undefined],[baby, undefined, undefined] x78]
       }
-      console.log(evolutionChainsArray)
+
       for (let i = 0; i <= 150; i++) {
 
-        const relevantEvolutionChain = evolutionChainsArray.find((element) => {
+        let relevantEvolutionChain = evolutionChainsArray.find((element) => {
           const relevantName = capitalized(data1Array[i].name)
           return element.includes(relevantName);
           //for each of the 151 pokemons, this will find the element (array), in the evolutionChainsArray, that contains the name of the pokemon we are iteration over.
           //this will be returned as true and become the relevantEvolutionChain to be sent to our DB on the current iteration
-        });       
+        });
+
+        if (data1Array[i].name === "eevee" ) {
+          relevantEvolutionChain = ["Vaporeon", "Jolteon", "Flareon"];
+        }
+        if (data1Array[i].name === "vaporeon" ) {
+          relevantEvolutionChain = ["Eevee", "Vaporeon", undefined];
+        }
+        if (data1Array[i].name === "jolteon" ) {
+          relevantEvolutionChain = ["Eevee", "Jolteon", undefined];
+        }     
+        if (data1Array[i].name === "flareon" ) {
+          relevantEvolutionChain = ["Eevee", "Flareon", undefined];
+        }      
 
         const types = [];
         const typesRawData = data1Array[i].types;
@@ -90,7 +102,7 @@ const createPokemons = async () => {
         //extracts array relative to the egg groups from the data2Array
         eggGroupsRawData.forEach((element) => eggGroups.push(capitalized(element.name)));
         //this will iterate over the raw data on eggGroups for the specific pokemon we are iterating over and push just the eggGroups' names into our newly created array
-
+        
         const pokemon = {
           name: capitalized(data1Array[i].name),
           id: data1Array[i].id,

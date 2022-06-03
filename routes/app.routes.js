@@ -13,6 +13,8 @@ import Pokedex from "pokedex-promise-v2";
 import capitalized from "../utils/capitalized.js";
 const MyPokedex = new Pokedex();
 
+//ORIGINAL TRAINER
+
 router.get("/original-trainer-profile", async (req, res, next) => {
   try {
     res.render("app/original-trainer-profile");
@@ -26,7 +28,7 @@ router.get("/original-trainer-team", async (req, res, next) => {
     const pokemon = await Pokemon.find({
       name: ["Blastoise", "Dragonite", "Gengar", "Chansey", "Ninetales", "Mew"],
     });
-    console.log(pokemon);
+
     //const pokemon2 = await MyPokedex.getPokemonByName(['blastoise', 'dragonite', 'gengar','chansey', 'ninetales', 'mew']);
 
     res.render("app/original-trainer-team", { pokemon });
@@ -34,6 +36,24 @@ router.get("/original-trainer-team", async (req, res, next) => {
     next(err);
   }
 });
+
+//POKEDEX
+
+router.get("/pokedex", async (req, res, next) => {
+  try {
+    const pokemonShuffled = await Pokemon.find();
+
+    // const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+    // const pokemonShuffled = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
+
+    const pokemon = pokemonShuffled.sort((a, b) => a.id - b.id);
+    res.render("app/pokedex", { pokemon });
+  } catch (err) {
+    next(err);
+  }
+});
+
+//POKEMON DETAILS
 
 router.get("/pokemon-details/:id", async (req, res, next) => {
   try {
@@ -71,6 +91,8 @@ router.get("/pokemon-details/:id", async (req, res, next) => {
   }
 });
 
+//POKEMON BY EGG GROUP
+
 router.get("/pokemon-by-egg-group-list/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -89,6 +111,8 @@ router.get("/pokemon-by-egg-group-list/:id", async (req, res, next) => {
   }
 });
 
+//SEARCH
+
 router.get("/pokemon-search", async (req, res, next) => {
   try {
     const searchedPokemon = req.query.id;
@@ -101,27 +125,21 @@ router.get("/pokemon-search", async (req, res, next) => {
         searchedPokemon.toLowerCase().replace(/\s/g, "")
       );
       try {
+        if (filteredSearchedPokemon === "Nidoran" || filteredSearchedPokemon === "Nidonanf" || filteredSearchedPokemon === "Nidoranfemale") {
+          res.redirect(`/app/pokemon-details/29`);
+        } else if (filteredSearchedPokemon === "Nidonanm" || filteredSearchedPokemon === "Nidoranmale" ) {
+          res.redirect(`/app/pokemon-details/32`);
+        } else if (filteredSearchedPokemon === "Mr.mime" || filteredSearchedPokemon === "Mrmime" || filteredSearchedPokemon === "Mime" ) {
+          res.redirect(`/app/pokemon-details/122`);
+        } else {
         const pokemon = await Pokemon.find({ name: filteredSearchedPokemon });
         const searchedPokemonId = pokemon[0].id;
         res.redirect(`/app/pokemon-details/${searchedPokemonId}`);
+        }
       } catch {
         res.render("app/pokemon-search-unsuccessful");
       }
     }
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/pokedex", async (req, res, next) => {
-  try {
-    const pokemonShuffled = await Pokemon.find();
-
-    // const gen1Pokemon = await MyPokedex.getGenerationByName(1);
-    // const pokemonShuffled = await MyPokedex.getPokemonByName(gen1Pokemon.pokemon_species.map(pokemon => pokemon.name));
-
-    const pokemon = pokemonShuffled.sort((a, b) => a.id - b.id);
-    res.render("app/pokedex", { pokemon });
   } catch (err) {
     next(err);
   }
@@ -136,12 +154,14 @@ router.get("/catch-pokemon/:id", async (req, res, next) => {
     const userId = req.session.user._id;
     const user = await User.findById(userId);
     const userObjId = user._id;
-    await Pokemon.findByIdAndUpdate(pokemonObjId, {
-      $addToSet: { trainer: userObjId },
-    });
     await User.findByIdAndUpdate(userObjId, {
       $addToSet: { pokemon: pokemonObjId },
     });
+    if (user.team.length<6){
+      await User.findByIdAndUpdate(userObjId, {
+        $addToSet: { team: pokemonObjId },
+      });
+    }
     res.redirect("/app/own-pokemon-team");
   } catch (err) {
     next(err);
@@ -151,8 +171,9 @@ router.get("/catch-pokemon/:id", async (req, res, next) => {
 router.get("/own-pokemon-team", async (req, res, next) => {
   try {
     const userId = req.session.user._id;
-    const user = await User.findById(userId).populate("pokemon");
-    const pokemon = user.pokemon;
+    const user = await User.findById(userId).populate("team");
+    const pokemon = user.team;
+    console.log(user.team.length)
     if (pokemon.length < 1) {
       const noPokemon = "No Pokemons caught yet";
       res.render("app/own-pokemon-team", { noPokemon });
@@ -235,14 +256,103 @@ router.get("/trainer-profile/:id", async (req, res, next) => {
 router.get("/trainer-team/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const trainerInArray = await User.find({ _id: id }).populate("pokemon");
-    const pokemon = trainerInArray[0].pokemon;
+    const trainerInArray = await User.find({ _id: id }).populate("team");
+    const pokemon = trainerInArray[0].team;
     const trainer = trainerInArray[0]
     if (pokemon.length < 1) {
       const noPokemon = "No Pokemons caught yet";
       res.render("app/trainer-team", { noPokemon, trainer });
     } else {
       res.render("app/trainer-team", { pokemon, trainer});
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/own-pokemon-team-edit/", async (req, res, next) => {
+  try {
+    try {
+      const userId = req.session.user._id;
+      const user = await User.findById(userId).populate("pokemon").populate("team");
+      if (user.pokemon.length < 1) {
+        const noPokemon = "No Pokemons caught yet";
+        res.render("app/own-pokemon-team-edit", { noPokemon });
+      } else {
+        for (let i=0; i < user.pokemon.length; i++){
+          for (let j=0; j < user.team.length; j++){
+            if (user.pokemon[i].id === user.team[j].id){
+              user.pokemon.splice(i, 1);
+            }
+          }
+        }   
+        const pokemon = user.pokemon.sort((a, b) => a.id - b.id);
+        const pokemonInTeam = user.team;
+        res.render("app/own-pokemon-team-edit", { pokemon, pokemonInTeam});
+      }
+    } catch (err) {
+      next(err);
+    }  
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/own-pokemon-team-edit-add/:id", async (req, res, next) => {
+  try {
+    const userId = req.session.user._id;
+    const user = await User.findById(userId).populate("pokemon").populate("team");
+    const { id } = req.params;
+    const pokemonInArray = await Pokemon.find({ id: id });
+    const pokemonObjId = pokemonInArray[0]._id;
+    //if (user.team.includes(pokemonObjId)) {
+    for (let i=0; i<user.team.length; i++ ){
+      if (user.team[i].id === pokemonInArray[0].id){
+        console.log("pokemon already in the team");
+        //POP UP WINDOW
+        res.redirect("/app/own-pokemon-team-edit");
+      } else if (user.team.length >= 6) {
+        user.team.shift();
+        user.team.push(pokemonObjId);
+        await User.findByIdAndUpdate( userId,
+          { team : user.team },
+          { new: true }
+        );
+        res.redirect("/app/own-pokemon-team-edit");
+      } else {
+        await User.findByIdAndUpdate(userId, {
+          $addToSet: { team: pokemonObjId },
+        });
+        res.redirect("/app/own-pokemon-team-edit");
+      }
+    }    
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/own-pokemon-team-edit-remove/:id", async (req, res, next) => {
+  try {
+    const userId = req.session.user._id;
+    const user = await User.findById(userId).populate("team");
+    const { id } = req.params;
+    const pokemonInArray = await Pokemon.find({ id: id });
+    const pokemonObjId = pokemonInArray[0]._id;
+    const pokemonIndexInTeam = user.team.findIndex(object => {
+      return object._id === pokemonObjId;
+    });
+
+    if (user.team.length>1){
+      user.team.splice(pokemonIndexInTeam, 1);
+      await User.findByIdAndUpdate( userId,
+        { team : user.team },
+        { new: true }
+      );
+      res.redirect("/app/own-pokemon-team-edit");
+    } else {
+      console.log("You need at least one Pokemon in your party!");
+      //POP UP WINDOW
+      res.redirect("/app/own-pokemon-team-edit");
     }
   } catch (err) {
     next(err);

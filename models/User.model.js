@@ -26,7 +26,11 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    pokemon: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }]
+    pokemon: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }],
+    team: { 
+      type: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }],
+      maxlength: 6
+    }
   },
   {
     timestamps: true,

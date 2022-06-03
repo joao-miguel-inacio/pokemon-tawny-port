@@ -20,8 +20,7 @@ const pokemonSchema = new Schema(
       back_animated: String
     },
     evolution_chain: [String],
-    egg_groups: [String],
-    trainer: { type: Schema.Types.ObjectId, ref: "User" }
+    egg_groups: [String]
   },
   {
     timestamps: true,

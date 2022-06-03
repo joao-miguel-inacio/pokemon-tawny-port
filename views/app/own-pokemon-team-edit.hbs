@@ -1,0 +1,73 @@
+{{>header}}
+
+{{#if noPokemon}}
+    <h4 class="no-pokemon-team-text">You do not have any Pokemons yet.</h4>
+    <h4 class="no-pokemon-team-text">Explore your Pokedex and try to catch some Pokemons!</h4>
+{{/if}}
+
+{{#if pokemon}}
+    <p class="original-trainer-team-text">You can carry 6 Pokémons in your team.</p>
+    <p class="original-trainer-team-text">Adding a 7th Pokemon will cause the first to be sent to your Personal Pokémon Storage Box</p>
+
+    <div class="container">
+        <div class="edit-team-head row">
+            <div class="col">
+                <a>In Team</a>
+            </div>
+            <div class="col">
+                <a>Pokémon</a>
+            </div>
+            <div class="col">
+                <a>Remove from team</a>
+            </div>
+        </div>
+        {{#each pokemonInTeam}}
+        <div class="row edit-team-body">
+            <div class="col">
+                <img src="{{this.sprites.front_default}}" alt="https://res.cloudinary.com/dvru7nv6q/image/upload/v1653720586/pokemon-white/pokeball-transparent-png-2_skcq48.png">
+            </div>
+            <div class="col">
+                <a>{{this.name}} #{{this.id}}</a>
+            </div>
+            <div class="col">
+                <form class="edit-team-form" method="post" action="/app/own-pokemon-team-edit-remove/{{this.id}}">
+                    <button type="submit "class="remove-pokemon-from-team-btn"></button>
+                </form>      
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <div class="edit-team-head row">
+            <div class="col">
+                <a>Caught</a>
+            </div>
+            <div class="col">
+                <a>Pokémon</a>
+            </div>
+            <div class="col">
+                <a>Add to team</a>
+            </div>
+        </div>
+        {{#each pokemon}}
+        <div class="row edit-team-body">
+            <div class="col">
+                <img src="{{this.sprites.front_default}}" alt="https://res.cloudinary.com/dvru7nv6q/image/upload/v1653720586/pokemon-white/pokeball-transparent-png-2_skcq48.png">
+            </div>
+            <div class="col">
+                <a>{{this.name}} #{{this.id}}</a>
+            </div>
+            <div class="col">
+                <form class="edit-team-form" method="post" action="/app/own-pokemon-team-edit-add/{{this.id}}">
+                    <button type="submit "class="add-pokemon-to-team-btn"></button>
+                </form>      
+            </div>
+        </div>
+        {{/each}}
+    </div>
+{{/if}}
+
+{{>footer}}
