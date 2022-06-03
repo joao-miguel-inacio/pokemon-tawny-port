@@ -159,6 +159,12 @@ footer {
   }
 }
 
+/*edit profile*/
+
+.editing-container{
+  margin: 2em;
+}
+
 /*6 pokemon team*/
 
 .original-trainer-team-text {
@@ -329,7 +335,6 @@ footer {
   gap: 1em;
   margin: 1em;
 }
-
 
 .pokemon-details-types{
   padding: 5px;

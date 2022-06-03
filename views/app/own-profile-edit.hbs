@@ -1,17 +1,32 @@
-<form action="/app/own-profile-edit" method="POST">
+{{>header}}
 
-   <label> Name
-      <input required type="text" name="name" value="{{user.name}}">
-   </label>
-   <label> Username
-      <input required type="text" name="username" value="{{user.username}}">
-   </label>
-   <label> Image
-      <input required type="text" name="image" value="{{user.image}}">
-   </label>
-   <label> About you:
-      <input required type="text" name="description" value="{{user.description}}">
-   </label>
+<div class="editing-container">
+   <form action="/app/own-profile-edit" method="POST">
 
-   <button type="submit">Submit</button>
-</form>
+      <div class="row mb-1">
+         <label class="form-label"> Name
+            <input class="form-control" required type="text" name="name" value="{{user.name}}">
+         </label>
+      </div>
+      <div class="row mb-1">
+         <label class="form-label"> Username
+            <input class="form-control" required type="text" name="username" value="{{user.username}}">
+         </label>
+      </div>
+      <div class="row mb-1">
+         <label class="form-label"> Image
+            <input class="form-control" required type="text" name="image" value="{{user.image}}">
+         </label>
+      </div>
+      <div class="row mb-1">
+         <label class="form-label"> About you:
+            <input class="form-control" required type="text" name="description" value="{{user.description}}">
+         </label>
+      </div>
+
+      <button  class="btn btn-danger" type="submit">Submit</button>
+
+   </form>
+</div>
+
+{{>footer}}

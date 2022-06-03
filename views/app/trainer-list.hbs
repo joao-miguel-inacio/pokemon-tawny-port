@@ -1,9 +1,9 @@
 {{>header}}
 
-<div class="container">
+<div id="trainer-list-container" class="container">
     <div class="pokedex-head row">
         <div class="col">
-            <img class="pokedex-pokeball-image" src="https://res.cloudinary.com/dvru7nv6q/image/upload/v1654107302/pokemon-white/pokeball-png-45332_rarrzq.png" alt="Image">
+            <img class="pokedex-pokeball-image" src="https://res.cloudinary.com/dvru7nv6q/image/upload/v1654107302/pokemon-white/pokeball-png-45332_rarrzq.png" alt="Image">            
         </div>
         <div class="col">
             <a>Name</a>
@@ -12,10 +12,10 @@
             <a>Username</a>
         </div>
         <div class="col">
-            <a>Pokemons</a>
+            <a>Pokemon</a>
         </div>
         <div class="col">
-            <a>See Profile</a>
+            <a>Profile</a>
         </div>
     </div>
     {{#each trainers}}
@@ -26,7 +26,7 @@
         <div class="col">
             <a>{{this.name}}</a>
         </div>
-        <div class="col">
+        <div class="col" >
             <a>{{this.username}}</a>
         </div>
         <div class="col">
