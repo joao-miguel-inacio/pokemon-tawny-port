@@ -14,6 +14,11 @@ body {
   text-align: center;
 }
 
+.small-screen-hidden,
+.medium-screen-hidden {
+  display: none;
+}
+
 /*auth*/
 
 .auth-container{
@@ -248,11 +253,17 @@ footer {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .small-screen-hidden {
+    display: block;
+  }
 }
 
 @media screen and (min-width: 769px) {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .medium-screen-hidden {
+    display: block;
   }
 }
 
@@ -265,8 +276,9 @@ footer {
 /*pokedex*/
 
 .pokedex-pokeball-image{
-  height: 96px;
-  margin: 0;
+  height: 50px;
+  display: block;
+  margin: 10px auto 10px auto;
 }
 
 .pokedex-pokedex-link {
@@ -286,6 +298,7 @@ footer {
   justify-content: center;
   text-align: center;
   align-items: center;
+  min-height: 50px;
 }
 
 .pokedex-body {

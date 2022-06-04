@@ -234,22 +234,15 @@ router.get("/own-pokemon-team-edit/", isLoggedIn, async (req, res, next) => {
           const pokemonInTeam = user.team;
           res.render("app/own-pokemon-team-edit", { pokemonInTeam });
         } else {
-          //const arrayOfI= [];
-          for (let i=0; i < user.pokemon.length; i++){
-            for (let j=0; j < user.team.length; j++){
-              console.log(user.pokemon[i].id)
-              console.log(user.team[j].id)
-              if (user.pokemon[i].id === user.team[j].id){
-                user.pokemon.splice(i, 1)
-                //arrayOfI.push(i);
-              }
-            }
+          const pokemonArray = user.pokemon;
+          const pokemonInTeam = user.team; 
+          function pokemonCleaner (pokemonArray, pokemonInTeam) {
+            const pokemon = ( pokemonArray.filter ( el => !pokemonInTeam
+              .find(element => element._id.toString() === el._id.toString() )))
+              .sort((a, b) => a.id - b.id);
+            return pokemon;
           }
-          // for (let i = 0; i < arrayOfI.length; i++){
-          //   user.pokemon.splice(arrayOfI[i], 1);
-          // }
-          const pokemon = user.pokemon.sort((a, b) => a.id - b.id);
-          const pokemonInTeam = user.team;
+          const pokemon = pokemonCleaner(pokemonArray, pokemonInTeam);
           res.render("app/own-pokemon-team-edit", { pokemon, pokemonInTeam});
         }
       }
@@ -267,19 +260,18 @@ router.post("/own-pokemon-team-edit-add/:id", isLoggedIn, async (req, res, next)
     const user = await User.findById(userId).populate("pokemon").populate("team");
     const { id } = req.params;
     const pokemonInArray = await Pokemon.find({ id: id });
-    const pokemonObjId = pokemonInArray[0]._id;
+    const pokemonObjId = pokemonInArray[0]._id.toString();
     //if (user.team.includes(pokemonObjId)) {
     for (let i=0; i<user.team.length; i++ ){
-      if (user.team[i].id === pokemonInArray[0].id){
+      if (user.team[i]._id.toString() === pokemonObjId){
         console.log("pokemon already in the team");
-        //POP UP WINDOW
+        //POP UP WINDOW //NOT REALLY NECESSARY AS POKEMON IN TEAM SHOULDNT BE IN POKEMON TABLE
         res.redirect("/app/own-pokemon-team-edit");
       } else if (user.team.length >= 6) {
-        user.team.shift();
-        user.team.push(pokemonObjId);
+        user.team.splice(0, 1, pokemonObjId);
         await User.findByIdAndUpdate( userId,
-          { team : user.team },
-          { new: true }
+           { team : user.team },
+           { new: true }
         );
         res.redirect("/app/own-pokemon-team-edit");
       } else {
@@ -301,10 +293,7 @@ router.post("/own-pokemon-team-edit-remove/:id", isLoggedIn, async (req, res, ne
     const { id } = req.params;
     const pokemonInArray = await Pokemon.find({ id: id });
     const pokemonObjId = pokemonInArray[0]._id;
-    const pokemonIndexInTeam = user.team.findIndex(object => {
-      return object._id === pokemonObjId;
-    });
-
+    const pokemonIndexInTeam = user.team.findIndex( object => object._id.toString() === pokemonObjId.toString() );
     if (user.team.length>1){
       user.team.splice(pokemonIndexInTeam, 1);
       await User.findByIdAndUpdate( userId,
@@ -328,20 +317,9 @@ router.post("/own-pokemon-team-edit-remove/:id", isLoggedIn, async (req, res, ne
 router.get("/trainer-list", isLoggedIn, async (req, res, next) => {
   try {
     const trainers = await User.find();
-    //console.log(trainers)
     const user = req.session.user;
-    //console.log(user)
-
-    const userIndex = trainers.findIndex(object => {
-      return object.name === user.name;
-    });
-
-    //const userIndex = trainers.indexOf(user);
-    //ALWAYS RETURNING -1
-
-    //console.log(userIndex)
+    const userIndex = trainers.findIndex(object => object._id.toString() === user._id.toString() );
     trainers.splice(userIndex, 1);
-    //console.log(trainers)
     res.render("app/trainer-list", { trainers });
   } catch (err) {
     next(err);
