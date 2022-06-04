@@ -60,10 +60,23 @@ router.get("/pokemon-details/:id", async (req, res, next) => {
     const { id } = req.params;
     const pokemonInArray = await Pokemon.find({ id: id });
     const pokemon = pokemonInArray[0];
+
     const evolutionChainPokemons = await Pokemon.find({
       name: pokemon.evolution_chain
     });
-    res.render("app/pokemon-details", { pokemon, evolutionChainPokemons });
+    if (req.session.user){
+        const userId = req.session.user._id;
+      const user = await User.findById(userId);
+      if(user.pokemon.find( element => element._id.toString() === pokemon._id.toString())){
+        const caught = "caught";
+        res.render("app/pokemon-details", { pokemon, evolutionChainPokemons, caught });
+      } else {
+        const newPokemon = "newPokemon"
+        res.render("app/pokemon-details", { pokemon, evolutionChainPokemons, newPokemon });
+      }   
+    } else {
+      res.render("app/pokemon-details", { pokemon, evolutionChainPokemons });
+    }
 
     // const pokemon = await MyPokedex.getPokemonByName(id);
     // const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
@@ -150,7 +163,8 @@ router.get("/pokemon-search", async (req, res, next) => {
 router.get("/own-profile", isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("pokemon");
+    console.log(user)
     res.render("app/own-profile", { user });
   } catch (err) {
     next(err);
@@ -312,7 +326,6 @@ router.post("/own-pokemon-team-edit-remove/:id", isLoggedIn, async (req, res, ne
 });
 
 //OTHER TRAINERS
-
 
 router.get("/trainer-list", isLoggedIn, async (req, res, next) => {
   try {

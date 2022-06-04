@@ -72,7 +72,7 @@ const createPokemons = async () => {
       for (let i = 0; i <= 150; i++) {
 
         let relevantEvolutionChain = evolutionChainsArray.find((element) => {
-          const relevantName = capitalized(data1Array[i].name)
+          const relevantName = capitalized(data1Array[i].name);
           return element.includes(relevantName);
           //for each of the 151 pokemons, this will find the element (array), in the evolutionChainsArray, that contains the name of the pokemon we are iteration over.
           //this will be returned as true and become the relevantEvolutionChain to be sent to our DB on the current iteration

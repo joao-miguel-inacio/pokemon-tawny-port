@@ -176,7 +176,6 @@ footer {
   text-align: center;
   padding-left: 5%;
   padding-right: 5%;
-  font-size: small;
   margin: 0;
 }
 
@@ -290,7 +289,7 @@ footer {
 }
 
 .pokedex-pokedex-link:hover{
-  color: transparent;
+  color: transparent !important;
 }
 
 .pokedex-head {
@@ -330,6 +329,10 @@ footer {
 .pokemon-details-name{
   text-align: center;
   background-color: #efefef;
+}
+
+.pokemon-caught-text{
+  text-align: center;
 }
 
 .pokemon-details-image-container{

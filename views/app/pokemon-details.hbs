@@ -1,9 +1,16 @@
 {{>header}}
 
-{{#if inSession}}   
+{{#if inSession}}
+    {{#if ./newPokemon}}
     <form class="catch-button" action="/app/catch-pokemon/{{this.pokemon.id}}" method="get">
         <button class="btn btn-danger">Catch!</button>
     </form>
+    {{/if}}
+{{/if}}
+
+{{#if caught}}
+    <p class="pokemon-caught-text">Well done! You already caught this pokemon! &#128293;
+</p>
 {{/if}}
 
 <h1 class="pokemon-details-name">{{this.pokemon.name}} #{{this.pokemon.id}}</h1>
