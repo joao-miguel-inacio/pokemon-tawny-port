@@ -360,7 +360,7 @@ router.get("/trainer-team/:id", isLoggedIn, async (req, res, next) => {
     const { id } = req.params;
     const trainerInArray = await User.find({ _id: id }).populate("team");
     const pokemon = trainerInArray[0].team;
-    const trainer = trainerInArray[0]
+    const trainer = trainerInArray[0];
     if (pokemon.length < 1) {
       const noPokemon = "No Pokemons caught yet";
       res.render("app/trainer-team", { noPokemon, trainer });
