@@ -17,7 +17,7 @@
             <div class="col">
                 <a>Pokémon</a>
             </div>
-            {{#if pokemon}} 
+            {{#if pokemon}}
             <div class="col">
                 <a>Remove from team</a>
             </div>
@@ -31,7 +31,7 @@
             <div class="col">
                 <a>{{this.name}} #{{this.id}}</a>
             </div>
-            {{#if pokemon}} 
+            {{#if ../pokemon}}
             <div class="col">
                 <form class="edit-team-form" method="post" action="/app/own-pokemon-team-edit-remove/{{this.id}}">
                     <button type="submit "class="remove-pokemon-from-team-btn"></button>
@@ -42,20 +42,22 @@
         {{/each}}
     </div>
 {{/if}}
+
     <hr>
-{{#if pokemon}}    
-    <div class="container">
-        <div class="edit-team-head row">
-            <div class="col">
-                <a>Caught</a>
-            </div>
-            <div class="col">
-                <a>Pokémon</a>
-            </div>
-            <div class="col">
-                <a>Add to team</a>
-            </div>
+  
+<div class="container">
+    <div class="edit-team-head row">
+        <div class="col">
+            <a>Caught</a>
         </div>
+        <div class="col">
+            <a>Pokémon</a>
+        </div>
+        <div class="col">
+            <a>Add to team</a>
+        </div>
+    </div>
+    {{#if pokemon}}  
         {{#each pokemon}}
         <div class="row edit-team-body">
             <div class="col">
@@ -71,7 +73,8 @@
             </div>
         </div>
         {{/each}}
-    </div>
-{{/if}}
+    {{/if}}
+</div>
+
 
 {{>footer}}
