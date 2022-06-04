@@ -1,7 +1,7 @@
 {{>header}}
 
 {{#if inSession}}   
-    <form action="/app/catch-pokemon/{{this.pokemon.id}}" method="get">
+    <form class="catch-button" action="/app/catch-pokemon/{{this.pokemon.id}}" method="get">
         <button class="btn btn-danger">Catch!</button>
     </form>
 {{/if}}

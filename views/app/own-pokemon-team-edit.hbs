@@ -5,7 +5,7 @@
     <h4 class="no-pokemon-team-text">Explore your Pokedex and try to catch some Pokemons!</h4>
 {{/if}}
 
-{{#if pokemon}}
+{{#if pokemonInTeam}}
     <p class="original-trainer-team-text">You can carry 6 Pokémons in your team.</p>
     <p class="original-trainer-team-text">Adding a 7th Pokemon will cause the first to be sent to your Personal Pokémon Storage Box</p>
 
@@ -17,9 +17,11 @@
             <div class="col">
                 <a>Pokémon</a>
             </div>
+            {{#if pokemon}} 
             <div class="col">
                 <a>Remove from team</a>
             </div>
+            {{/if}}
         </div>
         {{#each pokemonInTeam}}
         <div class="row edit-team-body">
@@ -29,17 +31,19 @@
             <div class="col">
                 <a>{{this.name}} #{{this.id}}</a>
             </div>
+            {{#if pokemon}} 
             <div class="col">
                 <form class="edit-team-form" method="post" action="/app/own-pokemon-team-edit-remove/{{this.id}}">
                     <button type="submit "class="remove-pokemon-from-team-btn"></button>
                 </form>      
             </div>
+            {{/if}}
         </div>
         {{/each}}
     </div>
-
+{{/if}}
     <hr>
-
+{{#if pokemon}}    
     <div class="container">
         <div class="edit-team-head row">
             <div class="col">

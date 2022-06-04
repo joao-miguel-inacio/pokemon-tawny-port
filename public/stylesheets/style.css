@@ -306,6 +306,14 @@ footer {
 
 /*pokemon details*/
 
+.catch-button{
+  text-align: center;
+}
+
+.catch-button > button{
+  width: 20vw;
+}
+
 .pokemon-details-name{
   text-align: center;
   background-color: #efefef;
@@ -375,6 +383,7 @@ footer {
 /*trainer list*/
 .trainer-list-image {
   height: 50px;
+  width: 50px;
 }
 
 .trainer-list-link {

@@ -5,12 +5,12 @@
         <div class="d-flex flex-column justify-content-center align-items-center">
             <div class="profile-image-and-user-details-container">
                 <div class="profile-image-container d-flex justify-content-center ">
-                    <img class="profile-image" src="{{this.user.image}}" height="100" width="100" alt="User Image"/>
+                    <img class="profile-image" src="{{user.image}}" height="100" width="100" alt="User Image"/>
                 </div>  
             <div class="profile-user-details-container">
-                <span class="profile-name d-flex mt-2 justify-content-center">{{this.user.name}}</span>
-                <span class="profile-idd d-flex mt-2 justify-content-center">@{{this.user.username}}</span>
-                <span class="profile-number d-flex mt-2 justify-content-center align-items-center gap">{{this.teamLength}} <span class="profile-pokemon">Pokemons</span></span>
+                <span class="profile-name d-flex mt-2 justify-content-center">{{user.name}}</span>
+                <span class="profile-idd d-flex mt-2 justify-content-center">@{{user.username}}</span>
+                <span class="profile-number d-flex mt-2 justify-content-center align-items-center gap">{{teamLength}} <span class="profile-pokemon">Pokemons</span></span>
             </div>
             </div>  
             <div class="profile-buttons-container">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <p class="profile-text mt-3"> 
-                {{this.user.description}} 
+                {{user.description}} 
             </p>
         </div>
     </div>

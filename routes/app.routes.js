@@ -145,21 +145,18 @@ router.get("/pokemon-search", async (req, res, next) => {
   }
 });
 
-router.get("/catch-pokemon/:id", async (req, res, next) => {
+//CATCH POKEMON
+
+router.get("/catch-pokemon/:id", isLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.params;
     const pokemonInArray = await Pokemon.find({ id: id });
-    const pokemon = pokemonInArray[0];
-    const pokemonObjId = pokemonInArray[0]._id;
-    const userId = req.session.user._id;
-    const user = await User.findById(userId);
-    const userObjId = user._id;
-    await User.findByIdAndUpdate(userObjId, {
-      $addToSet: { pokemon: pokemonObjId },
+    await User.findByIdAndUpdate(req.session.user._id, {
+      $addToSet: { pokemon: pokemonInArray[0]._id },
     });
-    if (user.team.length<6){
-      await User.findByIdAndUpdate(userObjId, {
-        $addToSet: { team: pokemonObjId },
+    if (req.session.user.team.length < 6){
+      await User.findByIdAndUpdate(req.session.user._id, {
+        $addToSet: { team: pokemonInArray[0]._id  },
       });
     }
     res.redirect("/app/own-pokemon-team");
@@ -168,35 +165,18 @@ router.get("/catch-pokemon/:id", async (req, res, next) => {
   }
 });
 
-router.get("/own-pokemon-team", async (req, res, next) => {
+//OWN PROFILE
+
+router.get("/own-profile", isLoggedIn, async (req, res, next) => {
   try {
-    const userId = req.session.user._id;
-    const user = await User.findById(userId).populate("team");
-    const pokemon = user.team;
-    console.log(user.team.length)
-    if (pokemon.length < 1) {
-      const noPokemon = "No Pokemons caught yet";
-      res.render("app/own-pokemon-team", { noPokemon });
-    } else {
-      res.render("app/own-pokemon-team", { pokemon });
-    }
+    const teamLength = req.session.user.pokemon.length;
+    res.render("app/own-profile", { teamLength });
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/own-profile", async (req, res, next) => {
-  try {
-    const userObjId = req.session.user._id;
-    const user = await User.findById(userObjId).populate("pokemon");
-    const teamLength = user.pokemon.length;
-    res.render("app/own-profile", { user, teamLength });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/own-profile-edit", async (req, res, next) => {
+router.get("/own-profile-edit", isLoggedIn, async (req, res, next) => {
   try {
     res.render("app/own-profile-edit");
   } catch (err) {
@@ -219,58 +199,25 @@ router.post("/own-profile-edit", async (req, res, next) => {
   }
 });
 
-router.get("/trainer-list", async (req, res, next) => {
+//OWN TEAM
+
+router.get("/own-pokemon-team", isLoggedIn, async (req, res, next) => {
   try {
-    const trainers = await User.find();
-    //console.log(trainers)
-    const user = req.session.user;
-    //console.log(user)
-
-    const userIndex = trainers.findIndex(object => {
-      return object.name === user.name;
-    });
-
-    //const userIndex = trainers.indexOf(user);
-    //ALWAYS RETURNING -1
-
-    //console.log(userIndex)
-    trainers.splice(userIndex, 1);
-    //console.log(trainers)
-    res.render("app/trainer-list", { trainers });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/trainer-profile/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const trainerInArray = await User.find({ _id: id });
-    const trainer = trainerInArray[0];
-    res.render("app/trainer-profile", { trainer });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/trainer-team/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const trainerInArray = await User.find({ _id: id }).populate("team");
-    const pokemon = trainerInArray[0].team;
-    const trainer = trainerInArray[0]
+    const userId = req.session.user._id;
+    const user = await User.findById(userId).populate("team");
+    const pokemon = user.team;
     if (pokemon.length < 1) {
       const noPokemon = "No Pokemons caught yet";
-      res.render("app/trainer-team", { noPokemon, trainer });
+      res.render("app/own-pokemon-team", { noPokemon });
     } else {
-      res.render("app/trainer-team", { pokemon, trainer});
+      res.render("app/own-pokemon-team", { pokemon });
     }
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/own-pokemon-team-edit/", async (req, res, next) => {
+router.get("/own-pokemon-team-edit/", isLoggedIn, async (req, res, next) => {
   try {
     try {
       const userId = req.session.user._id;
@@ -279,16 +226,28 @@ router.get("/own-pokemon-team-edit/", async (req, res, next) => {
         const noPokemon = "No Pokemons caught yet";
         res.render("app/own-pokemon-team-edit", { noPokemon });
       } else {
-        for (let i=0; i < user.pokemon.length; i++){
-          for (let j=0; j < user.team.length; j++){
-            if (user.pokemon[i].id === user.team[j].id){
-              user.pokemon.splice(i, 1);
+        if (user.pokemon.length <= 6){
+          const pokemonInTeam = user.team;
+          res.render("app/own-pokemon-team-edit", { pokemonInTeam});
+        } else {
+          //const arrayOfI= [];
+          for (let i=0; i < user.pokemon.length; i++){
+            for (let j=0; j < user.team.length; j++){
+              console.log(user.pokemon[i].id)
+              console.log(user.team[j].id)
+              if (user.pokemon[i].id === user.team[j].id){
+                user.pokemon.splice(i, 1)
+                //arrayOfI.push(i);
+              }
             }
           }
-        }   
-        const pokemon = user.pokemon.sort((a, b) => a.id - b.id);
-        const pokemonInTeam = user.team;
-        res.render("app/own-pokemon-team-edit", { pokemon, pokemonInTeam});
+          // for (let i = 0; i < arrayOfI.length; i++){
+          //   user.pokemon.splice(arrayOfI[i], 1);
+          // }
+          const pokemon = user.pokemon.sort((a, b) => a.id - b.id);
+          const pokemonInTeam = user.team;
+          res.render("app/own-pokemon-team-edit", { pokemon, pokemonInTeam});
+        }
       }
     } catch (err) {
       next(err);
@@ -298,7 +257,7 @@ router.get("/own-pokemon-team-edit/", async (req, res, next) => {
   }
 });
 
-router.post("/own-pokemon-team-edit-add/:id", async (req, res, next) => {
+router.post("/own-pokemon-team-edit-add/:id", isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id;
     const user = await User.findById(userId).populate("pokemon").populate("team");
@@ -331,7 +290,7 @@ router.post("/own-pokemon-team-edit-add/:id", async (req, res, next) => {
   }
 });
 
-router.post("/own-pokemon-team-edit-remove/:id", async (req, res, next) => {
+router.post("/own-pokemon-team-edit-remove/:id", isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id;
     const user = await User.findById(userId).populate("team");
@@ -353,6 +312,60 @@ router.post("/own-pokemon-team-edit-remove/:id", async (req, res, next) => {
       console.log("You need at least one Pokemon in your party!");
       //POP UP WINDOW
       res.redirect("/app/own-pokemon-team-edit");
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+//OTHER TRAINERS
+
+
+router.get("/trainer-list", isLoggedIn, async (req, res, next) => {
+  try {
+    const trainers = await User.find();
+    //console.log(trainers)
+    const user = req.session.user;
+    //console.log(user)
+
+    const userIndex = trainers.findIndex(object => {
+      return object.name === user.name;
+    });
+
+    //const userIndex = trainers.indexOf(user);
+    //ALWAYS RETURNING -1
+
+    //console.log(userIndex)
+    trainers.splice(userIndex, 1);
+    //console.log(trainers)
+    res.render("app/trainer-list", { trainers });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/trainer-profile/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const trainerInArray = await User.find({ _id: id });
+    const trainer = trainerInArray[0];
+    res.render("app/trainer-profile", { trainer });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/trainer-team/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const trainerInArray = await User.find({ _id: id }).populate("team");
+    const pokemon = trainerInArray[0].team;
+    const trainer = trainerInArray[0]
+    if (pokemon.length < 1) {
+      const noPokemon = "No Pokemons caught yet";
+      res.render("app/trainer-team", { noPokemon, trainer });
+    } else {
+      res.render("app/trainer-team", { pokemon, trainer});
     }
   } catch (err) {
     next(err);
