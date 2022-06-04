@@ -95,6 +95,10 @@ footer {
 
 /*trainer profile*/
 
+.original-trainer-team-button{
+  background: linear-gradient(to right, #0047AB 0%, #FF0000 100%) !important;
+}
+
 .profile-card {
   width: 75vw;
   background-color: #efefef;
@@ -254,6 +258,9 @@ footer {
   }
   .small-screen-hidden {
     display: block;
+  }
+  .original-trainer-team-button{
+    width: 20vw;
   }
 }
 
