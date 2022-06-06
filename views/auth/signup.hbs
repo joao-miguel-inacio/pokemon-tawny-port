@@ -7,7 +7,7 @@
   />
   <h1>Tawny Port</h1>
 
-  <form action="/auth/signup" method="POST">
+  <form action="/auth/signup" method="POST" enctype="multipart/form-data">
 
     <div class="row mb-1">
       <label class="form-label">Name
@@ -22,6 +22,11 @@
     <div class="row mb-1">
       <label class="form-label">Image
          <input class="form-control" required type="text" name="image" id="profile-creation-image" value="{{this.pokemonImg}}"/>
+      </label>
+    </div>
+    <div class="row mb-1">
+      <label class="form-label">Profile Picture
+         <input class="form-control" required type="file" name="profilePic" id="profilePic"/>
       </label>
     </div>
     <div class="row mb-1">

@@ -5,16 +5,21 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     image: {
       type: String,
       required: true
     },
+    profilePic: {
+      type: String
+    },
     username: {
       type: String,
       unique: true,
-      required: true
+      required: true,
+      trim: true
     },
     description: {
       type: String,
@@ -24,7 +29,8 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     pokemon: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }],
     team: { 

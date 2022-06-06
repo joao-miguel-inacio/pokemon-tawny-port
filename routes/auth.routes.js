@@ -11,6 +11,8 @@ import Pokemon from "../models/Pokemon.model.js";
 import isLoggedOut from "../middleware/isLoggedOut.js";
 import isLoggedIn from "../middleware/isLoggedIn.js";
 
+import uploader from "../config/cloudinary.config.js";
+
 const saltRounds = 10;
 
 router.get("/signup", isLoggedOut, async (req, res) => {
@@ -20,9 +22,9 @@ router.get("/signup", isLoggedOut, async (req, res) => {
   res.render("auth/signup", {pokemonImg});
 });
 
-router.post("/signup", isLoggedOut, (req, res) => {
+router.post("/signup", [uploader.any('profilePic'), isLoggedOut], (req, res) => {
   const { name, username, image, description, password } = req.body;
-
+  console.log(req.file);
   if (!name) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your name.",
@@ -81,6 +83,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
           name,
           username,
           image,
+          profilePic: req.file.path,
           description,
           password: hashedPassword,
         });
