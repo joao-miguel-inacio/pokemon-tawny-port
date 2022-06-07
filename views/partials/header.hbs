@@ -4,12 +4,12 @@
             <input id="pokemon-input" type="text" name="id" class="form-control me-3" placeholder="Search">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form>
-    <a class="nav-link" id="/auth/logout" href="/auth/logout">Log out</a>
     {{#if anonymous}}
     <a class="nav-link" id="/auth/login" href="/auth/login">Log in</a>
     <a class="nav-link" id="/auth/signup" href="/auth/signup">Sign up</a>
     {{/if}}
-    {{#if inSession}}   
+    {{#if inSession}}
+    <a class="nav-link" id="/auth/logout" href="/auth/logout">Log out</a>
     <a class="nav-link" id="/app/trainer" href="/app/trainer-list">Trainers list</a>
     <a class="nav-link" id="/app/own-profile" href="/app/own-profile">Profile</a>
     {{/if}}
