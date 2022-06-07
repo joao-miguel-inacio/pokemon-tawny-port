@@ -22,7 +22,8 @@ router.get("/signup", isLoggedOut, async (req, res) => {
   res.render("auth/signup", {pokemonImg});
 });
 
-router.post("/signup", [uploader.any('profilePic'), isLoggedOut], (req, res) => {
+//router.post("/signup", [uploader.any('profilePic'), isLoggedOut], (req, res) => {
+router.post("/signup", isLoggedOut, (req, res) => {
   const { name, username, image, description, password } = req.body;
   console.log(req.file);
   if (!name) {
@@ -83,7 +84,7 @@ router.post("/signup", [uploader.any('profilePic'), isLoggedOut], (req, res) => 
           name,
           username,
           image,
-          profilePic: req.file.path,
+          //profilePic: req.file.path,
           description,
           password: hashedPassword,
         });

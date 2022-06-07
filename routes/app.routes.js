@@ -268,6 +268,20 @@ router.get("/own-pokemon-team-edit/", isLoggedIn, async (req, res, next) => {
   }
 });
 
+
+router.get("/own-pokemon-team-edit/json-list", isLoggedIn, async (req, res, next) => {
+  try {
+    const userId = req.session.user._id;
+    const user = await User.findById(userId).populate("pokemon").populate("team");
+    const userTeam = user.team;
+    const userPokemon = user.Pokemon;
+    res.json ([userTeam, userPokemon]);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 router.post("/own-pokemon-team-edit-add/:id", isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id;

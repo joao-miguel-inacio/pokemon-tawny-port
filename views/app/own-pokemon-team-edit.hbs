@@ -34,14 +34,13 @@
             {{#if ../pokemon}}
             <div class="col">
                 <form class="edit-team-form" method="post" action="/app/own-pokemon-team-edit-remove/{{this.id}}">
-                    <button type="submit "class="remove-pokemon-from-team-btn"></button>
+                    <button type="submit "class="remove-pokemon-from-team-btn"><span class="hidden">{{this.id}}</span></button>
                 </form>      
             </div>
             {{/if}}
         </div>
         {{/each}}
     </div>
-{{/if}}
 
     <hr>
   
@@ -57,6 +56,7 @@
             <a>Add to team</a>
         </div>
     </div>
+{{/if}}
     {{#if pokemon}}  
         {{#each pokemon}}
         <div class="row edit-team-body">
@@ -68,7 +68,7 @@
             </div>
             <div class="col">
                 <form class="edit-team-form" method="post" action="/app/own-pokemon-team-edit-add/{{this.id}}">
-                    <button type="submit "class="add-pokemon-to-team-btn"></button>
+                    <button type="submit "class="add-pokemon-to-team-btn"><span class="hidden">{{this.id}}</span></button>
                 </form>      
             </div>
         </div>
@@ -78,3 +78,5 @@
 
 
 {{>footer}}
+
+<script src="/js/axios.js"></script>
