@@ -42,24 +42,6 @@ body {
   width: 6em;
 }
 
-/*
-.random-image-generator-button{
-  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654107302/pokemon-white/pokeball-png-45332_rarrzq.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 25px;
-  border: 0.5px solid black;
-}
-
-.random-text-generator-button{
-  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654169206/pokemon-white/letter_L_PNG92_crc1ze.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 25px;
-  border: 0.5px solid black;
-}
-*/
-
 /*header*/
 
 .nav{
@@ -290,7 +272,7 @@ footer {
 .pokedex-pokedex-link {
   text-decoration: none;
   color: transparent;
-  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-white/66a6a4d3-pokedex_kanto_jvz4bm.png);
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-tawny-port/66a6a4d3-pokedex_kanto_jvz4bm.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -412,7 +394,7 @@ footer {
 .trainer-list-link {
   text-decoration: none;
   color: transparent;
-  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-white/66a6a4d3-pokedex_kanto_jvz4bm.png);
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654179821/pokemon-tawny-port/66a6a4d3-pokedex_kanto_jvz4bm.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -428,7 +410,7 @@ footer {
 }
 
 .add-pokemon-to-team-btn{
-  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654260394/pokemon-white/PngItem_574430_m2zacr.png);
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654260394/pokemon-tawny-port/PngItem_574430_m2zacr.png);
   background-size: cover;
   background-color: transparent;
   height: 50px;
@@ -437,8 +419,7 @@ footer {
 }
 
 .remove-pokemon-from-team-btn{
-  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654267713/pokemon-white/pngfind.com-transparent-box-png-1594011_w9k0bo.png
-  );
+  background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654267713/pokemon-tawny-port/pngfind.com-transparent-box-png-1594011_w9k0bo.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
