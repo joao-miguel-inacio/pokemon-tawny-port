@@ -1,3 +1,3 @@
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/pokemon-tawny-port"
+const MONGO_URI = process.env.MONGODB_URI 
 
 export default MONGO_URI;
