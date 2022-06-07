@@ -33,6 +33,6 @@ import appRoutes from "./routes/app.routes.js";
 app.use("/app", appRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
-import aSecondFunction from "./error-handling";
+import aSecondFunction from "./error-handling/index.js";
 
 export default app;
