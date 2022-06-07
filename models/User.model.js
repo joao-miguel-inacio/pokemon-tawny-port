@@ -9,10 +9,6 @@ const userSchema = new Schema(
       trim: true
     },
     image: {
-      type: String,
-      required: true
-    },
-    profilePic: {
       type: String
     },
     username: {

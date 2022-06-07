@@ -15,17 +15,22 @@ import uploader from "../config/cloudinary.config.js";
 
 const saltRounds = 10;
 
-router.get("/signup", isLoggedOut, async (req, res) => {
-  const pokemonID = Math.floor(Math.random() * 151);
-  const pokemon = await Pokemon.find( {id:pokemonID});
-  const pokemonImg = pokemon[0].sprites.front_animated;
-  res.render("auth/signup", {pokemonImg});
+router.get("/signup", isLoggedOut, (req, res) => {
+  res.render("auth/signup");
 });
 
-//router.post("/signup", [uploader.any('profilePic'), isLoggedOut], (req, res) => {
-router.post("/signup", isLoggedOut, (req, res) => {
-  const { name, username, image, description, password } = req.body;
-  console.log(req.file);
+router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res) => {
+//router.post("/signup", isLoggedOut, (req, res) => {
+  const { name, username, description, password } = req.body;
+  
+  if (!req.file) {
+    const pokemonID = Math.floor(Math.random() * 151);
+    const pokemon = await Pokemon.find( {id:pokemonID});
+    const pokemonImg = pokemon[0].sprites.front_animated;
+    req.file = {};
+    req.file.path = pokemonImg;
+  }
+
   if (!name) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your name.",
@@ -35,12 +40,6 @@ router.post("/signup", isLoggedOut, (req, res) => {
   if (!username) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your username.",
-    });
-  }
-
-  if (!image) {
-    return res.status(400).render("auth/signup", {
-      errorMessage: "Please provide the link to an image.",
     });
   }
 
@@ -83,8 +82,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         return User.create({
           name,
           username,
-          image,
-          //profilePic: req.file.path,
+          image: req.file.path,
           description,
           password: hashedPassword,
         });

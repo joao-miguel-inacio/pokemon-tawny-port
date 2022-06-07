@@ -164,7 +164,6 @@ router.get("/own-profile", isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id;
     const user = await User.findById(userId).populate("pokemon");
-    console.log(user)
     res.render("app/own-profile", { user });
   } catch (err) {
     next(err);
