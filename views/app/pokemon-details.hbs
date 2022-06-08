@@ -1,19 +1,19 @@
 {{>header}}
 
-{{#if inSession}}
-    {{#if ./newPokemon}}
-    <form class="catch-button" action="/app/catch-pokemon/{{this.pokemon.id}}" method="get">
-        <button class="btn btn-danger">Catch!</button>
-    </form>
+<div class="page-body">
+    {{#if inSession}}
+        {{#if ./newPokemon}}
+        <form class="catch-button" action="/app/catch-pokemon/{{this.pokemon.id}}" method="get">
+            <button class="btn btn-danger">Catch!</button>
+        </form>
+        {{/if}}
     {{/if}}
-{{/if}}
 
-{{#if caught}}
-    <p class="pokemon-caught-text">Well done! You already caught this pokemon! &#128293;
-</p>
-{{/if}}
+    {{#if caught}}
+        <p class="pokemon-caught-text">Well done! You already caught this pokemon! &#128293;</p>
+    {{/if}}
 
-<h1 class="pokemon-details-name">{{this.pokemon.name}} #{{this.pokemon.id}}</h1>
+    <h1 class="pokemon-details-name">{{this.pokemon.name}} #{{this.pokemon.id}}</h1>
     <div class="pokemon-details-image-container">
         <div class="pokemon-details-shiny-images-container">
             <p>Normal:</p>
@@ -61,6 +61,7 @@
         {{/each}}
         </div>
     </div>
+</div>
 
 {{>footer}}
 

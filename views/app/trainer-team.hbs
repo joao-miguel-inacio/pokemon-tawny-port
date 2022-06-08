@@ -1,12 +1,13 @@
 {{>header}}
 
+<div class="page-body">
+    {{#if noPokemon}}
+    <h3 class="no-pokemon-team-text">{{this.trainer.username}} didn't catch any Pokemon yet.</h3>
+    <h3 class="no-pokemon-team-text">I think {{this.trainer.username}} is on their way now to see Prof. Oak!</h3>
+    {{/if}}
 
-{{#if noPokemon}}
-<h3 class="no-pokemon-team-text">{{this.trainer.username}} didn't catch any Pokemon yet.</h3>
-<h3 class="no-pokemon-team-text">I think {{this.trainer.username}} is on their way now to see Prof. Oak!</h3>
-{{/if}}
-
-{{>cards}}
+    {{>cards}}
+</div>
 
 {{>footer}}
 

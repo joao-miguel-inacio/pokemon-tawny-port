@@ -1,15 +1,17 @@
 {{>header}}
 
-{{#if anonymous}}
-    <p class="original-trainer-team-text">Click the cards to flip them.</p>
-    <p class="original-trainer-team-text">Click the Pokemon name and he will tell you all his secrets. &#129299</p>
-{{/if}}
-{{#if inSession}}   
-    <p class="original-trainer-team-text">This is my team @{{user.username}}.</p>
-    <p class="original-trainer-team-text">How would your team fare against mine? &#128121</p>
-{{/if}}
+<div class="page-body">
+    {{#if anonymous}}
+        <p class="original-trainer-team-text">Click the cards to flip them.</p>
+        <p class="original-trainer-team-text">Click the Pokemon name and he will tell you all his secrets. &#129299</p>
+    {{/if}}
+    {{#if inSession}}   
+        <p class="original-trainer-team-text">This is my team @{{user.username}}.</p>
+        <p class="original-trainer-team-text">How would your team fare against mine? &#128121</p>
+    {{/if}}
 
-{{>cards}}
+    {{>cards}}
+</div>
 
 {{>footer}}
 
