@@ -1,6 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: linear-gradient(to right, #0047AB 0%, #FF0000 100%) !important;
+  background: linear-gradient(to left, #0047AB 0%, #FF0000 100%) !important;
   position: relative !important;
   min-height: 100vh !important;
 }
@@ -14,6 +14,7 @@ body {
 }
 
 .no-pokemon-team-text{
+  color: white;
   text-align: center;
 }
 
@@ -38,6 +39,7 @@ body {
 
 .auth-container >h1 {
   align-self: center;
+  color: rgb(237,230,227);
 }
 
 .auth-submit-button,
@@ -52,7 +54,7 @@ body {
   position: sticky !important;
   margin: 0 0 2.5% 0 !important;
   padding: 0 !important;
-  background-color: #efefef !important;
+  background-color: rgba(237,230,227,0.7) !important;
 }
 
 .navbar-form {
@@ -66,13 +68,18 @@ body {
 }
 
 .nav-link {
+  color: black !important;
   margin: 0 15px 0 15px !important;
   border-radius: 10px !important;
 }
 
 .active {
-  background-color: #545454 !important;
+  background-color: #36382E !important;
   color: white !important;
+}
+
+.btn-outline-secondary{
+  color: black !important;
 }
 
 .page-body {
@@ -86,8 +93,8 @@ footer {
   bottom: 0;
   width: 100vw !important;
   padding: 0%;
-  color: #545454;
-  background-color: #efefef;
+  color: black;
+  background-color: rgba(237,230,227,0.7);
   justify-content: space-between;
   height: 10vh !important;
 }
@@ -104,6 +111,11 @@ footer {
   margin-right: 5vw;
 }
 
+.footer-right > a {
+  color: black;
+  text-decoration: none;  
+} 
+  
 /*trainer profile*/
 
 .original-trainer-team-button{
@@ -112,7 +124,7 @@ footer {
 
 .profile-card {
   width: 75vw;
-  background-color: #efefef;
+  background-color: rgba(237,230,227,0.7);
   border: none;
   cursor: pointer;
   transition: all 0.5s;
@@ -150,7 +162,7 @@ footer {
 .profile-text {
   text-align: center;
   font-size: 13px;
-  color: #545454;
+  color: black;
   font-weight: 500
 }
 
@@ -207,7 +219,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(110, 13, 13);
+  background-color: rgba(128,36,86,0.3);
   color: #f7f9f9;
   position: relative;
   width: 100%;
@@ -215,7 +227,7 @@ footer {
   min-width: 200px;
   transition: transform 1s;
   transform-style: preserve-3d;
-  box-shadow: 0px 0px 10px rgb(32, 3, 3);
+  box-shadow: 0px 0px 10px rgba(32, 3, 3, 0.7);
   border-radius: 15px;
 }
 
@@ -311,7 +323,7 @@ footer {
 }
 
 .pokedex-head {
-  background-color: #efefef;
+  background-color: rgba(237,230,227,0.7);
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -319,11 +331,13 @@ footer {
 }
 
 .pokedex-body {
+  background-color: rgba(239,239,239, 0.1);
   justify-content: center;
   text-align: center;
   align-items: center;
-  border: dashed #efefef;
+  border: dashed rgba(237,230,227,0.7);
   border-top: none;
+  color: white;
 }
 
 /*unsuccessful search*/
@@ -332,6 +346,7 @@ footer {
   text-align: center;
   padding-left: 5%;
   padding-right: 5%;
+  color: white;
 }
 
 /*pokemon details*/
@@ -346,7 +361,7 @@ footer {
 
 .pokemon-details-name{
   text-align: center;
-  background-color: #efefef;
+  background-color: rgba(237,230,227,0.7);
 }
 
 .pokemon-caught-text{
@@ -368,7 +383,7 @@ footer {
 }
 
 .pokemon-details > h4 {
-  background-color: #efefef;
+  background-color: rgba(237,230,227,0.7);
 }
 
 .pokemon-details-card{
@@ -460,7 +475,7 @@ footer {
 
 .edit-team-head{
   height: 100px;
-  background-color: #efefef;
+  background-color: rgba(237,230,227,0.7);
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -470,7 +485,7 @@ footer {
   justify-content: center;
   text-align: center;
   align-items: center;
-  border: dashed #efefef;
+  border: dashed rgba(237,230,227,0.7);
   border-top: none;
 }
 
