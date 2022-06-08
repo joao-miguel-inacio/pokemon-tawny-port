@@ -1,21 +1,14 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: linear-gradient(to left, #0047AB 0%, #FF0000 100%) !important;
+  background: url("https://res.cloudinary.com/dvru7nv6q/image/upload/v1654714346/pokemon-tawny-port/20998_1_pjufvv.jpg");
+  background-position: center;
+  background-size: cover;
   position: relative !important;
   min-height: 100vh !important;
 }
 
-.home-image {
-  width: 50vh;
-}
-
 .hidden {
   display: none;
-}
-
-.no-pokemon-team-text{
-  color: white;
-  text-align: center;
 }
 
 .small-screen-hidden,
@@ -28,12 +21,13 @@ body {
 .auth-container{
   display: flex;
   flex-direction: column;
-  margin: 2em;
+  margin: 0 2em 2em 2em;
+  padding-top: 2em;
 }
 
 .auth-image {
   width: 60vw;
-  max-width: 500px;
+  max-width: 350px;
   align-self: center;
 }
 
@@ -48,13 +42,28 @@ body {
   width: 6em;
 }
 
+/*home*/
+.home-container{
+  position: relative;
+  margin-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  margin: 2em;
+}
+
+.home-image {
+  width: 60vw;
+  max-width: 500px;
+  align-self: center;
+}
+
 /*header*/
 
 .navbar {
   position: sticky !important;
   margin: 0 0 2.5% 0 !important;
   padding: 0 !important;
-  background-color: rgba(237,230,227,0.7) !important;
+  background-color: rgba(237,230,227,0.9) !important;
 }
 
 .navbar-form {
@@ -68,14 +77,21 @@ body {
 }
 
 .nav-link {
+  padding-left: 5vw !important;
   color: black !important;
   margin: 0 15px 0 15px !important;
   border-radius: 10px !important;
 }
 
 .active {
-  background-color: #36382E !important;
-  color: white !important;
+  border-width: 3px;
+  border-style: solid;
+  border-image: 
+    linear-gradient(
+      to bottom, 
+      rgba(255,0,0,0.9),
+      rgba(0,0,0,0.9)
+    ) 1 100% ;
 }
 
 .btn-outline-secondary{
@@ -94,9 +110,9 @@ footer {
   width: 100vw !important;
   padding: 0%;
   color: black;
-  background-color: rgba(237,230,227,0.7);
+  background-color: rgba(237,230,227,0.9);
   justify-content: space-between;
-  height: 10vh !important;
+  height: 14vh !important;
 }
 
 .psyduck-image {
@@ -119,13 +135,15 @@ footer {
 /*trainer profile*/
 
 .original-trainer-team-button{
-  background: linear-gradient(to right, #0047AB 0%, #FF0000 100%) !important;
+  background: linear-gradient(to right, rgba(255, 0, 0,0.9) 0%, rgba(0,0,0,0.9) 100%) !important;
+  border: none !important;
 }
 
 .profile-card {
   width: 75vw;
-  background-color: rgba(237,230,227,0.7);
+  background-color: rgba(237,230,227,0.9);
   border: none;
+  border-radius: 15px;
   cursor: pointer;
   transition: all 0.5s;
 }
@@ -189,6 +207,10 @@ footer {
     flex-direction: column;
     gap: 5px;
   }
+
+  .nav-link {
+    padding: 1vw !important;
+  }
 }
 
 /*edit profile*/
@@ -198,13 +220,6 @@ footer {
 }
 
 /*6 pokemon team*/
-
-.original-trainer-team-text {
-  text-align: center;
-  padding-left: 5%;
-  padding-right: 5%;
-  margin: 0;
-}
 
 .card-grid {
   position: relative;
@@ -219,15 +234,13 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(128,36,86,0.3);
-  color: #f7f9f9;
+  background: linear-gradient(to right, rgba(255, 0, 0,0.9) 0%, rgba(0,0,0,0.9) 100%) !important;
   position: relative;
   width: 100%;
   height: 100%;
   min-width: 200px;
   transition: transform 1s;
   transform-style: preserve-3d;
-  box-shadow: 0px 0px 10px rgba(32, 3, 3, 0.7);
   border-radius: 15px;
 }
 
@@ -323,7 +336,7 @@ footer {
 }
 
 .pokedex-head {
-  background-color: rgba(237,230,227,0.7);
+  background-color: rgba(237,230,227,0.9);
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -331,11 +344,11 @@ footer {
 }
 
 .pokedex-body {
-  background-color: rgba(239,239,239, 0.1);
+  background: linear-gradient(to right, rgba(255, 0, 0,0.2) 0%, rgba(0,0,0,0.2) 100%) !important;
   justify-content: center;
   text-align: center;
   align-items: center;
-  border: dashed rgba(237,230,227,0.7);
+  border: dashed rgba(237,230,227,0.9);
   border-top: none;
   color: white;
 }
@@ -475,17 +488,19 @@ footer {
 
 .edit-team-head{
   height: 100px;
-  background-color: rgba(237,230,227,0.7);
+  background-color: rgba(237,230,227,0.9);
   justify-content: center;
   text-align: center;
   align-items: center;
+  color: black !important;
 }
 
 .edit-team-body{
+  background: linear-gradient(to right, rgba(255, 0, 0,0.2) 0%, rgba(0,0,0,0.2) 100%) !important;
   justify-content: center;
   text-align: center;
   align-items: center;
-  border: dashed rgba(237,230,227,0.7);
+  border: dashed rgba(237,230,227,0.9);
   border-top: none;
 }
 

@@ -2,12 +2,15 @@
 
 <div class="page-body">
     {{#if noPokemon}}
-        <h4 class="no-pokemon-team-text">You do not have any Pokemons yet.</h4>
-        <h4 class="no-pokemon-team-text">Explore your Pokedex and try to catch some Pokemons!</h4>
+        <h4 class="center-text">You do not have any Pokemons yet.</h4>
+        <h4 class="center-text">Explore your Pokedex and try to catch some Pokemons!</h4>
     {{/if}}
     {{#if pokemonInTeam}}
-    <p class="original-trainer-team-text">You can carry 6 Pokémons in your team.</p>
-    <p class="original-trainer-team-text">Adding a 7th Pokemon will cause the first to be sent to your Personal Pokémon Storage Box</p>
+    <h4 class="center-text">You can carry 6 Pokémons in your team.</h4>
+    <h4 class="center-text">Adding a 7th Pokemon will cause the first to be sent to your Personal Pokémon Storage Box.</h4>
+    
+    <hr>
+    
     <div class="container">
         <div class="edit-team-head row">
             <div class="col">

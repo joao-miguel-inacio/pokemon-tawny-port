@@ -1,16 +1,20 @@
 {{>header}}
 
 <div class="page-body">
+
     {{#if anonymous}}
-        <p class="center-text">Click the cards to flip them.</p>
-        <p class="center-text">Click the Pokemon name and he will tell you all his secrets. &#129299</p>
+        <h4 class="center-text">Click the cards to flip them.</h4>
+        <h4 class="center-text">Click the Pokemon name and he will tell you all his secrets. &#129299</h4>
     {{/if}}
     {{#if inSession}}   
-        <p class="center-text">This is my team @{{user.username}}.</p>
-        <p class="center-text">How would your team fare against mine? &#128121</p>
+        <h4 class="center-text">This is my team @{{user.username}}.</h4>
+        <h4 class="center-text">How would your team fare against mine? &#128121</h4>
     {{/if}}
-
+    
+    <hr>
+    
     {{>cards}}
+
 </div>
 
 {{>footer}}
