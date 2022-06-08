@@ -24,6 +24,9 @@ function respNavBar() {
   } else if (currentpage.includes("/app/own")) {
     document.getElementById("/app/own-profile").classList.add("active");
 
+  } else if (currentpage.includes("/app/battle")) {
+    document.getElementById("/app/battle").classList.add("active");
+
   } else if (currentpage.includes("/app/trainer")) {
     document.getElementById("/app/trainer").classList.add("active");
 

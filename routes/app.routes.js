@@ -380,4 +380,19 @@ router.get("/trainer-team/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.get("/battle", isLoggedIn, async (req, res, next) => {
+  try {
+    //const { id } = req.params;
+    const pokemon1Id = Math.floor(Math.random() * 151);
+    const pokemon1InArray = await Pokemon.find({ id: pokemon1Id });
+    const pokemon1 = pokemon1InArray[0];
+    const pokemon2Id = Math.floor(Math.random() * 151);
+    const pokemon2InArray = await Pokemon.find( { id : pokemon2Id });
+    const pokemon2 = pokemon2InArray[0];
+    res.render("app/battle", { pokemon1, pokemon2});
+  }catch (err) {
+    next(err);
+  }
+});
+
 export default router;
