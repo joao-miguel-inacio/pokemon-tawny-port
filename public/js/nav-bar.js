@@ -1,7 +1,6 @@
 function respNavBar() {
   let currentpage = window.location.pathname;
   console.log(currentpage);
-
   if (
     currentpage.includes("/app/own")) {
     document.getElementById("/app/own-profile").classList.add("active");

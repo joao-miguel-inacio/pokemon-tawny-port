@@ -36,6 +36,7 @@ body {
 .auth-container >h1 {
   align-self: center;
 }
+
 .auth-submit-button,
 .auth-login-button,
 .auth-visit-button {
@@ -44,13 +45,26 @@ body {
 
 /*header*/
 
-.nav{
-  margin: 2vw !important;
-  width: 75vw !important;
+.navbar {
+  margin: 0 0 2vw 0 !important;
+  padding: 0 !important;
+  background-color: #efefef !important;
+}
+
+.navbar-form {
+  display: flex;
+  margin:  0 15px 15px 15px !important;
+  padding-top: 18px !important;
+}
+
+.navBarSearchForm {
+  width: 150px !important;
 }
 
 .nav-link {
+  margin: 0 15px 0 15px !important;
   color: #545454 !important;
+  border-radius: 10px !important;
 }
 
 .active {

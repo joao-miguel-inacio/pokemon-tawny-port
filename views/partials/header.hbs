@@ -1,18 +1,42 @@
-<nav class="nav flex-column mx-auto d-block nav-pills">
-    <form class="d-flex" role="search" action="/app/pokemon-search" method="get">
-        <label for="pokemon-input"></label>
-            <input id="pokemon-input" type="text" name="id" class="form-control me-3" placeholder="Search">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
-    </form>
-    {{#if anonymous}}
-    <a class="nav-link" id="/auth/login" href="/auth/login">Log in</a>
-    <a class="nav-link" id="/auth/signup" href="/auth/signup">Sign up</a>
-    {{/if}}
-    {{#if inSession}}
-    <a class="nav-link" id="/auth/logout" href="/auth/logout">Log out</a>
-    <a class="nav-link" id="/app/trainer" href="/app/trainer-list">Trainers list</a>
-    <a class="nav-link" id="/app/own-profile" href="/app/own-profile">Profile</a>
-    {{/if}}
-    <a class="nav-link" id="/app/original-trainer-profile" href="/app/original-trainer-profile">Original Trainer</a>
-    <a class="nav-link" id="/app/pokedex" href="/app/pokedex">Pokedex</a>
-</nav>
+<nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <form class="navbar-form" role="search" action="/app/pokemon-search" method="get">
+          <label for="pokemon-input"></label>
+          <input type="text" name="id" class="form-control me-1 navBarSearchForm" placeholder="Search">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {{#if anonymous}}
+            <li class="nav-item">
+              <a class="nav-link" id="/auth/login" href="/auth/login">Log in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="/auth/signup" href="/auth/signup">Sign up</a>
+            </li>
+            {{/if}}
+            {{#if inSession}}
+            <li class="nav-item">
+              <a class="nav-link" id="/auth/logout" href="/auth/logout">Log out</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="/app/trainer" href="/app/trainer-list">Trainers list</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="/app/own-profile" href="/app/own-profile">Profile</a>
+            </li>
+            {{/if}}
+            <li class="nav-item">
+              <a class="nav-link" id="/app/original-trainer-profile" href="/app/original-trainer-profile">Original Trainer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="/app/pokedex" href="/app/pokedex">Pokedex</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
