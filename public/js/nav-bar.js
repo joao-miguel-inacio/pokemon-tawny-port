@@ -31,6 +31,10 @@ function respNavBar() {
     document.getElementById("/app/original-trainer-profile").classList.add("active");
 
   } else if (currentpage.includes("/app/pokemon")) {
+    document.body.style.background = "url('https://res.cloudinary.com/dvru7nv6q/image/upload/v1654716614/pokemon-tawny-port/20998_1_pjufvv_pr16kl.jpg')";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.color = "white";
     document.getElementById("/app/pokedex").classList.add("active");
 
   } else if (currentpage.includes("/app/pokedex")) {

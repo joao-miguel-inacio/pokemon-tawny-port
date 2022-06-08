@@ -374,11 +374,8 @@ footer {
 
 .pokemon-details-name{
   text-align: center;
-  background-color: rgba(237,230,227,0.7);
-}
-
-.pokemon-caught-text{
-  text-align: center;
+  background-color: rgba(237,230,227,0.9);
+  color: black;
 }
 
 .pokemon-details-image-container{
@@ -395,8 +392,13 @@ footer {
   text-align: center;
 }
 
-.pokemon-details > h4 {
-  background-color: rgba(237,230,227,0.7);
+.pokemon-details-a{
+  color: white;
+}
+
+.pokemon-details > h5 {
+  background-color: rgba(237,230,227,0.9);
+  color: black;
 }
 
 .pokemon-details-card{

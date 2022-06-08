@@ -6,28 +6,30 @@
         <form class="catch-button" action="/app/catch-pokemon/{{this.pokemon.id}}" method="get">
             <button class="btn btn-danger">Catch!</button>
         </form>
+        <hr>
         {{/if}}
     {{/if}}
 
     {{#if caught}}
-        <p class="pokemon-caught-text">Well done! You already caught this pokemon! &#128293;</p>
+        <h4 class="pokemon-caught-text center-text">Well done! You already caught this pokemon! &#128293;</h4>
+        <hr>
     {{/if}}
 
-    <h1 class="pokemon-details-name">{{this.pokemon.name}} #{{this.pokemon.id}}</h1>
+    <h4 class="pokemon-details-name">{{this.pokemon.name}} #{{this.pokemon.id}}</h4>
     <div class="pokemon-details-image-container">
         <div class="pokemon-details-shiny-images-container">
-            <p>Normal:</p>
+            <p><span class="bold">Normal:</span></p>
             <img src="{{this.pokemon.sprites.front_default}}" alt="{{this.pokemon.name}} image">
             <img src="{{this.pokemon.sprites.back_default}}" alt="{{this.pokemon.name}} image">
         </div>
         <div class="pokemon-details-shiny-images-container">
-            <p>Shiny:</p>
+            <p><span class="bold">Shiny:</span></p>
             <img src="{{this.pokemon.sprites.front_shiny}}" alt="{{this.pokemon.name}} image">
             <img src="{{this.pokemon.sprites.back_shiny}}" alt="{{this.pokemon.name}} image">
         </div>
     </div>
     <div class="pokemon-details">
-        <h4>Pokedex Data</h4>
+        <h5>Pokedex Data</h5>
         <div class="pokemon-details-card">
                 <p><span class="bold">Base Exp:</span> {{this.pokemon.base_experience}};</p>
                 <p><span class="bold">Height:</span> {{this.pokemon.height}} cm;</p>
@@ -40,23 +42,23 @@
                 <p><span class="bold">Habitat:</span> {{this.pokemon.habitat}};</p>
         </div>
     
-        <h4>Evolution Chain</h4>
+        <h5>Evolution Chain</h5>
         <div class="evolution-chain-container">
             {{#each evolutionChainPokemons}}
             <div>
                 <img src="{{this.sprites.front_animated}}" alt="">
-                <p><a href="/app/pokemon-search?id={{this.id}}">{{this.name}}</a></p>
+                <p><a class="pokemon-details-a" href="/app/pokemon-search?id={{this.id}}">{{this.name}}</a></p>
             </div>
             {{/each}}
         </div>
         
-        <h4>Breeding</h4>
-        <p>Egg Groups:</p>
+        <h5>Breeding</h5>
+        <p><span class="bold">Egg Groups:</span></p>
         <div class="egg-groups-container">
         {{#each this.pokemon.egg_groups}}
             <div>
                 <p>{{this}}</p>
-                <a href="/app/pokemon-by-egg-group-list/{{this}}">Other {{this}}s</a>
+                <a class="pokemon-details-a" href="/app/pokemon-by-egg-group-list/{{this}}">Other {{this}}s</a>
             </div>
         {{/each}}
         </div>
