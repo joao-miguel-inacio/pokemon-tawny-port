@@ -22,7 +22,7 @@ const logger = (req, res, next) => {
   console.log('Req.Body: ', req.body)
   next()
 }
-router.post("/signup",logger, uploader.single('image'), logger, isLoggedOut, async (req, res, next) => {
+router.post("/signup",logger, uploader.any('image'), logger, isLoggedOut, async (req, res, next) => {
 //router.post("/signup", isLoggedOut, (req, res) => {
   const { name, username, description, password } = req.body;
   console.log('hi')
