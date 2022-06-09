@@ -2,7 +2,7 @@
 
 IronHack Project 2 - [START YOUR ADVENTURE!](https://joaomiguelinacio.github.io/demon-slayer-dodging/)
 
-![](./public/images/read-me-home-page.png)
+![](./public/images/home-page.png)
 
 ## Introduction
 
@@ -14,7 +14,7 @@ The challenge was to create a simple website with 2 models and 1 relationship, a
 
 ## The Idea
 
-The initial idea was indeed simple: Using the @[PokeAPI](https://pokeapi.co/), I would render some views with the Pokémon details, some other views with the user's details and I would allow users to catch Pokémon adding them to their Pokémon collection.
+The initial idea was indeed simple: Using the [PokeAPI](https://pokeapi.co/), I would render some views with the Pokémon details, some other views with the user's details and I would allow users to catch Pokémon adding them to their Pokémon collection.
 
 But it wasn't long until I faced my first challenge: to pick a color for my application name being that there are Pokémon games with the names of all the colors in the visible light spectrum already!
 
@@ -22,15 +22,16 @@ I had decided to use Pokémon from the first Generation only and those games wer
 
 After making a quick Google search to confirm that there wasn't a Pokémon TAWNY PORT game, my decision was made and I could finally move on to less important things.
 
+![](./public/images/original-trainer-team.png)
 ![](./public/images/colors.png)
 
 ## ES modules
 
 Speaking of Google searches, if you search for commonly used APIs, surely the PokeAPI will come up as one of them. Some authors will even refer to it as easy to use and begginer friendly so I thought I had hit the jackpot. 
 
-During the bootcamp we had only used CommonJS module format but the @[PokeAPI](https://pokeapi.co/) is now pure ESM.
+During the bootcamp we had only used CommonJS module format but the [PokeAPI](https://pokeapi.co/) is now pure ESM.
 
-So, I wrote my thoughts on the search bar and there it was: those same thoughts in the title of an article @[What the heck is ESM?](https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm#:~:text=ESM%20stands%20for%20ES%20Modules,import%20React%20from%20'react'%3B).
+So, I wrote my thoughts on the search bar and there it was: those same thoughts in the title of an article [What the heck is ESM?](https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm#:~:text=ESM%20stands%20for%20ES%20Modules,import%20React%20from%20'react'%3B).
 
 I had choosen a name for my app so there was no way I could go back on my choice for API - I quickly regretted this.
 
@@ -126,7 +127,7 @@ This is something I strongly advise them to do as Registered Users will also soo
 
 ### Models
 
-@[User Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/User.model.js)
+User Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/User.model.js)
 
 ```javascript
 const userSchema = new Schema(
@@ -148,7 +149,7 @@ const userSchema = new Schema(
 );
 ```
 
-@[Pokémon Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/Pokemon.model.js)
+[Pokémon Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/Pokemon.model.js)
 
 ```javascript
 const pokemonSchema = new Schema(
@@ -178,16 +179,23 @@ const pokemonSchema = new Schema(
 );
 ```
 
-Pretty straight forward? Let me try changing your mind with @[this](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/seeds/pokemon.seed.js)!
+Pretty straight forward? Let me try changing your mind with [this](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/seeds/pokemon.seed.js)!
 
 ### Routes
 
-Index Routes | HTTP Verb| Description  | View
+[Index Routes](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/routes/index.routes.js) | HTTP Verb| Description  | View
 ------------- | ------------- | ------------- | -------------
 /  | GET  | Shows Home Page  | index
 
+[Auth Routes](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/routes/auth.routes.js)  | HTTP Verb| Description  | View
+------------- | ------------- | ------------- | -------------
+/signup  | GET  | Shows Sign Up form | auth/signup
+/signup  | POST  | Creates New User and Redirects to: | / (Home Page)
+/login  | GET  | Shows Login form | auth/login
+/login  | POST  | Logs User In and Redirects to: | / (Home Page)
+/logout  | GET  | Logs User Out and Redirects to: | / (Home Page)
 
-App Routes | HTTP Verb| Description  | View
+[App Routes](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/routes/app.routes.js) | HTTP Verb| Description  | View
 ------------- | ------------- | ------------- | -------------
 /original-trainer-profile  | GET  | Shows Original Trainer Profile  | app/original-trainer-profile
 /original-trainer-team  | GET  | Shows Original Trainer Team  | app/original-trainer-team
@@ -208,11 +216,3 @@ App Routes | HTTP Verb| Description  | View
 /trainer-profile/:id | GET  | Shows a specific trainer's profile | app/trainer-profile
 /trainer-team/:id | GET  | Shows a specific trainer's team | app/trainer-team
 /battle | GET  | Starts a battle | app/battle
-
-Auth Routes | HTTP Verb| Description  | View
-------------- | ------------- | ------------- | -------------
-/signup  | GET  | Shows Sign Up form | auth/signup
-/signup  | POST  | Creates New User and Redirects to: | / (Home Page)
-/login  | GET  | Shows Login form | auth/login
-/login  | POST  | Logs User In and Redirects to: | / (Home Page)
-/logout  | GET  | Logs User Out and Redirects to: | / (Home Page)
