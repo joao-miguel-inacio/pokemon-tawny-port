@@ -1,7 +1,9 @@
 const GBBtn =  document.getElementById("GB-flag");
 const EsBtn =  document.getElementById("Es-flag");
 const PtBtn =  document.getElementById("Pt-flag");
+const BrBtn =  document.getElementById("Br-flag");
 const FrBtn  =  document.getElementById("Fr-flag");
+const GerBtn =  document.getElementById("Ger-flag");
 const JpnBtn =  document.getElementById("Jpn-flag");
 
 audioElement = new Audio('https://res.cloudinary.com/dvru7nv6q/video/upload/v1654772010/pokemon-tawny-port/Y2Mate.is_-_Pok%C3%A9mon_Theme_Song_Music_Video_-rg6CiPI6h2g-160k-1654162516340_hflxz2.mp3');
@@ -27,9 +29,23 @@ PtBtn.addEventListener("click", function() {
     audioElement.play();
 });
 
+BrBtn.addEventListener("click", function() {
+    audioElement.pause();
+    audioElement = new Audio('https://res.cloudinary.com/dvru7nv6q/video/upload/v1654805551/pokemon-tawny-port/Y2Mate.is_-_Pok%C3%A9mon_Abertura_em_Portugu%C3%AAs_-_Temos_que_Pegar_PT_BR_-sTelrncNFbU-160k-1654805525002_jstx1j.mp3');
+    audioElement.volume = 0.4;
+    audioElement.play();
+});
+
 FrBtn.addEventListener("click", function() {
     audioElement.pause();
     audioElement = new Audio('https://res.cloudinary.com/dvru7nv6q/video/upload/v1654771882/pokemon-tawny-port/Y2Mate.is_-_Pokemon_Theme_Song_In_French-7jMtPauG2qA-160k-1654771863256_vqi2ch.mp3');
+    audioElement.volume = 0.4;
+    audioElement.play();
+});
+
+GerBtn.addEventListener("click", function() {
+    audioElement.pause();
+    audioElement = new Audio('https://res.cloudinary.com/dvru7nv6q/video/upload/v1654805518/pokemon-tawny-port/Y2Mate.is_-_Pokemon_Theme_Song_1_German_FULL_SONG_-LUlZ5n0cyak-160k-1654554096205_b6h9bv.mp3');
     audioElement.volume = 0.4;
     audioElement.play();
 });
