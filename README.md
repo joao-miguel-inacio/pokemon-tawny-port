@@ -127,7 +127,7 @@ This is something I strongly advise them to do as Registered Users will also soo
 
 ### Models
 
-User Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/User.model.js)
+[User Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/User.model.js)
 
 ```javascript
 const userSchema = new Schema(
@@ -216,3 +216,19 @@ Pretty straight forward? Let me try changing your mind with [this](https://githu
 /trainer-profile/:id | GET  | Shows a specific trainer's profile | app/trainer-profile
 /trainer-team/:id | GET  | Shows a specific trainer's team | app/trainer-team
 /battle | GET  | Starts a battle | app/battle
+
+
+## Backlog
+
+Because on top of coding I have a 37.5h/week part-time job, this will have to wait:
+
+- [ ] Fix whatever bug is wrong with Axios;
+- [ ] Allow 1 own Pokémon vs random Pokémon battles;
+- [ ] Allow trainer (6 vs 6) battles;
+- [ ] Change battle winner algorithm so that types influence the outcome;
+- [ ] Add level to User.model being that this increases with each battle won;
+- [ ] Limit what Pokémon users can catch depending on their level.
+
+## Aditional Links
+
+[Trello](https://trello.com/b/IiltWmB0/project-2-pokeapi)
