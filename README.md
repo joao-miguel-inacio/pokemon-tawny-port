@@ -120,4 +120,4 @@ This is something I strongly advise them to do as Registered Users will also soo
 
 ### From his team composition, can you guess what Pokémon this user is searching for to chatch next?
 
-![](./public/images/original-trainer-team.png)
+![](./public/images/team-and-search.png)
