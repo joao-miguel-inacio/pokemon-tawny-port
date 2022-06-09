@@ -19,7 +19,7 @@ router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res) => {
+router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res, next) => {
 //router.post("/signup", isLoggedOut, (req, res) => {
   const { name, username, description, password } = req.body;
   
