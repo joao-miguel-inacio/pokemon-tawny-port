@@ -6,7 +6,7 @@ IronHack Project 2 - [START YOUR ADVENTURE!](https://joaomiguelinacio.github.io/
 
 ## Introduction
 
-Half way throught Ironhack's Web Development Bootcamp learning remains as fun as ever.
+Half way through Ironhack's Web Development Bootcamp learning remains as fun as ever.
 
 This second project marks the end of module two, where we first learnt about Handlebars, Node and Express, Databases, such as MongoDB, and APIs.
 
