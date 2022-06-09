@@ -106,6 +106,7 @@ router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res) =
               "Username need to be unique. The username you chose is already in use.",
           });
         }
+        return next(error)
         return res
           .status(500)
           .render("auth/signup", { errorMessage: error.message });
