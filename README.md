@@ -118,6 +118,97 @@ This is something I strongly advise them to do as Registered Users will also soo
 - Users can see the Pokémon in their team and all their other Pokémon in the same page and they are not repeated. This is despite the fact that all one User's Team Pokémon are also in that one User's Pokémon list in the database. 
 - Did I mention that this app was designed using a mobile first approach?
 
-### From his team composition, can you guess what Pokémon this user is searching for to chatch next?
+#### From his team composition, can you guess what Pokémon this user is searching for to catch next?
 
 ![](./public/images/team-and-search.png)
+
+## ~~Boring~~ Important Stuff
+
+### Models
+
+@[User Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/User.model.js)
+
+```javascript
+const userSchema = new Schema(
+  {
+    name: {...},
+    image: {...},
+    username: {...},
+    description: {...},
+    password: {...},
+    pokemon: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }],
+    team: { 
+      type: [{ type: Schema.Types.ObjectId, ref: "Pokemon" }],
+      maxlength: 6
+    }
+  },
+  {
+    timestamps: true,
+  }
+);
+```
+
+@[Pokémon Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/Pokemon.model.js)
+
+```javascript
+const pokemonSchema = new Schema(
+  {
+    name: String,
+    id: Number,
+    base_experience: Number,
+    types: [String],
+    height: Number,
+    weight: Number,
+    habitat: String,
+    growth_rate: String,
+    sprites: {
+      front_default : String,
+      back_default: String,
+      front_shiny: String,
+      back_shiny: String,
+      front_animated: String,
+      back_animated: String
+    },
+    evolution_chain: [String],
+    egg_groups: [String]
+  },
+  {
+    timestamps: true,
+  }
+);
+```
+
+Pretty straight forward? Let me try changing your mind with @[this](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/seeds/pokemon.seed.js)!
+
+### Routes
+
+App Routes | HTTP Verb| Description  | View
+------------- | ------------- | ------------- | -------------
+/original-trainer-profile  | GET  | Shows Original Trainer Profile  | app/original-trainer-profile
+/original-trainer-team  | GET  | Shows Original Trainer Team  | app/original-trainer-team
+\|  | \|  | \|  | \|
+/pokedex  | GET  | Shows Pokedex  | app/pokedex
+\|  | \|  | \|  | \|
+/pokemon-search  | GET  | Redirects to:  | /app/pokemon-details/${searchedPokemonId}
+/pokemon-details/  | GET  | Shows Error View  | app/pokemon-search-unsuccessful
+/pokemon-details/:id  | GET  | Shows Pokémon details  | app/pokemon-details
+\|  | \|  | \|  | \|
+/pokemon-by-egg-group-list/:id  | GET  | Shows all Pokémon of the Egg Group  | app/pokemon-by-egg-group-list
+\|  | \|  | \|  | \|
+/own-profile  | GET  | Shows own Profile  | app/own-profile
+/own-profile-edit  | GET  | Shows form to edit own Profile  | app/own-profile-edit
+/own-profile-edit  | POST  | Redirects to:  | own-profile
+\|  | \|  | \|  | \|
+/catch-pokemon/:id | GET  | Redirects to:  | /app/own-pokemon-team
+\|  | \|  | \|  | \|
+/own-pokemon-team | GET  | Shows own Pokémon Team  | app/own-pokemon-team
+/own-pokemon-team-edit/ | GET  | Shows own Pokémon Team and own Pokémon | app/own-pokemon-team-edit
+/own-pokemon-team-edit-add/:id | POST  | Redirects to: | app/own-pokemon-team-edit
+/own-pokemon-team-edit-remove/:id | POST  | Redirects to: | app/own-pokemon-team-edit
+\|  | \|  | \|  | \|
+/trainer-list | GET  | Shows all trainers | app/trainer-list
+/trainer-profile/:id | GET  | Shows a specific trainer's profile | app/trainer-profile
+/trainer-team/:id | GET  | Shows a specific trainer's team | app/trainer-team
+\|  | \|  | \|  | \|
+/battle | GET  | Starts a battle | app/battle
+

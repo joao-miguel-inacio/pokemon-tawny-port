@@ -176,6 +176,7 @@ router.get("/own-profile", isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
 router.get("/own-profile-edit", isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id;
@@ -380,6 +381,8 @@ router.get("/trainer-team/:id", isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
+//Battle
 
 router.get("/battle", async (req, res, next) => {
   try {
