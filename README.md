@@ -233,3 +233,5 @@ Because on top of coding I have a 37.5h/week part-time job, this will have to wa
 ## Additional Links :relieved:
 
 [Trello](https://trello.com/b/IiltWmB0/project-2-pokeapi)
+
+[Prezzi Presentation](https://prezi.com/view/VYNRrc45jfkjqihqP4Zm/)
