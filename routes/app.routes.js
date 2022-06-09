@@ -13,6 +13,8 @@ import Pokedex from "pokedex-promise-v2";
 import capitalized from "../utils/capitalized.js";
 const MyPokedex = new Pokedex();
 
+//import sound from "sound-play";
+
 //ORIGINAL TRAINER
 
 router.get("/original-trainer-profile", async (req, res, next) => {
@@ -388,9 +390,14 @@ router.get("/trainer-team/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.get("/battle", isLoggedIn, async (req, res, next) => {
+router.get("/battle", async (req, res, next) => {
   try {
-    //const { id } = req.params;
+    // try {
+    //   await sound.play("https://res.cloudinary.com/dvru7nv6q/video/upload/v1654739321/pokemon-tawny-port/Pok%C3%A9mon_-Red_Blue_Wild_Battle_Music_lft1s8.mp3");
+    //   console.log("done");
+    // } catch (error) {
+    //   console.error(error);
+    // }
     const pokemon1Id = Math.floor(Math.random() * 151);
     const pokemon1InArray = await Pokemon.find({ id: pokemon1Id });
     const pokemon1 = pokemon1InArray[0];

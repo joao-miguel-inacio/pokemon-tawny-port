@@ -102,6 +102,24 @@ body {
   padding-bottom: 15vh;
 }
 
+.launguages-menu{
+  padding-left: 5vw !important;
+  margin: 15px 15px 15px 15px !important;
+  display: flex;
+  gap: 10px;
+}
+
+.launguages-item {
+  background: none;
+  border: none;
+}
+
+.launguages-item > img {
+  height: 20px;
+  width: 30px;
+  align-self: center;
+}
+
 /*footer*/
 
 footer {
@@ -208,8 +226,12 @@ footer {
     gap: 5px;
   }
 
-  .nav-link {
+  .nav-link{
     padding: 1vw !important;
+  }
+
+  .launguages-menu {
+    padding-left: 1vw !important;
   }
 }
 
