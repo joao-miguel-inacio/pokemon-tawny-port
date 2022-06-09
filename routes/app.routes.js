@@ -105,7 +105,7 @@ router.get("/pokemon-details/:id", async (req, res, next) => {
     // } else {
     //   res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
     // }
-    //}
+    // }
 
   } catch (err) {
     next(err);
