@@ -117,3 +117,7 @@ This is something I strongly advise them to do as Registered Users will also soo
 - Users can carry 6 Pokémon in their team. If trying to add a 7th Pokémon then another will be removed from their team.
 - Users can see the Pokémon in their team and all their other Pokémon in the same page and they are not repeated. This is despite the fact that all one User's Team Pokémon are also in that one User's Pokémon list in the database. 
 - Did I mention that this app was designed using a mobile first approach?
+
+### From his team composition, can you guess what Pokémon this user is searching for to chatch next?
+
+![](./public/images/original-trainer-team.png)
