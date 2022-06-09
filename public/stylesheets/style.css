@@ -140,7 +140,7 @@ body {
 footer {
   position: absolute;
   bottom: 0;
-  width: 100vw !important;
+  min-width: 100% !important;
   padding: 0%;
   color: black;
   background-color: rgba(237,230,227,0.9);
