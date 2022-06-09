@@ -182,33 +182,37 @@ Pretty straight forward? Let me try changing your mind with @[this](https://gith
 
 ### Routes
 
+Index Routes | HTTP Verb| Description  | View
+------------- | ------------- | ------------- | -------------
+/  | GET  | Shows Home Page  | index
+
+
 App Routes | HTTP Verb| Description  | View
 ------------- | ------------- | ------------- | -------------
 /original-trainer-profile  | GET  | Shows Original Trainer Profile  | app/original-trainer-profile
 /original-trainer-team  | GET  | Shows Original Trainer Team  | app/original-trainer-team
-\|  | \|  | \|  | \|
 /pokedex  | GET  | Shows Pokedex  | app/pokedex
-\|  | \|  | \|  | \|
 /pokemon-search  | GET  | Redirects to:  | /app/pokemon-details/${searchedPokemonId}
 /pokemon-details/  | GET  | Shows Error View  | app/pokemon-search-unsuccessful
 /pokemon-details/:id  | GET  | Shows Pokémon details  | app/pokemon-details
-\|  | \|  | \|  | \|
 /pokemon-by-egg-group-list/:id  | GET  | Shows all Pokémon of the Egg Group  | app/pokemon-by-egg-group-list
-\|  | \|  | \|  | \|
 /own-profile  | GET  | Shows own Profile  | app/own-profile
 /own-profile-edit  | GET  | Shows form to edit own Profile  | app/own-profile-edit
 /own-profile-edit  | POST  | Redirects to:  | own-profile
-\|  | \|  | \|  | \|
 /catch-pokemon/:id | GET  | Redirects to:  | /app/own-pokemon-team
-\|  | \|  | \|  | \|
 /own-pokemon-team | GET  | Shows own Pokémon Team  | app/own-pokemon-team
 /own-pokemon-team-edit/ | GET  | Shows own Pokémon Team and own Pokémon | app/own-pokemon-team-edit
 /own-pokemon-team-edit-add/:id | POST  | Redirects to: | app/own-pokemon-team-edit
 /own-pokemon-team-edit-remove/:id | POST  | Redirects to: | app/own-pokemon-team-edit
-\|  | \|  | \|  | \|
 /trainer-list | GET  | Shows all trainers | app/trainer-list
 /trainer-profile/:id | GET  | Shows a specific trainer's profile | app/trainer-profile
 /trainer-team/:id | GET  | Shows a specific trainer's team | app/trainer-team
-\|  | \|  | \|  | \|
 /battle | GET  | Starts a battle | app/battle
 
+Auth Routes | HTTP Verb| Description  | View
+------------- | ------------- | ------------- | -------------
+/signup  | GET  | Shows Sign Up form | auth/signup
+/signup  | POST  | Creates New User and Redirects to: | / (Home Page)
+/login  | GET  | Shows Login form | auth/login
+/login  | POST  | Logs User In and Redirects to: | / (Home Page)
+/logout  | GET  | Logs User Out and Redirects to: | / (Home Page)
