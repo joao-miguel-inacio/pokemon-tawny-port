@@ -13,8 +13,6 @@ import Pokedex from "pokedex-promise-v2";
 import capitalized from "../utils/capitalized.js";
 const MyPokedex = new Pokedex();
 
-//import sound from "sound-play";
-
 //ORIGINAL TRAINER
 
 router.get("/original-trainer-profile", async (req, res, next) => {
@@ -298,13 +296,6 @@ router.post("/own-pokemon-team-edit-add/:id", isLoggedIn, async (req, res, next)
     const { id } = req.params;
     const pokemonInArray = await Pokemon.find({ id: id });
     const pokemonObjId = pokemonInArray[0]._id.toString();
-    //if (user.team.includes(pokemonObjId)) {
-    //for (let i=0; i<user.team.length; i++ ){
-      // if (user.team[i]._id.toString() === pokemonObjId){
-      //   console.log("pokemon already in the team");
-      //   //POP UP WINDOW //NOT REALLY NECESSARY AS POKEMON IN TEAM SHOULDNT BE IN POKEMON TABLE
-      //   res.redirect("/app/own-pokemon-team-edit");
-      // } 
       if (user.team.length >= 6) {
         user.team.splice(0, 1, pokemonObjId);
         await User.findByIdAndUpdate( userId,
@@ -393,12 +384,6 @@ router.get("/trainer-team/:id", isLoggedIn, async (req, res, next) => {
 
 router.get("/battle", async (req, res, next) => {
   try {
-    // try {
-    //   await sound.play("https://res.cloudinary.com/dvru7nv6q/video/upload/v1654739321/pokemon-tawny-port/Pok%C3%A9mon_-Red_Blue_Wild_Battle_Music_lft1s8.mp3");
-    //   console.log("done");
-    // } catch (error) {
-    //   console.error(error);
-    // }
     const pokemon1Id = Math.floor(Math.random() * 151);
     const pokemon1InArray = await Pokemon.find({ id: pokemon1Id });
     const pokemon1 = pokemon1InArray[0];
