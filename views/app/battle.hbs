@@ -1,5 +1,43 @@
 {{>header}}
 
+<div class="vibrating-plate">
+    <button id="battle-btn" class="vibrate-1">Ganbatte!</button>
+    {{#if winner}}
+       
+        <img id="winner-image" class="hidden" src="{{this.winner.sprites.front_default}}" alt="{{this.winner.name}}">
+        <h4 id="winner-text1" class="hidden" >WON THE FIGHT!</h4>
+        <p id="winner-text2" class="hidden" >{{this.loser.name}}, with {{this.loser.base_experience}} experience points, wasn't strong enough to beat {{this.winner.name}}, with {{this.winner.base_experience}} experience points.</p>
 
+    {{/if}}
+
+    {{#if draw}}
+
+        <h4 id="draw-text1" class="hidden" >IT IS A DRAW!</h4>
+        <p id="draw-text2" class="hidden" >{{this.pokemon1.name}} and {{this.pokemon2.name}} are exhausted and can't carry on anymore. They have the same experience points!</p>
+
+    {{/if}}
+</div>
+
+<div class="battle-stage">
+    <div class="pokemon1" id="pokemon1">
+        <img class="pokemon1-image" src="{{this.pokemon1.sprites.back_animated}}" alt="{{this.pokemon1.name}}">
+        <p class="pokemon1-name">{{this.pokemon1.name}}</p>
+        <p class="pokemon1-exp">{{this.pokemon1.base_experience}}</p>
+        {{#each this.pokemon1.types}}
+            <article class="pokemon-details-types">{{this}}</article>
+        {{/each}}
+    </div>
+    <div class="pokemon2" id="pokemon2">
+        <img class="pokemon2-image" src="{{this.pokemon2.sprites.front_animated}}" alt="{{this.pokemon2.name}}">
+        <p class="pokemon2-name">{{this.pokemon2.name}}</p>
+        <p class="pokemon2-exp">{{this.pokemon2.base_experience}}</p>
+        {{#each this.pokemon2.types}}
+            <article class="pokemon-details-types">{{this}}</article>
+        {{/each}}
+    </div>
+</div>
 
 {{>footer}}
+
+<script src="/js/types.js"></script>
+<script src="/js/battle.js"></script>

@@ -7,6 +7,12 @@ function respNavBar() {
     document.body.style.backgroundSize = "cover";
     document.getElementById("/app/trainer").classList.add("active");
 
+  } else if (currentpage === "/app/battle") {
+    document.body.style.background = "url('https://res.cloudinary.com/dvru7nv6q/image/upload/v1654716614/pokemon-tawny-port/20998_1_pjufvv_pr16kl.jpg')";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundSize = "cover";
+    document.getElementById("/app/battle").classList.add("active");
+
   } else if (currentpage === "/app/own-pokemon-team-edit"){
     document.body.style.background = "url('https://res.cloudinary.com/dvru7nv6q/image/upload/v1654716614/pokemon-tawny-port/20998_1_pjufvv_pr16kl.jpg')";
     document.body.style.backgroundPosition = "center";
@@ -23,9 +29,6 @@ function respNavBar() {
 
   } else if (currentpage.includes("/app/own")) {
     document.getElementById("/app/own-profile").classList.add("active");
-
-  } else if (currentpage.includes("/app/battle")) {
-    document.getElementById("/app/battle").classList.add("active");
 
   } else if (currentpage.includes("/app/trainer")) {
     document.getElementById("/app/trainer").classList.add("active");

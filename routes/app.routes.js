@@ -55,6 +55,14 @@ router.get("/pokedex", async (req, res, next) => {
 
 //POKEMON DETAILS
 
+router.get("/pokemon-details/", async (req, res, next) => {
+  try {
+    res.render("app/pokemon-search-unsuccessful");
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/pokemon-details/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -127,7 +135,7 @@ router.get("/pokemon-by-egg-group-list/:id", async (req, res, next) => {
 //SEARCH
 
 router.get("/pokemon-search", async (req, res, next) => {
-  try {
+try {
     const searchedPokemon = req.query.id;
     if (+searchedPokemon > 151) {
       res.render("app/pokemon-search-unsuccessful");
@@ -389,7 +397,18 @@ router.get("/battle", isLoggedIn, async (req, res, next) => {
     const pokemon2Id = Math.floor(Math.random() * 151);
     const pokemon2InArray = await Pokemon.find( { id : pokemon2Id });
     const pokemon2 = pokemon2InArray[0];
-    res.render("app/battle", { pokemon1, pokemon2});
+    if (pokemon1.base_experience > pokemon2.base_experience){
+      const winner = pokemon1;
+      const loser = pokemon2;
+      res.render("app/battle", { pokemon1, pokemon2, winner, loser});
+    } else if (pokemon2.base_experience > pokemon1.base_experience){
+      const winner = pokemon2;
+      const loser = pokemon1;
+      res.render("app/battle", { pokemon1, pokemon2, winner, loser});
+    } else {
+      const draw = "It is a draw!";
+      res.render("app/battle", { pokemon1, pokemon2, draw});
+    } 
   }catch (err) {
     next(err);
   }
