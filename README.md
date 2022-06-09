@@ -40,33 +40,36 @@ I believe everything I read on the Web and, after changing what looked like ever
 
 The next day I realised that the info I wanted on the Pokémon was only obtainable using three different API methods and after days iterating through arrays, feeling a log more confident using the `map()`, `filter()` and `sort()` methods, I had an app that would take less than half an hour to render each view.
 
-code (const pokemon = await MyPokedex.getPokemonByName(id);
-    const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
-    async function findEvoChainId (pokemonSpecies) {
-      if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
-        const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
-        const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-        return pokemonEvolutionChain;
-      } else {
-        const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
-        const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
-        return pokemonEvolutionChain;
-      }
-    }
-    const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
-    if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
-      res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
+```javascript
+  const pokemon = await MyPokedex.getPokemonByName(id);
+  const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
+  async function findEvoChainId (pokemonSpecies) {
+    if (pokemonSpecies.evolution_chain.url.charAt(43) !== "/") {
+      const chainId = pokemonSpecies.evolution_chain.url.charAt(42)+pokemonSpecies.evolution_chain.url.charAt(43);
+      const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+      return pokemonEvolutionChain;
     } else {
-      res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
+      const chainId = pokemonSpecies.evolution_chain.url.charAt(42);
+      const pokemonEvolutionChain = await MyPokedex.getEvolutionChainById(chainId);
+      return pokemonEvolutionChain;
     }
-    })
+  }
+  const pokemonEvolutionChain = await findEvoChainId (pokemonSpecies);
+  if (String(pokemonEvolutionChain.chain.evolves_to) === "" ){
+    res.render('app/pokemon-details', {pokemon, pokemonSpecies} );
+  } else {
+    res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
+  }
+```
     
-    code (const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
-    const gen1Pokemon = await MyPokedex.getGenerationByName(1);
-    const pokemonNamesInEggGroup = eggGroupPokemon.pokemon_species.map(pokemon => pokemon.name);
-    const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
-    const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
-    const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);)
+```javascript
+  const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
+  const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+  const pokemonNamesInEggGroup = eggGroupPokemon.pokemon_species.map(pokemon => pokemon.name);
+  const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
+  const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
+  const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);
+```
 
 ## The Solution
 
@@ -89,13 +92,8 @@ This is something I strongly advise them to do as Registered Users will also soo
 ## Cool Stuff
 
 - When signing up, if users don't upload any image, a Pokémon will be picked randomly to stand in for them.
-
 - If the pokemon has been caught by the User previously, then the User can't catch it again.
-
 - Users will see search suggestions after typing the second caracther in the search bar. No need to have to have Bulbapedia open on a different tab worrying about making a typo!
-
 - Users can carry 6 Pokémon in their team. If trying to add a 7th Pokémon then another will be removed from their team.
-
 - Users can see the Pokémon in their team and all their other Pokémon in the same page and they are not repeated. This is despite the fact that all one User's Team Pokémon are also in that one User's Pokémon list in the database. 
-
 - Did I mention that this app was designed using a mobile first approach?
