@@ -18,12 +18,13 @@ const saltRounds = 10;
 router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup");
 });
+
 const logger = (req, res, next) => {
-  console.log('Req.Body: ', req.body)
+  console.log('Req.File: ', req.file)
   next()
 }
-router.post("/signup",logger, uploader.any('image'), logger, isLoggedOut, async (req, res, next) => {
-//router.post("/signup", isLoggedOut, (req, res) => {
+
+router.post("/signup", logger, uploader.single('image'), logger, isLoggedOut, async (req, res, next) => {
   const { name, username, description, password } = req.body;
   console.log('hi')
   if (!req.file) {
