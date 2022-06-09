@@ -8,13 +8,14 @@ function respNavBar() {
     document.getElementById("/app/trainer").classList.add("active");
 
   } else if (currentpage === "/app/battle") {
-    document.body.style.background = "url('https://res.cloudinary.com/dvru7nv6q/image/upload/v1654716614/pokemon-tawny-port/20998_1_pjufvv_pr16kl.jpg')";
-    document.body.style.backgroundPosition = "center";
-    document.body.style.backgroundSize = "cover";
     audioElement.pause();
     audioElement = new Audio('https://res.cloudinary.com/dvru7nv6q/video/upload/v1654739321/pokemon-tawny-port/Pok%C3%A9mon_-Red_Blue_Wild_Battle_Music_lft1s8.mp3');
     audioElement.volume = 0.5;
     audioElement.play();
+    document.body.classList.add('fade');
+    document.body.style.background = "url('https://res.cloudinary.com/dvru7nv6q/image/upload/v1654716614/pokemon-tawny-port/20998_1_pjufvv_pr16kl.jpg')";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundSize = "cover";
     document.getElementById("/app/battle").classList.add("active");
 
   } else if (currentpage === "/app/own-pokemon-team-edit"){
