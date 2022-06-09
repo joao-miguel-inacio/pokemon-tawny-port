@@ -22,7 +22,7 @@ router.get("/signup", isLoggedOut, (req, res) => {
 router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res, next) => {
 //router.post("/signup", isLoggedOut, (req, res) => {
   const { name, username, description, password } = req.body;
-  
+  console.log('hi')
   if (!req.file) {
     const pokemonID = Math.floor(Math.random() * 151);
     const pokemon = await Pokemon.find( {id:pokemonID});
@@ -36,25 +36,25 @@ router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res, n
       errorMessage: "Please provide your name.",
     });
   }
-
+  console.log('hi1')
   if (!username) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your username.",
     });
   }
-
+  console.log('hi2')
   if (!description) {
     return res.status(400).render("auth/signup", {
       errorMessage: "What kind of trainer are you?",
     });
   }
-
+  console.log('hi3')
   if (password.length < 8) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Your password needs to be at least 8 characters long.",
     });
   }
-
+  console.log('hi4')
   //   ! This use case is using a regular expression to control for special characters and min length
   /*
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -74,11 +74,12 @@ router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res, n
         .status(400)
         .render("auth.signup", { errorMessage: "Username already taken." });
     }
-
+    console.log('hi5')
     return bcrypt
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
+        console.log('Creating user?')
         return User.create({
           name,
           username,
@@ -88,6 +89,7 @@ router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res, n
         });
       })
       .then((user) => {
+        console.log('created User')
         req.session.user = user;
         req.app.locals.user = req.session.user;
         req.app.locals.inSession = true;
