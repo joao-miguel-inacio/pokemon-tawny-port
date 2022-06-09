@@ -68,7 +68,6 @@ router.get("/pokemon-details/:id", async (req, res, next) => {
     const { id } = req.params;
     const pokemonInArray = await Pokemon.find({ id: id });
     const pokemon = pokemonInArray[0];
-
     const evolutionChainPokemons = await Pokemon.find({
       name: pokemon.evolution_chain
     });

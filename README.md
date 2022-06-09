@@ -63,19 +63,32 @@ The next day I realised that the info I wanted on the Pokémon was only obtainab
 ```
     
 ```javascript
-  const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
-  const gen1Pokemon = await MyPokedex.getGenerationByName(1);
-  const pokemonNamesInEggGroup = eggGroupPokemon.pokemon_species.map(pokemon => pokemon.name);
-  const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
-  const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
-  const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);
+    const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
+    const gen1Pokemon = await MyPokedex.getGenerationByName(1);
+    const pokemonNamesInEggGroup = eggGroupPokemon.pokemon_species.map(pokemon => pokemon.name);
+    const pokemonNamesInGen1 = gen1Pokemon.pokemon_species.map(pokemon => pokemon.name);
+    const relevantPokemonNames = pokemonNamesInEggGroup.filter( name => pokemonNamesInGen1.indexOf(name) > -1);
+    const pokemon = await MyPokedex.getPokemonByName(relevantPokemonNames);
 ```
 
 ## The Solution
 
 Turns out seeding the database with data obtained using the API and using models made to measure, meeting all the data requirements my pages have, is not only much easier but it will also make the app much faster.
 
-Come in, Mongo DB.
+Come in, Mongo DB. The same as above, but different:
+
+```javascript
+const { id } = req.params;
+const pokemonInArray = await Pokemon.find({ id: id });
+const pokemon = pokemonInArray[0];
+const evolutionChainPokemons = await Pokemon.find({
+  name: pokemon.evolution_chain
+});
+```
+```javascript
+    const { id } = req.params;
+    const pokemon = await Pokemon.find({ egg_groups: id });
+```
 
 ## The Fun Begins
 
@@ -84,6 +97,13 @@ I was finnaly ready to dive back in into the world of Pokémon! And now, so can 
 - Anonymous Users can see the Original Trainer Profile, my team, the Pokedex and each Pokémon details. 
 - Anonymous Users can sing along the iconic Pokémon season 1 theme in their preferred languague.
 - Anonymous Users can be transported back to the 90's when launching a random vs random Pokémon battle.
+
+![](./public/images/original-trainer-team.png)
+
+![](./public/images/battle.png) ![](./public/images/menu.png)
+
+
+
 - Registered Users can catch Pokémon and build their own team, see who are the other trainers and see their teams.
 - Registered Users can edit their profile and edit what Pokémon are on their team.
 
