@@ -60,7 +60,16 @@ Registered Users can edit their profile and edit what Pokémon are on their team
 
 This is something I strongly advise them to do as Registered Users will also soon be able to choose one of the Pokémon in their team to battle random Pokémon and choose to battle other trainers on team of 6 vs team of 6 battles.
 
+## Cool Stuff
 
+When signing up, if users don't upload any image, a Pokémon will be picked randomly to stand in for them.
 
+If the pokemon has been caught by the User previously, then the User can't catch it again.
 
+Users will see search suggestions after typing the second caracther in the search bar so you you don't have to have Bulbapedia open on a different tab worrying about making a typo!
 
+Users can carry 6 Pokémon in their team. If trying to add a 7th Pokémon then another will be removed from their team.
+
+Users can see the Pokémon in their team and all their other Pokémon in the same page and they are not repeated. This is despite the fact that all one User's Team Pokémon are also in that one User's Pokémon list in the database. 
+
+Did I mention that this app was designed using a mobile first approach?
