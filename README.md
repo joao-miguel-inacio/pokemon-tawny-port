@@ -18,6 +18,6 @@ The initial idea was indeed simple: Using the @[PokeAPI](https://pokeapi.co/), I
 
 But it wasn't long until I faced my first challenge: to pick a color for my application name when there are Pokémon games with the names of all the colors in the visible spectrum already!
 
-I had decided to use Pokémon from the first Generation only and those games were the versions ![RED](https://via.placeholder.com/15/f03c15/000000?text=+) `#FF0000` and ![BLUE](https://via.placeholder.com/15/c5f015/000000?text=+) `#0047AB`, so whilst playing with color mixers online I got to ![TAWNY PORT](https://via.placeholder.com/15/c5f015/000000?text=+) `#802456`.
+I had decided to use Pokémon from the first Generation only and those games were the versions ![#FF0000](https://via.placeholder.com/15/f03c15/000000?text=+) `RED` and ![#0047AB](https://via.placeholder.com/15/c5f015/000000?text=+) `BLUE`, so whilst playing with color mixers online I got to ![#802456](https://via.placeholder.com/15/c5f015/000000?text=+) `TAWNY PORT`.
 
-After making a quick google search to confirm that there wasn't a Pokémon ![TAWNY PORT](https://via.placeholder.com/15/c5f015/000000?text=+) `#802456` game, my decision was made and I could finally move on to less important things.
+After making a quick google search to confirm that there wasn't a Pokémon ![#802456](https://via.placeholder.com/15/c5f015/000000?text=+) `TAWNY PORT` game, my decision was made and I could finally move on to less important things.
