@@ -300,11 +300,12 @@ router.post("/own-pokemon-team-edit-add/:id", isLoggedIn, async (req, res, next)
     const pokemonObjId = pokemonInArray[0]._id.toString();
     //if (user.team.includes(pokemonObjId)) {
     for (let i=0; i<user.team.length; i++ ){
-      if (user.team[i]._id.toString() === pokemonObjId){
-        console.log("pokemon already in the team");
-        //POP UP WINDOW //NOT REALLY NECESSARY AS POKEMON IN TEAM SHOULDNT BE IN POKEMON TABLE
-        res.redirect("/app/own-pokemon-team-edit");
-      } else if (user.team.length >= 6) {
+      // if (user.team[i]._id.toString() === pokemonObjId){
+      //   console.log("pokemon already in the team");
+      //   //POP UP WINDOW //NOT REALLY NECESSARY AS POKEMON IN TEAM SHOULDNT BE IN POKEMON TABLE
+      //   res.redirect("/app/own-pokemon-team-edit");
+      // } 
+      if (user.team.length >= 6) {
         user.team.splice(0, 1, pokemonObjId);
         await User.findByIdAndUpdate( userId,
            { team : user.team },

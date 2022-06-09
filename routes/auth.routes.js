@@ -19,14 +19,8 @@ router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup");
 });
 
-const logger = (req, res, next) => {
-  console.log('Req.File: ', req.file)
-  next()
-}
-
-router.post("/signup", logger, uploader.single('image'), logger, isLoggedOut, async (req, res, next) => {
+router.post("/signup", uploader.single('image'), isLoggedOut, async (req, res) => {
   const { name, username, description, password } = req.body;
-  console.log('hi')
   if (!req.file) {
     const pokemonID = Math.floor(Math.random() * 151);
     const pokemon = await Pokemon.find( {id:pokemonID});
@@ -40,50 +34,31 @@ router.post("/signup", logger, uploader.single('image'), logger, isLoggedOut, as
       errorMessage: "Please provide your name.",
     });
   }
-  console.log('hi1')
   if (!username) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your username.",
     });
   }
-  console.log('hi2')
   if (!description) {
     return res.status(400).render("auth/signup", {
       errorMessage: "What kind of trainer are you?",
     });
   }
-  console.log('hi3')
   if (password.length < 8) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Your password needs to be at least 8 characters long.",
     });
   }
-  console.log('hi4')
-  //   ! This use case is using a regular expression to control for special characters and min length
-  /*
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-
-  if (!regex.test(password)) {
-    return res.status(400).render("signup", {
-      errorMessage:
-        "Password needs to have at least 8 chars and must contain at least one number, one lowercase and one uppercase letter.",
-    });
-  }
-  */
-
-  // Search the database for a user with the username submitted in the form
   User.findOne({ username }).then((found) => {
     if (found) {
       return res
         .status(400)
         .render("auth.signup", { errorMessage: "Username already taken." });
     }
-    console.log('hi5')
     return bcrypt
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
-        console.log('Creating user?')
         return User.create({
           name,
           username,
@@ -93,7 +68,6 @@ router.post("/signup", logger, uploader.single('image'), logger, isLoggedOut, as
         });
       })
       .then((user) => {
-        console.log('created User')
         req.session.user = user;
         req.app.locals.user = req.session.user;
         req.app.locals.inSession = true;
@@ -112,7 +86,6 @@ router.post("/signup", logger, uploader.single('image'), logger, isLoggedOut, as
               "Username need to be unique. The username you chose is already in use.",
           });
         }
-        return next(error)
         return res
           .status(500)
           .render("auth/signup", { errorMessage: error.message });
@@ -155,19 +128,14 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         }
         req.session.user = user;
         req.app.locals.user = req.session.user;
-        // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
         req.app.locals.inSession = true;
         req.app.locals.anonymous = false;
-        
         return res.redirect("/");
       });
     })
 
     .catch((err) => {
-      // in this case we are sending the error handling to the error handling middleware that is defined in the error handling file
-      // you can just as easily run the res.status that is commented out below
       next(err);
-      // return res.status(500).render("login", { errorMessage: err.message });
     });
 });
 
