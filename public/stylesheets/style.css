@@ -343,6 +343,9 @@ footer {
   .medium-screen-hidden {
     display: block;
   }
+  .edit-team-container {
+    display: flex !important;
+  }
 }
 
 /*egg group list*/
@@ -500,11 +503,11 @@ footer {
 
 /*team edit*/
 
-.edit-team-form{
+.edit-team-form {
   margin: 0;
 }
 
-.add-pokemon-to-team-btn{
+.add-pokemon-to-team-btn {
   background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654260394/pokemon-tawny-port/PngItem_574430_m2zacr.png);
   background-size: cover;
   background-color: transparent;
@@ -513,7 +516,7 @@ footer {
   border: none;
 }
 
-.remove-pokemon-from-team-btn{
+.remove-pokemon-from-team-btn {
   background-image: url(https://res.cloudinary.com/dvru7nv6q/image/upload/v1654267713/pokemon-tawny-port/pngfind.com-transparent-box-png-1594011_w9k0bo.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -524,7 +527,7 @@ footer {
   border: none;
 }
 
-.edit-team-head{
+.edit-team-head {
   height: 100px;
   background-color: rgba(237,230,227,0.9);
   justify-content: center;
@@ -533,7 +536,7 @@ footer {
   color: black !important;
 }
 
-.edit-team-body{
+.edit-team-body {
   background: linear-gradient(to right, rgba(255, 0, 0,0.2) 0%, rgba(0,0,0,0.2) 100%) !important;
   justify-content: center;
   text-align: center;
