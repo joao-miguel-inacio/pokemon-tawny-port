@@ -2,7 +2,7 @@
 
 IronHack Project 2 - [START YOUR ADVENTURE!](https://joaomiguelinacio.github.io/demon-slayer-dodging/)
 
-![](./public/images/home-page.png)
+<img src="./public/images/home-page.png" alt="drawing" width="100%"/>
 
 ## Introduction :sunrise:
 
@@ -22,8 +22,7 @@ I had decided to use Pokémon from the first Generation only and those games wer
 
 After making a quick Google search to confirm that there wasn't a Pokémon TAWNY PORT game, my decision was made and I could finally move on to less important things.
 
-![](./public/images/original-trainer-team.png)
-![](./public/images/colors.png)
+<img src="./public/images/colors.png" alt="drawing" width="50%" style="display:block; margin: 0 auto;" />
 
 ## ES modules :anguished:
 
@@ -104,11 +103,10 @@ I was finally ready to dive back in into the world of Pokémon! And now, you can
 - Anonymous Users can sing along the iconic Pokémon season 1 theme in their preferred language.
 - Anonymous Users can be transported back to the 90's when launching a random vs random Pokémon battle.
 
-![](./public/images/original-trainer-team.png)
+<img src="./public/images/original-trainer-team.png" alt="drawing" width="100%"/>
 
-![](./public/images/battle.png) ![](./public/images/menu.png)
-
-
+<img src="./public/images/battle.png" style="float: right;" alt="drawing" width="200"/>
+<img src="./public/images/menu.png" alt="drawing" width="200"/>
 
 - Registered Users can catch Pokémon and build their own team, see who are the other trainers and see their teams.
 - Registered Users can edit their profile and edit what Pokémon are on their team.
