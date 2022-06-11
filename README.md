@@ -1,6 +1,6 @@
 # Pokémon Tawny Port :wine_glass:
 
-IronHack Project 2 - [START YOUR ADVENTURE!](pokemon-tawny-port.herokuapp.com/)
+IronHack Project 2 - [START YOUR ADVENTURE!](https://pokemon-tawny-port.herokuapp.com/)
 
 <img src="./public/images/home-page.png" alt="drawing" width="100%"/>
 
