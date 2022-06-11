@@ -41,6 +41,7 @@ I believe everything I read on the Web and, after changing what looked like ever
 
 The next day I realised that the info I wanted on the Pokémon was only obtainable using three different API methods and after days iterating through arrays, feeling a log more confident using the `map()`, `filter()` and `sort()` methods, I had an app that would take less than half an hour to render each view.
 
+### /pokemon-details/:id - Route Using API
 ```javascript
   const pokemon = await MyPokedex.getPokemonByName(id);
   const pokemonSpecies = await MyPokedex.getPokemonSpeciesByName(id);
@@ -62,7 +63,8 @@ The next day I realised that the info I wanted on the Pokémon was only obtainab
     res.render('app/pokemon-details', {pokemon, pokemonSpecies, pokemonEvolutionChain} );
   }
 ```
-    
+
+### /pokemon-by-egg-group-list/:id - Route Using API
 ```javascript
     const eggGroupPokemon = await MyPokedex.getEggGroupByName(id);
     const gen1Pokemon = await MyPokedex.getGenerationByName(1);
@@ -78,6 +80,7 @@ Turns out seeding the database with data obtained using the API and using models
 
 Come in, Mongo DB. The same as above, but different:
 
+### /pokemon-details/:id - Route Using Database
 ```javascript
 const { id } = req.params;
 const pokemonInArray = await Pokemon.find({ id: id });
@@ -86,6 +89,8 @@ const evolutionChainPokemons = await Pokemon.find({
   name: pokemon.evolution_chain
 });
 ```
+
+### /pokemon-by-egg-group-list/:id - Route Using Database
 ```javascript
     const { id } = req.params;
     const pokemon = await Pokemon.find({ egg_groups: id });
@@ -228,7 +233,7 @@ Because on top of coding I have a 37.5h/week part-time job, this will have to wa
 - [ ] Change battle winner algorithm so that types influence the outcome;
 - [ ] Add level to User.model being that this increases with each battle won;
 - [ ] Limit what Pokémon users can catch depending on their level.
-- [ ] :wine_glass:
+- [ ] Have a glass of Tawny Port :wine_glass:
 
 ## Additional Links :relieved:
 
