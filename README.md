@@ -105,8 +105,10 @@ I was finally ready to dive back in into the world of Pokémon! And now, you can
 
 <img src="./public/images/original-trainer-team.png" alt="drawing" width="100%"/>
 
-<img src="./public/images/battle.png" style="float: right;" alt="drawing" width="200"/>
+<div style="display: flex; justify-content:space-between">
+<img src="./public/images/battle.png" alt="drawing" width="200"/>
 <img src="./public/images/menu.png" alt="drawing" width="200"/>
+</div>
 
 - Registered Users can catch Pokémon and build their own team, see who are the other trainers and see their teams.
 - Registered Users can edit their profile and edit what Pokémon are on their team.
