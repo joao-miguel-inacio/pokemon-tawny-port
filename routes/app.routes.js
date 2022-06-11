@@ -267,7 +267,12 @@ router.get("/own-pokemon-team-edit/", isLoggedIn, async (req, res, next) => {
             return pokemon;
           }
           const pokemon = pokemonCleaner(pokemonArray, pokemonInTeam);
-          res.render("app/own-pokemon-team-edit", { pokemon, pokemonInTeam});
+          if (pokemonInTeam.length===1){
+            const errorMessage = "You need to have at least 1 Pokémon in your party!";
+            res.render("app/own-pokemon-team-edit", { pokemon, pokemonInTeam, errorMessage});
+          } else {
+            res.render("app/own-pokemon-team-edit", { pokemon, pokemonInTeam});
+          }
         }
       }
     } catch (err) {
@@ -277,7 +282,6 @@ router.get("/own-pokemon-team-edit/", isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
-
 
 // router.get("/own-pokemon-team-edit/json-list", isLoggedIn, async (req, res, next) => {
 //   try {
@@ -290,7 +294,6 @@ router.get("/own-pokemon-team-edit/", isLoggedIn, async (req, res, next) => {
 //     next(err);
 //   }
 // });
-
 
 router.post("/own-pokemon-team-edit-add/:id", isLoggedIn, async (req, res, next) => {
   try {
@@ -312,7 +315,6 @@ router.post("/own-pokemon-team-edit-add/:id", isLoggedIn, async (req, res, next)
         });
         res.redirect("/app/own-pokemon-team-edit");
       }
-    //}    
   } catch (err) {
     next(err);
   }
@@ -334,8 +336,6 @@ router.post("/own-pokemon-team-edit-remove/:id", isLoggedIn, async (req, res, ne
       );
       res.redirect("/app/own-pokemon-team-edit");
     } else {
-      console.log("You need at least one Pokemon in your party!");
-      //POP UP WINDOW
       res.redirect("/app/own-pokemon-team-edit");
     }
   } catch (err) {
