@@ -105,7 +105,7 @@ I was finally ready to dive back in into the world of Pokémon! And now, you can
 
 <img src="./public/images/original-trainer-team.png" alt="drawing" width="100%"/>
 
-<div style="display: flex; justify-content:space-between">
+<div style="display: flex; justify-content:space-between; width=100%">
 <img src="./public/images/battle.png" alt="drawing" width="200"/>
 <img src="./public/images/menu.png" alt="drawing" width="200"/>
 </div>
