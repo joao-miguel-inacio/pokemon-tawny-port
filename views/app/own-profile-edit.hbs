@@ -2,7 +2,7 @@
 
 <div class="page-body">
    <div class="editing-container">
-      <form action="/app/own-profile-edit" method="POST">
+      <form action="/app/own-profile-edit" method="POST" enctype="multipart/form-data">
 
          <div class="row mb-1">
             <label class="form-label"> Name
@@ -15,8 +15,8 @@
             </label>
          </div>
          <div class="row mb-1">
-            <label class="form-label"> Image
-               <input class="form-control" required type="text" name="image" value="{{this.user.image}}">
+            <label class="form-label"> Profile Picture
+              <input class="form-control" type="file" name="image" id="image"/>
             </label>
          </div>
          <div class="row mb-1">

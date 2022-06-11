@@ -1,17 +1,14 @@
 import express from "express";
 const router = express.Router();
 
-import mongoose from "mongoose";
-
-import isLoggedOut from "../middleware/isLoggedOut.js";
 import isLoggedIn from "../middleware/isLoggedIn.js";
 
 import User from "../models/User.model.js";
 import Pokemon from "../models/Pokemon.model.js";
 
-import Pokedex from "pokedex-promise-v2";
 import capitalized from "../utils/capitalized.js";
-const MyPokedex = new Pokedex();
+
+import uploader from "../config/cloudinary.config.js";
 
 //ORIGINAL TRAINER
 
@@ -187,13 +184,19 @@ router.get("/own-profile-edit", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/own-profile-edit", async (req, res, next) => {
+router.post("/own-profile-edit", uploader.single('image'), async (req, res, next) => {
   try {
     const userId = req.session.user._id;
-    const { name, username, image, description, password } = req.body;
+    const { name, username, description } = req.body;
+    if (!req.file) {
+      const user = await User.findById(userId);
+      const pokemonImg = user.image;
+      req.file = {};
+      req.file.path = pokemonImg;
+    }
     await User.findByIdAndUpdate(
       userId,
-      { name, username, image, description },
+      { name, username, image: req.file.path, description },
       { new: true }
     );
     res.redirect("own-profile");
