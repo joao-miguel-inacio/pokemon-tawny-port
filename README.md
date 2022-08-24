@@ -132,7 +132,7 @@ This is something I strongly advise them to do as Registered Users will also soo
 
 ### Models :dancing_women:
 
-[User Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/User.model.js)
+[User Model](https://github.com/joao-miguel-inacio/pokemon-tawny-port/blob/main/models/User.model.js)
 
 ```javascript
 const userSchema = new Schema(
@@ -154,7 +154,7 @@ const userSchema = new Schema(
 );
 ```
 
-[Pokémon Model](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/models/Pokemon.model.js)
+[Pokémon Model](https://github.com/joao-miguel-inacio/pokemon-tawny-port/blob/main/models/Pokemon.model.js)
 
 ```javascript
 const pokemonSchema = new Schema(
@@ -184,15 +184,15 @@ const pokemonSchema = new Schema(
 );
 ```
 
-Pretty straight forward? Let me try changing your mind with [this](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/seeds/pokemon.seed.js)!
+Pretty straight forward? Let me try changing your mind with [this](https://github.com/joao-miguel-inacio/pokemon-tawny-port/blob/main/seeds/pokemon.seed.js)!
 
 ### Routes :motorway:
 
-[Index Routes](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/routes/index.routes.js) | HTTP Verb| Description  | View
+[Index Routes](https://github.com/joao-miguel-inacio/pokemon-tawny-port/blob/main/routes/index.routes.js) | HTTP Verb| Description  | View
 ------------- | ------------- | ------------- | -------------
 /  | GET  | Shows Home Page  | index
 
-[Auth Routes](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/routes/auth.routes.js)  | HTTP Verb| Description  | View
+[Auth Routes](https://github.com/joao-miguel-inacio/pokemon-tawny-port/blob/main/routes/auth.routes.js)  | HTTP Verb| Description  | View
 ------------- | ------------- | ------------- | -------------
 /signup  | GET  | Shows Sign Up form | auth/signup
 /signup  | POST  | Creates New User and Redirects to: | / (Home Page)
@@ -200,7 +200,7 @@ Pretty straight forward? Let me try changing your mind with [this](https://githu
 /login  | POST  | Logs User In and Redirects to: | / (Home Page)
 /logout  | GET  | Logs User Out and Redirects to: | / (Home Page)
 
-[App Routes](https://github.com/joaoMiguelInacio/pokemon-tawny-port/blob/main/routes/app.routes.js) | HTTP Verb| Description  | View
+[App Routes](https://github.com/joao-miguel-inacio/pokemon-tawny-port/blob/main/routes/app.routes.js) | HTTP Verb| Description  | View
 ------------- | ------------- | ------------- | -------------
 /original-trainer-profile  | GET  | Shows Original Trainer Profile  | app/original-trainer-profile
 /original-trainer-team  | GET  | Shows Original Trainer Team  | app/original-trainer-team
