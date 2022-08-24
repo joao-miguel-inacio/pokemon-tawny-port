@@ -22,7 +22,7 @@ I had decided to use Pokémon from the first Generation only and those games wer
 
 After making a quick Google search to confirm that there wasn't a Pokémon TAWNY PORT game, my decision was made and I could finally move on to less important things.
 
-<img src="./public/images/colors.png" alt="drawing" width="50%" style="display:block; margin: 0 auto;" />
+<img src="./public/images/Colors.png" alt="drawing" width="50%" style="display:block; margin: 0 auto;" />
 
 ## ES modules :anguished:
 
